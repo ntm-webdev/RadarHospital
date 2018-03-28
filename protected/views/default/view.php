@@ -57,53 +57,7 @@
 	  	<!-- Abas -->
 	  	<div class="tab-content">
 	    	<div role="tabpanel" class="tab-pane fade active in" id="detalhes">
-		    	<div class="row row-avaliacoes">
-		    		
-		    		<div>
-			    		<p class="text-beauty">Informações gerais</p>
-			    		<p>Nome: Hospital Previna Saúde</p>
-			    		<p>Região: Zona Oeste</p>
-			    		<p>Bairro: Centro</p>
-						<p>Endereço: R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP</p>
-			    		<hr>
-			    	</div>
-
-		    		<div>
-			    		<p class="text-beauty">Horário de Funcionamento</p>
-			    		<p>Domingo: Atendimento 24 horas</p>
-			    		<p>Segunda-feira: Atendimento 24 horas</p>
-			    		<p>Terça-feira: Atendimento 24 horas</p>
-			    		<p>Quarta-feira: Atendimento 24 horas</p>
-			    		<p>Quinta-feira: Atendimento 24 horas</p>
-			    		<p>Sexta-feira: Atendimento 24 horas</p>
-			    		<p>Sábado: Atendimento 24 horas</p>
-			    		<hr>
-			    	</div>
-
-			    	<div>
-			    		<p class="text-beauty">Especialidades</p>
-			    		<p>Cardiologia</p>
-			    		<p>Clínica Geral</p>
-			    		<p>Ortopedia</p>
-			    		<p>Alergista</p>
-			    		<hr>
-			    	</div>
-
-		    		<div>
-			    		<p class="text-beauty">Planos de Saúde</p>
-			    		<p>Unimed</p>
-			    		<p>Bradesco Saúde</p>
-			    		<hr>
-			    	</div>
-
-		    		<div>
-			    		<p class="text-beauty">Contato</p>
-			    		<p><i class="fa fa-link"></i> Site</p>
-			    		<p><i class="fa fa-phone"></i> +55114445-9080</p>
-			    		<hr>
-			    	</div>
-		    	</div>
-		    	
+		    	<?=$this->renderPartial('abas-view/detalhes', ['model' => $model])?>
 			</div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="avaliacoes">

@@ -10,12 +10,20 @@ class DefaultController extends CController
 
 	public function actionResultado()
 	{	
-    	$this->render('resultado');
+    	$model = hospital::model()->findAll();
+
+    	$this->render('resultado', [
+    		'model' => $model
+    	]);
 	}
 
-	public function actionView()
+	public function actionView($id)
 	{	
-    	$this->render('view');
+		$model = hospital::model()->findByPk($id);
+
+    	$this->render('view', [
+    		'model' => $model
+    	]);
 	}
 
 	public function actionevaluate()
