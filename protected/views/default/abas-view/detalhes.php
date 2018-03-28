@@ -41,7 +41,7 @@
 	<div>
 		<p class="text-beauty">Contato</p>
 		<p><i class="fa fa-link"></i> Site</p>
-		<p><i class="fa fa-phone"></i> +55114445-9080</p>
+		<p><i class="fa fa-phone"></i><?=$model->telefone?></p>
 		<hr>
 	</div>
 </div>
