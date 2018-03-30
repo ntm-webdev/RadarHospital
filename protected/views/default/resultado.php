@@ -69,7 +69,7 @@
 			</div>
 			
 			<br>
-
+			
 			<?php for($i=0;$i < count($model); $i++) : ?>
 				<div class="row">
 					<div class="media resultado">

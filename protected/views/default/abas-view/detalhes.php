@@ -50,7 +50,7 @@
 	<div>
 		<p class="text-beauty">Contato</p>
 		<p><i class="fa fa-link"></i> <?=CHtml::tag('a',['href'=>$model->site], 'Website')?></p>
-		<p><i class="fa fa-phone"></i><?=$model->telefone?></p>
+		<p><i class="fa fa-phone"></i> <?=$model->telefone?></p>
 		<hr>
 	</div>
 </div>

@@ -2,26 +2,40 @@
 
 	<div class="row">
 		<div id="gallery" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
+			
 			<ol class="carousel-indicators">
-				<li data-target="#gallery" data-slide-to="0" class="active"></li>
-			    <li data-target="#gallery" data-slide-to="1"></li>
-			    <li data-target="#gallery" data-slide-to="2"></li>
+				<?php 
+					$i=0; 
+					if(!empty($model->fkimagens)) : 
+						foreach ($model->fkimagens as $imagem) : 
+							if($imagem->nome == "1.jpg") : ?>
+								<li data-target="#gallery" data-slide-to="<?=$i?>" class="active"></li>
+							<?php else : ?>
+								<li data-target="#gallery" data-slide-to="<?=$i?>"></li>
+							<?php endif; 
+					$i++; 
+						endforeach; 
+					endif;
+				?>
 			</ol>
 
-		  	<!-- Wrapper for slides -->
 			<div class="carousel-inner">
-		    	<div class="item active">
-		      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/1.jpg" class="img img-responsive" alt="Los Angeles">
-		    	</div>
-
-		    	<div class="item">
-		      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/2.jpg" class="img img-responsive" alt="Chicago">
-		    	</div>
-
-		    	<div class="item">
-		      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/4.jpg" class="img img-responsive" alt="New York">
-		    	</div>
+				<?php
+					if(!empty($model->fkimagens)) : 
+						foreach ($model->fkimagens as $imagem) : 
+							if($imagem->nome == "1.jpg") : 
+				?>
+								<div class="item active">
+						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/1.jpg" class="img img-responsive">
+							    </div>
+							<?php else :?>
+						    	<div class="item">
+						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/<?=$imagem->nome?>" class="img img-responsive">
+						    	</div>
+			    <?php 		endif; 
+			    		endforeach;
+			    	endif; 
+			    ?>
 		  	</div>
 
 			<!-- Left and right controls -->
@@ -60,11 +74,11 @@
 			</div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="avaliacoes">
-			    <?=$this->renderPartial('abas-view/avaliacoes')?>
+			    <?=$this->renderPartial('abas-view/avaliacoes', ['model' => $model])?>
 		    </div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="mapa">
-		      <?=$this->renderPartial('abas-view/mapa')?>
+		      <?=$this->renderPartial('abas-view/mapa', ['model' => $model])?>
 			</div>
 		</div>  
 	</div> 
