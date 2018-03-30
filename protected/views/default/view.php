@@ -38,7 +38,6 @@
 	</div>
 	
 	<div class="row">
-
   		<!-- Navegacao -->
 			<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation" class="active">
@@ -61,63 +60,12 @@
 			</div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="avaliacoes">
-			    <div class="row row-avaliacoes">
-			    	<?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/evaluate'], '<i class="fa fa-user-plus pointer"></i>
-			    		Adicionar avaliação')?>
-			    	<hr>
-			    	<p class="text-beauty">Excelente</p>
-			    	<p>Ótimo atendimento, equipe muito atenciosa e médicos super-capacitados</p>
-			    	<p>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		100%
-			    	</p>
-			    </div> 
-			    <hr>
-			    <div class="row row-avaliacoes">
-			    	<p class="text-beauty">Bom</p>
-			    	<p>Bom atendimento, blablabla</p>
-			    	<p>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		75%
-			    	</p>
-			    </div> 
-			    <hr>
-			    <div class="row row-avaliacoes">
-			    	<p class="text-beauty">Razoável</p>
-			    	<p>blablablablablabalbalbalbalbalbalblbalbalba</p>
-			    	<p>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		50%
-			    	</p>
-			    </div> 
-			    <hr>
-			    <div class="row row-avaliacoes">
-			    	<p class="text-beauty">Ruim</p>
-			    	<p>blablablablablabalbalbalbalbalbalblbalbalba</p>
-			    	<p>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		25%
-			    	</p>
-			    </div> 
+			    <?=$this->renderPartial('abas-view/avaliacoes')?>
 		    </div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="mapa">
-			    <div class="map-responsive">
-			    	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.598248608264!2d-46.73033238502651!3d-23.3303309847981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cee43cc0d9c8a9%3A0x6bf97911c2c29ab3!2sHospital+Previna+-+Franco+da+Rocha!5e0!3m2!1spt-BR!2sbr!4v1520087090405" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-			    </div>   
+		      <?=$this->renderPartial('abas-view/mapa')?>
 			</div>
 		</div>  
-		</div> 
-	</div>
+	</div> 
+</div>

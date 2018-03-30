@@ -23,24 +23,33 @@
 
 	<div>
 		<p class="text-beauty">Especialidades</p>
-		<p>Cardiologia</p>
-		<p>Clínica Geral</p>
-		<p>Ortopedia</p>
-		<p>Alergista</p>
+		<?php 
+			if(!empty($model->fkespecialidade)) :
+				foreach($model->fkespecialidade as $especialidade) : ?>
+					<p><?=$especialidade->nome?></p>	
+		<?php   
+				endforeach; 
+			endif
+		?>
 		<hr>
 	</div>
 
 	<div>
 		<p class="text-beauty">Planos de Saúde</p>
-		<?php foreach($model->fkplanosaude as $plano) : ?>
-			<p><?=$plano->nome?></p>	
-		<?php endforeach; ?>
+		<?php 
+			if(!empty($model->fkplanosaude)) :
+				foreach($model->fkplanosaude as $plano) : ?>
+					<p><?=$plano->nome?></p>	
+		<?php   
+				endforeach; 
+			endif
+		?>
 		<hr>
 	</div>
 
 	<div>
 		<p class="text-beauty">Contato</p>
-		<p><i class="fa fa-link"></i> Site</p>
+		<p><i class="fa fa-link"></i> <?=CHtml::tag('a',['href'=>$model->site], 'Website')?></p>
 		<p><i class="fa fa-phone"></i><?=$model->telefone?></p>
 		<hr>
 	</div>
