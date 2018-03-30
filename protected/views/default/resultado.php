@@ -70,60 +70,27 @@
 			
 			<br>
 
-			<div class="row">
-				<div class="media resultado">
-				 	<div class="media-left">
-				      	<img class="media-object" src="<?=Yii::app()->theme->baseUrl?>/imgs/hospital.jpg" alt="...">
-				  	</div>
-				  	<div class="media-body">
-				    	<h5 class="media-heading text-beauty">Hospital Previna Sáude</h5>
-					    <p>
-							<i class="fa fa-map-marker"></i> 
-							Endereço: R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP, 07803-050
-							<hr>
-							<?=CHtml::link("Detalhes", ['default/view'], ['class'=>'btn btn-success pull-right'])?>
-						</p>
-				  	</div>
+			<?php for($i=0;$i < count($model); $i++) : ?>
+				<div class="row">
+					<div class="media resultado">
+					 	<div class="media-left">
+					      	<img class="media-object" src="<?=Yii::app()->theme->baseUrl?>/imgs/hospital.jpg" alt="...">
+					  	</div>
+					  	<div class="media-body">
+					    	<h5 class="media-heading text-beauty"><?=$model[$i]->nome?></h5>
+						    <p>
+								<i class="fa fa-map-marker"></i> 
+								<?=$model[$i]->endereco?>
+								<hr>
+								<?=CHtml::link("Detalhes", ['default/view', 'id'=>$model[$i]->id], ['class'=>'btn btn-success pull-right'])?>
+							</p>
+					  	</div>
+					</div>
 				</div>
-			</div>
 
-			<p></p>
+				<p></p>
+			<?php endfor ?>
 			
-			<div class="row">
-				<div class="media resultado">
-				 	<div class="media-left">
-				      	<img class="media-object" src="<?=Yii::app()->theme->baseUrl?>/imgs/hospital.jpg" alt="...">
-				  	</div>
-				  	<div class="media-body">
-				    	<h5 class="media-heading text-beauty">Hospital Previna Sáude</h5>
-					    <p>
-							<i class="fa fa-map-marker"></i> 
-							Endereço: R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP, 07803-050
-							<hr>
-							<?=CHtml::link("Detalhes", ['default/view'], ['class'=>'btn btn-success pull-right'])?>
-						</p>
-				  	</div>
-				</div>
-			</div>
-
-			<p></p>
-
-			<div class="row">
-				<div class="media resultado">
-				 	<div class="media-left">
-				      	<img class="media-object" src="<?=Yii::app()->theme->baseUrl?>/imgs/hospital.jpg" alt="...">
-				  	</div>
-				  	<div class="media-body">
-				    	<h5 class="media-heading text-beauty">Hospital Previna Sáude</h5>
-					    <p>
-							<i class="fa fa-map-marker"></i> 
-							Endereço: R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP, 07803-050
-							<hr>
-							<?=CHtml::link("Detalhes", ['default/view'], ['class'=>'btn btn-success pull-right'])?>
-						</p>
-				  	</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </body>

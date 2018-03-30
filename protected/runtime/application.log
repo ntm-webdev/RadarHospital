@@ -610,3 +610,13 @@ Stack trace:
 REQUEST_URI=/RadarHospital/index.php/default/userArea
 HTTP_REFERER=http://localhost/RadarHospital/index.php/default/resultado
 ---
+2018/03/26 17:08:45 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "gii". in /var/www/html/yii/framework/web/CController.php:486
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(270): CController->missingAction('gii')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('gii')
+#2 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/gii')
+#3 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#4 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/RadarHospital/index.php/default/gii
+---
