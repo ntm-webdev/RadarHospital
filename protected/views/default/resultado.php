@@ -44,6 +44,14 @@
 				  	</div>
 
 				  	<div class="form-group">
+						<label class="text-beauty" for="regiao">Distância</label>
+					    <div class="slidecontainer">
+						  	<input type="range" min="1" max="100" value="1" class="slider" id="myRange">
+						  	<p><span id="demo"></span></p>
+						</div>
+				  	</div>
+
+				  	<div class="form-group">
 				  		<input class="btn btn-success" type="submit" name="btnPesquisar" value="Pesquisar">
 					</div>
 			  	</form>
@@ -53,15 +61,15 @@
 				<p></p>
 
 				<div class="col-xs-4">
-					<i class="fa fa-filter pointer" onclick="openNav()"></i>
+					<i class="fa fa-filter pointer text-beauty" onclick="openNav()"></i>
 				</div>
 
 				<div class="col-xs-4">
-					<i class="fa fa-map pointer"></i>
+					<i class="fa fa-map pointer text-beauty"></i>
 				</div>
 
 				<div class="col-xs-4">
-					<?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/userArea', 'class'=> 'no-link'], '<i class="fa fa-user pointer"></i>')?>
+					<?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/userArea', 'class'=> 'no-link'], '<i class="fa fa-user pointer text-beauty"></i>')?>
 				</div>
 
 				<br>
@@ -79,51 +87,21 @@
 				    	<h5 class="media-heading text-beauty">Hospital Previna Sáude</h5>
 					    <p>
 							<i class="fa fa-map-marker"></i> 
-							Endereço: R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP, 07803-050
-							<hr>
-							<?=CHtml::link("Detalhes", ['default/view'], ['class'=>'btn btn-success pull-right'])?>
+							<b class="text-beauty">Endereço:</b> R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP, 07803-050
+						</p>
+						<p>
+							<h5 class="media-heading text-beauty">Planos:</h5>
+							<p>Notredame Intermédica, Bradesco Saude, Unimed, Amil</p> 
 						</p>
 				  	</div>
+				  	<hr>
+					<?=CHtml::link("Detalhes", ['default/view'], ['class'=>'btn btn-success pull-right'])?>
 				</div>
 			</div>
 
 			<p></p>
+
 			
-			<div class="row">
-				<div class="media resultado">
-				 	<div class="media-left">
-				      	<img class="media-object" src="<?=Yii::app()->theme->baseUrl?>/imgs/hospital.jpg" alt="...">
-				  	</div>
-				  	<div class="media-body">
-				    	<h5 class="media-heading text-beauty">Hospital Previna Sáude</h5>
-					    <p>
-							<i class="fa fa-map-marker"></i> 
-							Endereço: R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP, 07803-050
-							<hr>
-							<?=CHtml::link("Detalhes", ['default/view'], ['class'=>'btn btn-success pull-right'])?>
-						</p>
-				  	</div>
-				</div>
-			</div>
-
-			<p></p>
-
-			<div class="row">
-				<div class="media resultado">
-				 	<div class="media-left">
-				      	<img class="media-object" src="<?=Yii::app()->theme->baseUrl?>/imgs/hospital.jpg" alt="...">
-				  	</div>
-				  	<div class="media-body">
-				    	<h5 class="media-heading text-beauty">Hospital Previna Sáude</h5>
-					    <p>
-							<i class="fa fa-map-marker"></i> 
-							Endereço: R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP, 07803-050
-							<hr>
-							<?=CHtml::link("Detalhes", ['default/view'], ['class'=>'btn btn-success pull-right'])?>
-						</p>
-				  	</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </body>

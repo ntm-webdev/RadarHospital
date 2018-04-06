@@ -1,5 +1,5 @@
 <div class="container">
-	<img src="<?= Yii::app()->theme->baseUrl?>/imgs/main-logo.png" alt="Radar Hospital" class="img img-responsive img-center">
+	<img style="height: 230px" src="<?= Yii::app()->theme->baseUrl?>/imgs/main-logo.png" alt="Radar Hospital" class="img img-responsive center">
 	<form>
 		<div class="form-group">
 			<label for="nome-hospital" class="text-beauty">Nome do Hospital</label>

@@ -12,15 +12,15 @@
 		  	<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 		    	<div class="item active">
-		      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/1.jpg" class="img img-responsive" alt="Los Angeles">
+		      		<img style="width: 800; height: 280px;" src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/1.jpg" class="img img-responsive" alt="Los Angeles">
 		    	</div>
 
 		    	<div class="item">
-		      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/2.jpg" class="img img-responsive" alt="Chicago">
+		      		<img style="width: 800; height: 280px;" src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/2.jpg" class="img img-responsive" alt="Chicago">
 		    	</div>
 
 		    	<div class="item">
-		      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/4.jpg" class="img img-responsive" alt="New York">
+		      		<img style="width: 800; height: 280px;" src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/4.jpg" class="img img-responsive" alt="New York">
 		    	</div>
 		  	</div>
 
@@ -61,22 +61,22 @@
 		    		
 		    		<div>
 			    		<p class="text-beauty">Informações gerais</p>
-			    		<p>Nome: Hospital Previna Saúde</p>
-			    		<p>Região: Zona Oeste</p>
-			    		<p>Bairro: Centro</p>
-						<p>Endereço: R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP</p>
+			    		<p><b>Nome:</b> Hospital Previna Saúde</p>
+			    		<p><b>Região:</b> Zona Oeste</p>
+			    		<p><b>Bairro:</b> Centro</p>
+						<p><b>Endereço:</b> R. Gen. Vicente de Paula Coutinho, 68/52/32 - Centro, Franco da Rocha - SP</p>
 			    		<hr>
 			    	</div>
 
 		    		<div>
 			    		<p class="text-beauty">Horário de Funcionamento</p>
-			    		<p>Domingo: Atendimento 24 horas</p>
-			    		<p>Segunda-feira: Atendimento 24 horas</p>
-			    		<p>Terça-feira: Atendimento 24 horas</p>
-			    		<p>Quarta-feira: Atendimento 24 horas</p>
-			    		<p>Quinta-feira: Atendimento 24 horas</p>
-			    		<p>Sexta-feira: Atendimento 24 horas</p>
-			    		<p>Sábado: Atendimento 24 horas</p>
+			    		<p><b>Domingo:</b> Atendimento 24 horas</p>
+			    		<p><b>Segunda-feira:</b> Atendimento 24 horas</p>
+			    		<p><b>Terça-feira:</b> Atendimento 24 horas</p>
+			    		<p><b>Quarta-feira:</b> Atendimento 24 horas</p>
+			    		<p><b>Quinta-feira:</b> Atendimento 24 horas</p>
+			    		<p><b>Sexta-feira:</b> Atendimento 24 horas</p>
+			    		<p><b>Sábado:</b> Atendimento 24 horas</p>
 			    		<hr>
 			    	</div>
 
@@ -98,7 +98,7 @@
 
 		    		<div>
 			    		<p class="text-beauty">Contato</p>
-			    		<p><i class="fa fa-link"></i> Site</p>
+			    		<p><i class="fa fa-link"></i> <a href="#">Website</a></p>
 			    		<p><i class="fa fa-phone"></i> +55114445-9080</p>
 			    		<hr>
 			    	</div>
@@ -107,56 +107,120 @@
 			</div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="avaliacoes">
+		    	<p></p>
+		    	<div class="row row-avaliacoes">
+		    		<?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/evaluate', 'style'=>'font-size: 15px;'], '<button class="btn btn-purple"><i class="fa fa-user-plus pointer"></i>
+		    		Adicionar avaliação</button>')?>
+		    		<hr class="hr-beauty">
+			    </div>
+
 			    <div class="row row-avaliacoes">
-			    	<?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/evaluate'], '<i class="fa fa-user-plus pointer"></i>
-			    		Adicionar avaliação')?>
-			    	<hr>
-			    	<p class="text-beauty">Excelente</p>
-			    	<p>Ótimo atendimento, equipe muito atenciosa e médicos super-capacitados</p>
 			    	<p>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		100%
+			    		<b>Leandro Kil, em 23/04/2018</b>
 			    	</p>
-			    </div> 
-			    <hr>
-			    <div class="row row-avaliacoes">
-			    	<p class="text-beauty">Bom</p>
-			    	<p>Bom atendimento, blablabla</p>
+			    	<p>Ótimo atendimento, equipe muito atenciosa e médicos super-capacitados.</p>
+			    	<p class="text-beauty">
+			    		Atendimento 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i> 
+			    		<i class="fa fa-star-o"></i>
+			    	</p>
+			    	<p class="text-beauty">
+			    		Atendimento Médico
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i>
+			    	</p>
+			    	<p class="text-beauty">
+			    		Higiene 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i>
+			    	</p>
+			    	<p class="text-beauty">Infraestrutura 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i>
+			    	</p>
+			    </div>
+
+			   	<hr class="hr-beauty">
+
+			   	<div class="row row-avaliacoes">
 			    	<p>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		75%
+			    		<b>Leandro Kil, em 23/04/2018</b>
 			    	</p>
-			    </div> 
-			    <hr>
-			    <div class="row row-avaliacoes">
-			    	<p class="text-beauty">Razoável</p>
-			    	<p>blablablablablabalbalbalbalbalbalblbalbalba</p>
+			    	<p>Ótimo atendimento, equipe muito atenciosa e médicos super-capacitados.</p>
+			    	<p class="text-beauty">
+			    		Atendimento 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i> 
+			    		<i class="fa fa-star-o"></i>
+			    	</p>
+			    	<p class="text-beauty">
+			    		Atendimento Médico
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i>
+			    	</p>
+			    	<p class="text-beauty">
+			    		Higiene 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i>
+			    	</p>
+			    	<p class="text-beauty">Infraestrutura 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i>
+			    	</p>
+			    </div>
+			    
+			   	<hr class="hr-beauty">
+
+			   	<div class="row row-avaliacoes">
 			    	<p>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		50%
+			    		<b>Leandro Kil, em 23/04/2018</b>
 			    	</p>
-			    </div> 
-			    <hr>
-			    <div class="row row-avaliacoes">
-			    	<p class="text-beauty">Ruim</p>
-			    	<p>blablablablablabalbalbalbalbalbalblbalbalba</p>
-			    	<p>
-			    		<i class="fa fa-star"></i>
+			    	<p>Ótimo atendimento, equipe muito atenciosa e médicos super-capacitados.</p>
+			    	<p class="text-beauty">
+			    		Atendimento 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i> 
 			    		<i class="fa fa-star-o"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		<i class="fa fa-star-o"></i>
-			    		25%
 			    	</p>
-			    </div> 
+			    	<p class="text-beauty">
+			    		Atendimento Médico
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i>
+			    	</p>
+			    	<p class="text-beauty">
+			    		Higiene 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i>
+			    	</p>
+			    	<p class="text-beauty">Infraestrutura 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star"></i> 
+			    		<i class="fa fa-star-o"></i>
+			    	</p>
+			    </div>
+			    
+			   	<hr class="hr-beauty">
 		    </div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="mapa">

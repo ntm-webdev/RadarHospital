@@ -1,4 +1,4 @@
-.img-center {
+.center {
     margin: 0 auto;
 }
 
@@ -6,6 +6,14 @@
     width: 80%;
     margin: 0 auto;
     float: none;
+}
+
+#myRange {
+    width: 80%;
+}
+
+.on-top {
+    position: fixed;
 }
 
 .no-link {
@@ -17,10 +25,19 @@
     color: white
 }
 
+.btn-purple {
+    background-color: purple;
+    color: white;
+}
+
 #bloco {
     background-color: white;
     border: 2px solid;
     width: 80%;
+}
+
+.hr-beauty {
+    border-color: #660066;
 }
 
 .text-beauty {
@@ -153,7 +170,7 @@
     width: 25px;
     height: 25px;
     border-radius: 50%; 
-    background: #4CAF50;
+    background: #660066;
     cursor: pointer;
 }
 
@@ -163,4 +180,8 @@
     border-radius: 50%;
     background: #4CAF50;
     cursor: pointer;
+}
+
+#demo {
+    color: #660066;
 }
