@@ -2,22 +2,22 @@
 		    		
 	<div>
 		<p class="text-beauty">Informações gerais</p>
-		<p>Nome: <?=$model->nome?></p>
-		<p>Região: <?=$model->fkregiao->nome?></p>
-		<p>Bairro: <?=$model->fkbairro->nome?></p>
-		<p>Endereço: <?=$model->endereco?></p>
+		<p><b>Nome:</b> <?=$model->nome?></p>
+		<p><b>Região:</b> <?=$model->fkregiao->nome?></p>
+		<p><b>Bairro:</b> <?=$model->fkbairro->nome?></p>
+		<p><b>Endereço:</b> <?=$model->endereco?></p>
 		<hr>
 	</div>
 
 	<div>
 		<p class="text-beauty">Horário de Funcionamento</p>
-		<p>Domingo: Atendimento 24 horas</p>
-		<p>Segunda-feira: Atendimento 24 horas</p>
-		<p>Terça-feira: Atendimento 24 horas</p>
-		<p>Quarta-feira: Atendimento 24 horas</p>
-		<p>Quinta-feira: Atendimento 24 horas</p>
-		<p>Sexta-feira: Atendimento 24 horas</p>
-		<p>Sábado: Atendimento 24 horas</p>
+		<p><b>Domingo:</b> Atendimento 24 horas</p>
+		<p><b>Segunda-feira:</b> Atendimento 24 horas</p>
+		<p><b>Terça-feira:</b> Atendimento 24 horas</p>
+		<p><b>Quarta-feira:</b> Atendimento 24 horas</p>
+		<p><b>Quinta-feira:</b> Atendimento 24 horas</p>
+		<p><b>Sexta-feira:</b> Atendimento 24 horas</p>
+		<p><b>Sábado:</b> Atendimento 24 horas</p>
 		<hr>
 	</div>
 

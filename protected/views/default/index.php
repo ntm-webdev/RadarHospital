@@ -1,34 +1,28 @@
 <div class="container">
-	<img src="<?= Yii::app()->theme->baseUrl?>/imgs/main-logo.png" alt="Radar Hospital" class="img img-responsive img-center">
-	<form>
+	<img style="height: 230px" src="<?= Yii::app()->theme->baseUrl?>/imgs/main-logo.png" alt="Radar Hospital" class="img img-responsive center">
+	<?php $form=$this->beginWidget('CActiveForm', array(
+		'action' => Yii::app()->createUrl('/Default/Resultado'),
+		'method' => 'POST'
+	)) ?>
 		<div class="form-group">
-			<label for="nome-hospital" class="text-beauty">Nome do Hospital</label>
-		  	<input type="text" class="form-control" id="nome-hospital">
+			<?=CHtml::activeLabel($model, 'nome', ['class'=>'text-beauty'])?>
+			<?=CHtml::activeTextField($model, 'nome', ['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 		</div>
 		
 
 		<div class="form-group">
-			<label for="regiao" class="text-beauty">Plano de Saúde</label>
-		    <select class="form-control" id="regiao">
-		    	<option>Bradesco Saúde</option>
-		    	<option>Notredame Intermédica</option>
-		    	<option>Unimed</option>
-		    </select>
+			<?=CHtml::activeLabel($model, 'filtros[plano_saude]', ['class'=>'text-beauty'])?>
+			<?=CHtml::activeDropDownList($model, 'filtros[plano_saude]', CHtml::ListData($planos, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 	  	</div>
 		
 
 		<div class="form-group">
-			<label for="regiao" class="text-beauty">Região</label>
-		    <select class="form-control" id="regiao">
-		    	<option>Zona Norte</option>
-		    	<option>Zona Sul</option>
-		    	<option>Zona Leste</option>
-		    	<option>Zona Oeste</option>
-		    </select>
+			<?=CHtml::activeLabel($model, 'filtros[regiao]', ['class'=>'text-beauty']);?>
+		    <?=CHtml::activeDropDownList($model, 'filtros[regiao]', CHtml::ListData($regioes, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 	  	</div>
 	  	
 	  	<div class="form-group">
-	  		<input class="btn btn-success" type="submit" name="btnPesquisar" value="Pesquisar">
+	  		<?=CHtml::submitButton('Pesquisar', ['class'=>'btn btn-success'])?>
 		</div>
-	</form>
+	<?php $this->endWidget() ?>
 </div>	

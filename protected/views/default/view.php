@@ -26,11 +26,11 @@
 							if($imagem->nome == "1.jpg") : 
 				?>
 								<div class="item active">
-						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/1.jpg" class="img img-responsive">
+						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/1.jpg" class="img img-responsive img-view">
 							    </div>
 							<?php else :?>
 						    	<div class="item">
-						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/<?=$imagem->nome?>" class="img img-responsive">
+						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/<?=$imagem->nome?>" class="img img-responsive img-view">
 						    	</div>
 			    <?php 		endif; 
 			    		endforeach;
@@ -75,6 +75,10 @@
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="avaliacoes">
 			    <?=$this->renderPartial('abas-view/avaliacoes', ['model' => $model])?>
+		    </div>
+	    
+		    <div role="tabpanel" class="tab-pane fade" id="avaliacoes">
+		    	<?=$this->renderPartial('abas-view/avaliacoes', ['model' => $model])?>
 		    </div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="mapa">

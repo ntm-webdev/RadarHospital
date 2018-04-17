@@ -9,15 +9,10 @@
  * @property string $endereco
  * @property double $latitude
  * @property double $longitude
- * @property integer $id_plano_saude
  * @property integer $id_regiao
  * @property integer $id_bairro
  * @property string $telefone
  *
- * The followings are the available model relations:
- * @property Regiao $idRegiao
- * @property Bairro $idBairro
- * @property PlanoSaude[] $planoSaudes
  */
 class hospital extends CActiveRecord
 {
@@ -29,6 +24,8 @@ class hospital extends CActiveRecord
         return 'hospital';
     }
 
+    protected $filtros;
+
     /**
      * @return array validation rules for model attributes.
      */
@@ -38,11 +35,12 @@ class hospital extends CActiveRecord
         // will receive user inputs.
         return array(
             array('nome, endereco, latitude, longitude', 'required'),
-            array('id_plano_saude, id_regiao, id_bairro', 'numerical', 'integerOnly'=>true),
+            array('id_regiao, id_bairro', 'numerical', 'integerOnly'=>true),
             array('latitude, longitude', 'numerical'),
             array('nome', 'length', 'max'=>60),
             array('endereco', 'length', 'max'=>80),
             array('telefone', 'length', 'max'=>15),
+            array('filtros', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, nome, endereco, latitude, longitude, id_plano_saude, id_regiao, id_bairro, telefone', 'safe', 'on'=>'search'),
@@ -72,14 +70,14 @@ class hospital extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'nome' => 'Nome',
+            'nome' => 'Hospital',
             'endereco' => 'Endereco',
             'latitude' => 'Latitude',
             'longitude' => 'Longitude',
-            'id_plano_saude' => 'Id Plano Saude',
             'id_regiao' => 'Id Regiao',
             'id_bairro' => 'Id Bairro',
-            'telefone' => 'Telefone',
+            'filtros[plano_saude]' => 'Plano de Saude',
+            'filtros[regiao]' => 'Região',
         );
     }
 
@@ -106,10 +104,14 @@ class hospital extends CActiveRecord
         $criteria->compare('endereco',$this->endereco,true);
         $criteria->compare('latitude',$this->latitude);
         $criteria->compare('longitude',$this->longitude);
-        $criteria->compare('id_plano_saude',$this->id_plano_saude);
         $criteria->compare('id_regiao',$this->id_regiao);
         $criteria->compare('id_bairro',$this->id_bairro);
         $criteria->compare('telefone',$this->telefone,true);
+        $criteria->compare('fkplanosaude.nome', $this->filtros['plano_saude']??0);
+        $criteria->compare('fkregiao.nome', $this->filtros['regiao']??0);
+
+        $criteria->together = true;
+        $criteria->with = ['fkregiao', 'fkplanosaude'];
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -125,5 +127,22 @@ class hospital extends CActiveRecord
     public static function model($className=__CLASS__)
     {
         return parent::model($className);
+    }
+
+    public function getHospitais()
+    {
+        $hospitais = hospital::model()->findAll();
+
+        return $hospitais;
+    }
+
+    public function getFiltros()
+    {
+        return $this->filtros;
+    }
+
+    public function setFiltros($val)
+    {
+        $this->filtros = $val;
     }
 }

@@ -1,7 +1,8 @@
 <div class="container">
-	<h2 class="text-beauty">Deixe sua opinião</h2>
 	<form>
 		<div class="form-group">
+			<h2 class="text-beauty">Deixe sua opinião</h2>
+			<br>
 			<label class="text-beauty">Atendimento</label>
 			<select style="font-family:'FontAwesome', Arial;" class="form-control">
 				<option>&#xf005;&#xf006;&#xf006;&#xf006;</option>

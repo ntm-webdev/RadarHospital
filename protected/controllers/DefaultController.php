@@ -5,15 +5,28 @@ class DefaultController extends CController
 	
 	public function actionIndex()
 	{	
-    	$this->render('index');
+		$model = new hospital;
+		$planos = plano_saude::model()->findAll();
+		$regioes = regiao::model()->findAll();
+
+    	$this->render('index', [
+    		'model' => $model,
+    		'planos' => $planos,
+    		'regioes' => $regioes,
+    	]);
 	}
 
 	public function actionResultado()
 	{	
-    	$model = hospital::model()->findAll();
+    	$model = new hospital();
+    	$model->unsetAttributes();
+
+    	if (isset($_POST['hospital'])) {
+			$model->attributes = $_POST['hospital'];
+		}
 
     	$this->render('resultado', [
-    		'model' => $model
+    		'dataProvider' => $model->search()
     	]);
 	}
 
