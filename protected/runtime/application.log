@@ -716,3 +716,54 @@ Stack trace:
 #14 {main}
 REQUEST_URI=/RadarHospital/index.php/default/1
 ---
+2018/04/18 21:14:35 [error] [exception.ParseError] ParseError: syntax error, unexpected ',', expecting ')' in /var/www/html/RadarHospital/protected/models/hospital.php:61
+Stack trace:
+#0 [internal function]: YiiBase::autoload('hospital')
+#1 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(8): spl_autoload_call('hospital')
+#2 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionIndex()
+#3 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default')
+#8 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#9 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/
+---
+2018/04/18 21:33:32 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fkbairro.nome' in 'where clause'. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `hospital` `t`  LEFT OUTER JOIN `plano_hospital` `fkplanosaude_fkplanosaude` ON (`t`.`id`=`fkplanosaude_fkplanosaude`.`codhospital`) LEFT OUTER JOIN `plano_saude` `fkplanosaude` ON (`fkplanosaude`.`id`=`fkplanosaude_fkplanosaude`.`codplano`) LEFT OUTER JOIN `regiao` `fkregiao` ON (`t`.`id_regiao`=`fkregiao`.`id`) WHERE ((fkplanosaude.nome=:ycp0) AND (fkbairro.nome=:ycp1)).
+in /var/www/html/RadarHospital/protected/views/default/resultado.php (73)
+in /var/www/html/RadarHospital/protected/controllers/DefaultController.php (43)
+in /var/www/html/RadarHospital/index.php (13)
+2018/04/18 21:33:32 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fkbairro.nome' in 'where clause'. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `hospital` `t`  LEFT OUTER JOIN `plano_hospital` `fkplanosaude_fkplanosaude` ON (`t`.`id`=`fkplanosaude_fkplanosaude`.`codhospital`) LEFT OUTER JOIN `plano_saude` `fkplanosaude` ON (`fkplanosaude`.`id`=`fkplanosaude_fkplanosaude`.`codplano`) LEFT OUTER JOIN `regiao` `fkregiao` ON (`t`.`id_regiao`=`fkregiao`.`id`) WHERE ((fkplanosaude.nome=:ycp0) AND (fkbairro.nome=:ycp1)) in /var/www/html/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/html/yii/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/html/yii/framework/db/ar/CActiveFinder.php(765): CDbCommand->queryScalar()
+#2 /var/www/html/yii/framework/db/ar/CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 /var/www/html/yii/framework/db/ar/CActiveRecord.php(1613): CActiveFinder->count(Object(CDbCriteria))
+#4 /var/www/html/yii/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 /var/www/html/yii/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 /var/www/html/yii/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 /var/www/html/yii/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/html/yii/framework/zii/widgets/CBaseListView.php(125): CDataProvider->getData()
+#9 /var/www/html/yii/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#10 /var/www/html/yii/framework/web/CBaseController.php(147): CListView->init()
+#11 /var/www/html/yii/framework/web/CBaseController.php(181): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#12 /var/www/html/RadarHospital/protected/views/default/resultado.php(73): CBaseController->widget('zii.widgets.CLi...', Array)
+#13 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/R...')
+#14 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/R...', Array, true)
+#15 /var/www/html/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/html/R...', Array, true)
+#16 /var/www/html/yii/framework/web/CController.php(785): CController->renderPartial('resultado', Array, true)
+#17 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(43): CController->render('resultado', Array)
+#18 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionResultado()
+#19 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#21 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('resultado')
+#23 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/resulta...')
+#24 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#25 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/resultado
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/index
+---

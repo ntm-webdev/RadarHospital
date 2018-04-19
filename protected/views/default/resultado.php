@@ -3,44 +3,32 @@
         <div class="container">
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <form>
+                
+                <?php $form=$this->beginWidget("CActiveForm", array(
+                        'action' => Yii::app()->createUrl("Default/resultado"),
+                        'htmlOptions'=> [
+                            'id' => 'form-result'
+                        ],
+                        'method' => 'POST'
+                    )) ;?>
                     <div class="form-group">
-                        <label class="text-beauty">Bairro</label>
-                        <select class="form-control">
-                            <option>Paraíso</option>
-                            <option>Alto da Lapa</option>
-                            <option>Consolação</option>
-                            <option>Pirituba</option>
-                        </select>
+                        <?=CHtml::activeLabel($model, 'filtros[bairro]', ['class'=>'text-beauty'])?>
+                        <?=CHtml::activeDropDownList($model, 'filtros[bairro]', CHtml::ListData($bairros, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
                     </div>
 
                     <div class="form-group">
-                        <label class="text-beauty">Especialidade</label>
-                        <select class="form-control">
-                            <option>Pediatria</option>
-                            <option>Alergista</option>
-                            <option>Ortopedia</option>
-                            <option>Neurologia</option>
-                        </select>
+                        <?=CHtml::activeLabel($model, 'filtros[especialidade]', ['class'=>'text-beauty'])?>
+                        <?=CHtml::activeDropDownList($model, 'filtros[especialidade]', CHtml::ListData($especialidades, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
                     </div>
 
                     <div class="form-group">
-                        <label class="text-beauty" for="regiao">Região</label>
-                        <select class="form-control" id="regiao">
-                            <option>Zona Norte</option>
-                            <option>Zona Sul</option>
-                            <option>Zona Leste</option>
-                            <option>Zona Oeste</option>
-                        </select>
+                        <?=CHtml::activeLabel($model, 'filtros[regiao]', ['class'=>'text-beauty'])?>
+                        <?=CHtml::activeDropDownList($model, 'filtros[regiao]', CHtml::ListData($regioes, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
                     </div>
 
                     <div class="form-group">
-                        <label class="text-beauty" for="regiao">Plano de Saúde</label>
-                        <select class="form-control" id="regiao">
-                            <option>Bradesco Saúde</option>
-                            <option>Notredame Intermédica</option>
-                            <option>Unimed</option>
-                        </select>
+                        <?=CHtml::activeLabel($model, 'filtros[plano_saude]', ['class'=>'text-beauty'])?>
+                        <?=CHtml::activeDropDownList($model, 'filtros[plano_saude]', CHtml::ListData($planos, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
                     </div>
 
                     <div class="form-group">
@@ -52,9 +40,10 @@
                     </div>
 
                     <div class="form-group">
-                        <input class="btn btn-success" type="submit" name="btnPesquisar" value="Pesquisar">
+                        <?=CHtml::submitButton('Pesquisar', ['class'=>'btn btn-success'])?>
                     </div>
-                </form>
+
+                <?php $this->endWidget() ?>
             </div>
 
             <div class="row resultado">
@@ -79,10 +68,10 @@
     
             <?php
 
-	            $this->widget('zii.widgets.CListView', array(
-	               'dataProvider'=>$dataProvider,
-	               'itemView'=> 'list',
-	            )); 
+                $this->widget('zii.widgets.CListView', array(
+                   'dataProvider'=>$dataProvider,
+                   'itemView'=> 'list',
+                )); 
 
             ?>
 

@@ -4,23 +4,25 @@
 	      	<img class="media-object" src="<?=Yii::app()->theme->baseUrl?>/imgs/hospital.jpg" alt="...">
 	  	</div>
 	  	<div class="media-body">
-	    	<h5 class="media-heading text-beauty"><?=$data->nome?></h5>
+	    	<h5 class="media-heading text-beauty"><i class="fa fa-fw fa-h-square"></i> <?=$data->nome?></h5>
 		    <p>
-				<i class="fa fa-map-marker"></i> 
-				<b class="text-beauty">Endereço:</b> <?=$data->endereco?>
+				<i class="fa fa-fw fa-map-marker"></i> <b class="text-beauty">Endereço:</b> <?=$data->endereco?>
+				<br>
+				<i class="fa fa-fw fa-location-arrow"></i> <b class="text-beauty">Bairro:</b> <?=$data->fkbairro->nome?>
 			</p>
-			<p>
-				<h5 class="media-heading text-beauty">Planos:</h5>
-				<?php
-					$data->getRelated("fkplanosaude", true);
-					$planos = [];
-					 
-					foreach ($data->fkplanosaude as $plano) : 
-						$planos[] = $plano->nome;
-					endforeach;
 
-					echo implode($planos, ",");
-				?>
+			<h5 class="media-heading text-beauty"><i class="fa fa-fw fa-heartbeat"></i> Planos:</h5>
+			<p>
+			<?php
+				$data->getRelated("fkplanosaude", true);
+				$planos = [];
+				 
+				foreach ($data->fkplanosaude as $plano) : 
+					$planos[] = $plano->nome;
+				endforeach;
+
+				echo implode($planos, ",");
+			?>
 			</p>
 	  	</div>
 	  	<hr>

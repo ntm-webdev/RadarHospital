@@ -48,7 +48,7 @@ class Bairro extends CActiveRecord
         // class name for the relations automatically generated below.
         return array(
             'idRegiao' => array(self::BELONGS_TO, 'Regiao', 'id_regiao'),
-            'hospitals' => array(self::HAS_MANY, 'Hospital', 'id_bairro'),
+            'hospitals' => array(self::HAS_ONE, 'Hospital', 'id_bairro'),
         );
     }
 

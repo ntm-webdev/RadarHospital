@@ -57,8 +57,8 @@ class hospital extends CActiveRecord
         return array(
             'fkespecialidade' => array(self::MANY_MANY, 'especialidades', 'especialidade_hospital(codhospital, codespecialidade)'),
             'fkimagens' => array(self::MANY_MANY, 'imagens', 'imagem_hospital(codhospital, codimagem)'),
-            'fkregiao' => array(self::BELONGS_TO, 'regiao', 'id_regiao'),
-            'fkbairro' => array(self::BELONGS_TO, 'bairro', 'id_bairro'),
+            'fkregiao' => array(self::BELONGS_TO, 'Regiao', 'id_regiao'),
+            'fkbairro' => array(self::BELONGS_TO, 'Bairro', 'id_bairro'),
             'fkplanosaude' => array(self::MANY_MANY, 'plano_saude', 'plano_hospital(codhospital, codplano)')
         );
     }
@@ -78,6 +78,8 @@ class hospital extends CActiveRecord
             'id_bairro' => 'Id Bairro',
             'filtros[plano_saude]' => 'Plano de Saude',
             'filtros[regiao]' => 'Região',
+            'filtros[bairro]' => 'Bairro',
+            'filtros[especialidade]' => 'Especialidade',
         );
     }
 
@@ -99,19 +101,22 @@ class hospital extends CActiveRecord
 
         $criteria=new CDbCriteria;
 
-        $criteria->compare('id',$this->id);
-        $criteria->compare('nome',$this->nome,true);
-        $criteria->compare('endereco',$this->endereco,true);
-        $criteria->compare('latitude',$this->latitude);
-        $criteria->compare('longitude',$this->longitude);
-        $criteria->compare('id_regiao',$this->id_regiao);
-        $criteria->compare('id_bairro',$this->id_bairro);
-        $criteria->compare('telefone',$this->telefone,true);
+        $criteria->compare('t.id',$this->id);
+        $criteria->compare('t.nome',$this->nome,true);
+        $criteria->compare('t.endereco',$this->endereco,true);
+        $criteria->compare('t.latitude',$this->latitude);
+        $criteria->compare('t.longitude',$this->longitude);
+        $criteria->compare('t.id_regiao',$this->id_regiao);
+        $criteria->compare('t.id_bairro',$this->id_bairro);
+        $criteria->compare('t.telefone',$this->telefone,true);
         $criteria->compare('fkplanosaude.nome', $this->filtros['plano_saude']??0);
         $criteria->compare('fkregiao.nome', $this->filtros['regiao']??0);
+        //$criteria->compare('fkbairro.nome', $this->filtros['bairro']??0);
+        //$criteria->compare('fkespecialidade.nome', $this->filtros['especialidade']??0);
 
         $criteria->together = true;
-        $criteria->with = ['fkregiao', 'fkplanosaude'];
+        //$criteria->with = ['fkplanosaude','fkregiao','fkbairro','fkespecialidade'];
+        $criteria->with = ['fkplanosaude','fkregiao'];
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,

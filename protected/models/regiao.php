@@ -45,8 +45,8 @@ class Regiao extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'bairros' => array(self::HAS_MANY, 'Bairro', 'id_regiao'),
-            'hospitals' => array(self::HAS_MANY, 'Hospital', 'id_regiao'),
+            'bairros' => array(self::HAS_ONE, 'Bairro', 'id_regiao'),
+            'hospitals' => array(self::HAS_ONE, 'Hospital', 'id_regiao'),
         );
     }
 
