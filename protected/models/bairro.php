@@ -12,7 +12,7 @@
  * @property Regiao $idRegiao
  * @property Hospital[] $hospitals
  */
-class Bairro extends CActiveRecord
+class bairro extends CActiveRecord
 {
     /**
      * @return string the associated database table name

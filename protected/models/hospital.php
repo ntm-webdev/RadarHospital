@@ -57,8 +57,8 @@ class hospital extends CActiveRecord
         return array(
             'fkespecialidade' => array(self::MANY_MANY, 'especialidades', 'especialidade_hospital(codhospital, codespecialidade)'),
             'fkimagens' => array(self::MANY_MANY, 'imagens', 'imagem_hospital(codhospital, codimagem)'),
-            'fkregiao' => array(self::BELONGS_TO, 'Regiao', 'id_regiao'),
-            'fkbairro' => array(self::BELONGS_TO, 'Bairro', 'id_bairro'),
+            'fkregiao' => array(self::BELONGS_TO, 'regiao', 'id_regiao'),
+            'fkbairro' => array(self::BELONGS_TO, 'bairro', 'id_bairro'),
             'fkplanosaude' => array(self::MANY_MANY, 'plano_saude', 'plano_hospital(codhospital, codplano)')
         );
     }
