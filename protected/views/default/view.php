@@ -70,19 +70,15 @@
 	  	<!-- Abas -->
 	  	<div class="tab-content">
 	    	<div role="tabpanel" class="tab-pane fade active in" id="detalhes">
-		    	<?=$this->renderPartial('abas-view/detalhes', ['model' => $model])?>
+		    	<?=$this->renderPartial('abas-view/detalhes', ['model' => $model, 'feedback'=>$feedback])?>
 			</div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="avaliacoes">
-			    <?=$this->renderPartial('abas-view/avaliacoes', ['model' => $model])?>
-		    </div>
-	    
-		    <div role="tabpanel" class="tab-pane fade" id="avaliacoes">
-		    	<?=$this->renderPartial('abas-view/avaliacoes', ['model' => $model])?>
+			    <?=$this->renderPartial('abas-view/avaliacoes', ['model' => $model, 'feedback'=>$feedback])?>
 		    </div>
 	    
 		    <div role="tabpanel" class="tab-pane fade" id="mapa">
-		      <?=$this->renderPartial('abas-view/mapa', ['model' => $model])?>
+		      <?=$this->renderPartial('abas-view/mapa', ['model' => $model, 'feedback'=>$feedback])?>
 			</div>
 		</div>  
 	</div> 

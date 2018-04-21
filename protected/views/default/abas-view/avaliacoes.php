@@ -1,114 +1,35 @@
 <p></p>
 <div class="row row-avaliacoes">
-	<?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/evaluate', 'style'=>'font-size: 15px;'], '<button class="btn btn-purple"><i class="fa fa-user-plus pointer"></i>
-	Adicionar avaliação</button>')?>
+	<?=CHtml::link('Adicionar avaliação', ['Default/evaluate', 'idHospital'=>$model->id], ['class'=>'btn btn-purple','style'=>'font-size: 15px'])?>
 	<hr class="hr-beauty">
 </div>
 
-<div class="row row-avaliacoes">
-	<p>
-		<b>Leandro Kil, em 23/04/2018</b>
-	</p>
-	<p>Ótimo atendimento, equipe muito atenciosa e médicos super-capacitados.</p>
-	<p class="text-beauty">
-		Atendimento 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-	<p class="text-beauty">
-		Atendimento Médico
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-	<p class="text-beauty">
-		Higiene 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i>
-	</p>
-	<p class="text-beauty">Infraestrutura 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-</div>
+<?php for($i=0;$i < count($feedback); $i++) : ?>
+	
+	<div class="row row-avaliacoes">
+		<p>
+			<b><?=$feedback[$i]->fkusuario->nome?>, em <?=$feedback[$i]->ParseDate($feedback[$i]->datahora)?></b>
+		</p>
+		<p>
+			<?=$feedback[$i]->descricao?>
+		</p>
+		<p class="text-beauty">
+			Atendimento
+			<?=$feedback[$i]->getStarts($feedback[$i]->atendimento)?>
+		</p>
+		<p class="text-beauty">
+			Atendimento Médico
+			<?=$feedback[$i]->getStarts($feedback[$i]->atendimento_medico)?>
+		</p>
+		<p class="text-beauty">
+			Higiene 
+			<?=$feedback[$i]->getStarts($feedback[$i]->higiene)?>
+		</p>
+		<p class="text-beauty">Infraestrutura 
+			<?=$feedback[$i]->getStarts($feedback[$i]->infraestrutura)?>
+		</p>
+	</div>
+	
+	<hr class="hr-beauty">
 
-<hr class="hr-beauty">
-
-<div class="row row-avaliacoes">
-	<p>
-		<b>Leandro Kil, em 23/04/2018</b>
-	</p>
-	<p>Ótimo atendimento, equipe muito atenciosa e médicos super-capacitados.</p>
-	<p class="text-beauty">
-		Atendimento 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-	<p class="text-beauty">
-		Atendimento Médico
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-	<p class="text-beauty">
-		Higiene 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i>
-	</p>
-	<p class="text-beauty">Infraestrutura 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-</div>
-
-<hr class="hr-beauty">
-
-<div class="row row-avaliacoes">
-	<p>
-		<b>Leandro Kil, em 23/04/2018</b>
-	</p>
-	<p>Ótimo atendimento, equipe muito atenciosa e médicos super-capacitados.</p>
-	<p class="text-beauty">
-		Atendimento 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-	<p class="text-beauty">
-		Atendimento Médico
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-	<p class="text-beauty">
-		Higiene 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i>
-	</p>
-	<p class="text-beauty">Infraestrutura 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star"></i> 
-		<i class="fa fa-star-o"></i>
-	</p>
-</div>
-
-<hr class="hr-beauty">
+<?php endfor; ?>

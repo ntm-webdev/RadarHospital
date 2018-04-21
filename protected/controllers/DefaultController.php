@@ -47,15 +47,31 @@ class DefaultController extends CController
 	public function actionView($id)
 	{	
 		$model = hospital::model()->findByPk($id);
+		$feedback = feedback::model()->findAllByAttributes(['id_hospital'=>$id]);
 
     	$this->render('view', [
-    		'model' => $model
+    		'model' => $model,
+    		'feedback' => $feedback
     	]);
 	}
 
-	public function actionevaluate()
+	public function actionEvaluate()
 	{	
-    	$this->render('evaluate');
+		$model = new feedback();
+
+		if (!empty($_GET['Feedback'])) {
+			$model->attributes = $_GET['Feedback'];
+			$model->id_hospital = $_GET['idHospital'];
+			$model->id_usuario = 1;
+			
+			if ($model->save()) {
+				$this->redirect(['view', 'id'=>$_GET['idHospital']]);
+			}
+		} else {
+	    	$this->render('evaluate',[
+	    		'model' => $model
+	    	], false, true, true);
+	    }
 	}
 
 	public function actionuserArea()

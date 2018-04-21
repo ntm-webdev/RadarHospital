@@ -40,7 +40,7 @@ class hospital extends CActiveRecord
             array('nome', 'length', 'max'=>60),
             array('endereco', 'length', 'max'=>80),
             array('telefone', 'length', 'max'=>15),
-            array('filtros', 'safe'),
+            array('filtros, id', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, nome, endereco, latitude, longitude, id_plano_saude, id_regiao, id_bairro, telefone', 'safe', 'on'=>'search'),

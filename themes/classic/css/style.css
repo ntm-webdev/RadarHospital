@@ -9,6 +9,10 @@
    width:90%;
 }
 
+.select-evaluate {
+    font-family : 'FontAwesome', Arial;
+}
+
 .img-view {
     width: 800px;
     height: 280px;
