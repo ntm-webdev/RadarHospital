@@ -78,5 +78,73 @@ class DefaultController extends CController
 	{	
     	$this->render('userArea');
 	}
+
+	public function actionPreferences()
+	{	
+		$model = usuario::model()->findByPk("1");
+
+		if (isset($_POST['Usuario'])) {
+			$model->attributes = $_POST['Usuario'];
+
+			if ($model->save()) {
+				$this->redirect(['userArea']);
+			}
+		} else {
+	    	$this->render('preferences',[
+	    		'model' => $model
+	    	]);
+	    }
+	}
+
+	public function actionAbout()
+	{	
+    	$this->render('about');
+	}
+
+	public function actionFavorites()
+	{	
+		$model = usuario::model()->findByPk("1");
+
+    	$this->render('favorites', [
+    		'model' => $model,
+    		'dataProvider' => $model->search()
+    	]);
+	}
+
+	/**
+	 * Displays the login page
+	 */
+	public function actionLogin()
+	{
+		$model=new LoginForm;
+
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->login()) {
+				$this->redirect(Yii::app()->user->returnUrl);
+			}
+		}
+		// display the login form
+		$this->render('login',array('model'=>$model));
+	}
+
+	/**
+	 * Logs out the current user and redirect to homepage.
+	 */
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
+	}
 	
 }

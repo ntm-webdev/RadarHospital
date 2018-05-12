@@ -53,7 +53,7 @@
 	
 	<div class="row">
   		<!-- Navegacao -->
-			<ul class="nav nav-tabs" role="tablist">
+		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation" class="active">
 				<a href="#detalhes" class="text-beauty" aria-controls="detalhes" role="tab" data-toggle="tab" aria-expanded="true">Detalhes</a>
 			</li>
@@ -64,6 +64,12 @@
 
 		    <li role="presentation">
 		    	<a href="#mapa" class="text-beauty" aria-controls="mapa" role="tab" data-toggle="tab" aria-expanded="false">Mapa</a>
+		    </li>
+
+		    <li role="presentation">
+		    	<a class="text-beauty" aria-controls="mapa" role="tab" data-toggle="tab" aria-expanded="false">
+		    		<span class="glyphicon glyphicon-heart"></span>
+		    	</a>
 		    </li>
   		</ul>
 

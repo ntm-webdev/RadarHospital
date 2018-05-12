@@ -3,10 +3,17 @@
 }
 
 #form-index {
-    position:fixed;
-   top:35%;
-   left:18%;
-   width:90%;
+    position: relative;
+    top:35%;
+    left:10%;
+    width:90%;
+}
+
+.spec {
+    padding-right:0;
+    padding-left:0;
+    margin-right:auto;
+    margin-left:auto
 }
 
 .select-evaluate {
@@ -194,4 +201,21 @@
 
 #demo {
     color: #660066;
+}
+
+#list ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+#list ul li {
+    border-bottom: 1px solid;
+    padding: 5%;
+}
+
+#list ul li a {
+    color: black;
+    display: block;
 }

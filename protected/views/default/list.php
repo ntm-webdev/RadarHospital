@@ -12,7 +12,6 @@
 			</p>
 
 			<h5 class="media-heading text-beauty"><i class="fa fa-fw fa-heartbeat"></i> Planos:</h5>
-			<p>
 			<?php
 				$data->getRelated("fkplanosaude", true);
 				$planos = [];
@@ -21,9 +20,10 @@
 					$planos[] = $plano->nome;
 				endforeach;
 
-				echo implode($planos, ",");
+
+				$str = implode(",", $planos);
+				echo trim(str_replace(' ', '', $str));
 			?>
-			</p>
 	  	</div>
 	  	<hr>
 	  	<?=CHtml::link("Detalhes", ['default/view', 'id'=>$data->id], ['class'=>'btn btn-success pull-right'])?>

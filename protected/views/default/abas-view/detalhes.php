@@ -11,26 +11,24 @@
 
 	<div>
 		<p class="text-beauty">Horário de Funcionamento</p>
-		<p><b>Domingo:</b> Atendimento 24 horas</p>
-		<p><b>Segunda-feira:</b> Atendimento 24 horas</p>
-		<p><b>Terça-feira:</b> Atendimento 24 horas</p>
-		<p><b>Quarta-feira:</b> Atendimento 24 horas</p>
-		<p><b>Quinta-feira:</b> Atendimento 24 horas</p>
-		<p><b>Sexta-feira:</b> Atendimento 24 horas</p>
-		<p><b>Sábado:</b> Atendimento 24 horas</p>
+		<?php 
+			foreach ($model->fkdias as $dia) : ?>
+				<p><b><?=$dia->descricao?>:</b>
+				<?php foreach ($dia->fkperiodos as $periodo) : ?>
+					<?=$periodo->horario_inicial?> às <?=$periodo->horario_final?>
+		<?php   endforeach;
+		    endforeach; ?>
 		<hr>
 	</div>
 
 	<div>
 		<p class="text-beauty">Especialidades</p>
 		<?php 
-			if(!empty($model->fkespecialidade)) :
+			if (!empty($model->fkespecialidade)) :
 				foreach($model->fkespecialidade as $especialidade) : ?>
 					<p><?=$especialidade->nome?></p>	
-		<?php   
-				endforeach; 
-			endif
-		?>
+		<?php   endforeach; 
+			endif; ?>
 		<hr>
 	</div>
 
@@ -40,10 +38,8 @@
 			if(!empty($model->fkplanosaude)) :
 				foreach($model->fkplanosaude as $plano) : ?>
 					<p><?=$plano->nome?></p>	
-		<?php   
-				endforeach; 
-			endif
-		?>
+		<?php   endforeach; 
+			endif?>
 		<hr>
 	</div>
 
