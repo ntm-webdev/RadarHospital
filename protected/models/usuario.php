@@ -7,7 +7,7 @@
  * The followings are the available columns in table 'usuario':
  * @property integer $id
  * @property string $nome
- * @property string $endereco
+ * @property string $
  * @property integer $id_bairro
  * @property integer $id_planosaude
  *
@@ -18,6 +18,7 @@
  */
 class Usuario extends CActiveRecord
 {
+        public $maxColumn;
     /**
      * @return string the associated database table name
      */
@@ -34,13 +35,12 @@ class Usuario extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id, nome, endereco, id_bairro, id_planosaude, id_regiao', 'required'),
+            array('id, nome, id_bairro, id_planosaude, id_regiao', 'required'),
             array('id, id_bairro, id_planosaude, id_regiao', 'numerical', 'integerOnly'=>true),
-            array('nome', 'length', 'max'=>150),
-            array('endereco', 'length', 'max'=>200),
+            array('nome, email, pwd', 'length', 'max'=>150),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, nome, endereco, id_bairro, id_planosaude, id_regiao', 'safe', 'on'=>'search'),
+            array('id, nome, id_bairro, id_planosaude, id_regiao, email, pwd', 'safe', 'on'=>'search'),
         );
     }
 
@@ -67,10 +67,11 @@ class Usuario extends CActiveRecord
         return array(
             'id' => 'ID',
             'nome' => 'Nome',
-            'endereco' => 'Endereco',
             'id_bairro' => 'Id Bairro',
             'id_regiao' => 'Id Regiao',
             'id_planosaude' => 'Id Planosaude',
+            'email' => 'E-mail',
+            'pwd' => 'Senha',
         );
     }
 
@@ -94,7 +95,6 @@ class Usuario extends CActiveRecord
 
         $criteria->compare('id',$this->id);
         $criteria->compare('nome',$this->nome,true);
-        $criteria->compare('endereco',$this->endereco,true);
         $criteria->compare('id_bairro',$this->id_bairro);
         $criteria->compare('id_regiao',$this->id_regiao);
         $criteria->compare('id_planosaude',$this->id_planosaude);

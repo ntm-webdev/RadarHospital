@@ -1,4 +1,10 @@
 <div class="container">
+	<a href="http://localhost/RadarHospital/index.php/default/userArea">
+		<span class="text-beauty pull-right">
+			<i class="fa fa-fw fa-lg pointer fa-user"></i>
+			<?=(Yii::app()->user->hasState("id") ? Yii::app()->user->getState("nome") : "Faça seu Login") ?>
+		</span>
+	</a>
 	<img style="height: 230px" src="<?= Yii::app()->theme->baseUrl?>/imgs/main-logo.png" alt="Radar Hospital" class="img img-responsive center">
 	
 	<?php $form=$this->beginWidget("CActiveForm", array(

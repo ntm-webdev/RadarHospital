@@ -2,16 +2,26 @@
 	<?php 
 		$form = $this->beginWidget("CActiveForm", [
 			'method' => 'POST',
-			'action' => Yii::app()->createUrl("Default/preferences"),
-			'htmlOptions' => [
-				'id' => 'preferences-form'
-			]
+			'action' => Yii::app()->createUrl("Default/registerUser"),
 		]);
 	?>
 		<div class="form-group">
-			<h2 class="text-beauty">Olá, <?=$model->nome?> suas informações estão corretas?</h2>
+			<h2 class="text-beauty">Cadastre-se</h2>
+			<br>
+			<?=CHtml::activeLabel($model, 'nome', ['class'=>'text-beauty'])?>
+			<?=CHtml::activeTextField($model, 'nome', ['class'=>'form-control'])?>
 		</div>
-		
+
+		<div class="form-group">
+			<?=CHtml::activeLabel($model, 'email', ['class'=>'text-beauty'])?>
+			<?=CHtml::activeEmailField($model, 'email', ['class'=>'form-control'])?>
+		</div>
+
+		<div class="form-group">
+			<?=CHtml::activeLabel($model, 'pwd', ['class'=>'text-beauty'])?>
+			<?=CHtml::activePasswordField($model, 'pwd', ['class'=>'form-control'])?>
+		</div>
+
 		<div class="form-group">		
 			<label class="text-beauty">Plano de Saude</label>
 			<?=CHtml::activeDropDownList($model, 'id_planosaude', [
@@ -37,7 +47,7 @@
 		</div>
 
 		<div class="form-group">
-			<?=CHtml::submitButton('Gravar', ['class'=>'btn btn-success'])?>
+			<?=CHtml::submitButton('Enviar', ['class'=>'btn btn-success'])?>
 		</div>
 	<?php $this->endWidget(); ?>
 </div>

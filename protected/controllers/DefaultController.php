@@ -62,7 +62,7 @@ class DefaultController extends CController
 		if (!empty($_GET['Feedback'])) {
 			$model->attributes = $_GET['Feedback'];
 			$model->id_hospital = $_GET['idHospital'];
-			$model->id_usuario = 1;
+			$model->id_usuario = Yii::app()->user->getState("id");
 			
 			if ($model->save()) {
 				$this->redirect(['view', 'id'=>$_GET['idHospital']]);
@@ -81,7 +81,7 @@ class DefaultController extends CController
 
 	public function actionPreferences()
 	{	
-		$model = usuario::model()->findByPk("1");
+		$model = usuario::model()->findByPk(Yii::app()->user->getState("id"));
 
 		if (isset($_POST['Usuario'])) {
 			$model->attributes = $_POST['Usuario'];
@@ -103,7 +103,7 @@ class DefaultController extends CController
 
 	public function actionFavorites()
 	{	
-		$model = usuario::model()->findByPk("1");
+		$model = usuario::model()->findByPk(Yii::app()->user->getState("id"));
 
     	$this->render('favorites', [
     		'model' => $model,
@@ -131,7 +131,7 @@ class DefaultController extends CController
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login()) {
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect(['userArea']);
 			}
 		}
 		// display the login form
@@ -144,7 +144,30 @@ class DefaultController extends CController
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
+		$this->redirect(['index']);
+	}
+
+	public function actionregisterUser()
+	{
+		$model = new usuario();
+
+		if (isset($_POST['Usuario'])) {
+			$model->attributes = $_POST['Usuario'];
+			
+			$criteria=new CDbCriteria;
+			$criteria->select='max(id) AS maxColumn';
+			$row = $model->model()->find($criteria);
+			$somevariable = $row['maxColumn'] + 1;
+			$model->id = $somevariable;
+			
+			if ($model->save()) {
+				$this->redirect(['login']);
+			}
+		} else {
+			$this->render("registeruser", [
+				'model'=>$model
+			]);
+		}
 	}
 	
 }

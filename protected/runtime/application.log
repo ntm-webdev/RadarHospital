@@ -4761,3 +4761,558 @@ Stack trace:
 REQUEST_URI=/RadarHospital/index.php
 HTTP_REFERER=http://localhost/RadarHospital/index.php/default/login
 ---
+2018/05/12 17:59:11 [error] [exception.CDbException] CDbException: Table "usuario" does not have a column named "login". in /var/www/html/yii/framework/db/schema/CDbCommandBuilder.php:697
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(1526): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 /var/www/html/RadarHospital/protected/components/UserIdentity.php(22): CActiveRecord->findByAttributes(Array)
+#2 /var/www/html/RadarHospital/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#3 /var/www/html/yii/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#4 /var/www/html/yii/framework/validators/CValidator.php(201): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#5 /var/www/html/yii/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), Array)
+#6 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(133): CModel->validate()
+#7 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#8 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('login')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/login')
+#13 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/RadarHospital/index.php/default/login
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/login
+---
+2018/05/12 17:59:43 [error] [exception.CException] CException: Property "Usuario.password" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('password')
+#1 /var/www/html/RadarHospital/protected/components/UserIdentity.php(26): CActiveRecord->__get('password')
+#2 /var/www/html/RadarHospital/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#3 /var/www/html/yii/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#4 /var/www/html/yii/framework/validators/CValidator.php(201): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#5 /var/www/html/yii/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), Array)
+#6 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(133): CModel->validate()
+#7 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#8 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('login')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/login')
+#13 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/RadarHospital/index.php/default/login
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/login
+---
+2018/05/12 18:00:01 [error] [exception.CException] CException: Property "UserIdentity.pwd" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/RadarHospital/protected/components/UserIdentity.php(26): CComponent->__get('pwd')
+#1 /var/www/html/RadarHospital/protected/models/LoginForm.php(54): UserIdentity->authenticate()
+#2 /var/www/html/yii/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /var/www/html/yii/framework/validators/CValidator.php(201): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /var/www/html/yii/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), Array)
+#5 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(133): CModel->validate()
+#6 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#7 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/login')
+#12 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#13 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/RadarHospital/index.php/default/login
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/login
+---
+2018/05/12 18:00:32 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "site". in /var/www/html/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#1 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/RadarHospital/index.php
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/login
+---
+2018/05/12 18:05:23 [error] [exception.CException] CException: CWebApplication and its behaviors do not have a method or closure named "getState". in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(84): CComponent->__call('getState', Array)
+#1 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionPreferences()
+#2 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('preferences')
+#6 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/prefere...')
+#7 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#8 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/RadarHospital/index.php/default/preferences
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/userArea
+---
+2018/05/12 18:16:28 [error] [exception.CException] CException: Property "LoginForm.infraestrutura" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/web/helpers/CHtml.php(2747): CComponent->__get('infraestrutura')
+#1 /var/www/html/yii/framework/web/helpers/CHtml.php(1994): CHtml::resolveValue(Object(LoginForm), 'infraestrutura')
+#2 /var/www/html/RadarHospital/protected/views/default/login.php(38): CHtml::activeDropDownList(Object(LoginForm), 'infraestrutura', Array, Array)
+#3 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/R...')
+#4 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/R...', Array, true)
+#5 /var/www/html/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/html/R...', Array, true)
+#6 /var/www/html/yii/framework/web/CController.php(785): CController->renderPartial('login', Array, true)
+#7 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(138): CController->render('login', Array)
+#8 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#9 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/login')
+#14 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/RadarHospital/index.php/default/login
+---
+2018/05/12 18:22:27 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "RadarHospital". in /var/www/html/yii/framework/web/CController.php:486
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(270): CController->missingAction('RadarHospital')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('RadarHospital')
+#2 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/RadarHo...')
+#3 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#4 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/RadarHospital/index.php/default/RadarHospital
+---
+2018/05/12 18:31:03 [error] [exception.CException] CException: CWebApplication and its behaviors do not have a method or closure named "getState". in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/RadarHospital/protected/views/default/index.php(4): CComponent->__call('getState', Array)
+#1 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/R...')
+#2 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/R...', Array, true)
+#3 /var/www/html/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/html/R...', Array, true)
+#4 /var/www/html/yii/framework/web/CController.php(785): CController->renderPartial('index', Array, true)
+#5 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(19): CController->render('index', Array)
+#6 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionIndex()
+#7 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#11 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/index')
+#12 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#13 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/RadarHospital/index.php/default/index
+---
+2018/05/12 18:50:37 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "registerUser". in /var/www/html/yii/framework/web/CController.php:486
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(270): CController->missingAction('registerUser')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#2 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#3 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#4 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/login
+---
+2018/05/12 18:56:14 [error] [php] Undefined variable: model (/var/www/html/RadarHospital/protected/views/default/registeruser.php:14)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(161): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionRegisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+2018/05/12 18:58:35 [error] [exception.CException] CException: Property "Usuario.atendimento" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('atendimento')
+#1 /var/www/html/yii/framework/web/helpers/CHtml.php(2747): CActiveRecord->__get('atendimento')
+#2 /var/www/html/yii/framework/web/helpers/CHtml.php(2470): CHtml::resolveValue(Object(Usuario), 'atendimento')
+#3 /var/www/html/yii/framework/web/helpers/CHtml.php(1540): CHtml::activeInputField('text', Object(Usuario), 'atendimento', Array)
+#4 /var/www/html/RadarHospital/protected/views/default/registeruser.php(15): CHtml::activeTextField(Object(Usuario), 'atendimento', Array)
+#5 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/R...')
+#6 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/R...', Array, true)
+#7 /var/www/html/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/html/R...', Array, true)
+#8 /var/www/html/yii/framework/web/CController.php(785): CController->renderPartial('registeruser', Array, true)
+#9 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(162): CController->render('registeruser', Array)
+#10 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionRegisterUser()
+#11 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#13 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#15 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#16 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#17 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/login
+---
+2018/05/13 09:29:59 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /var/www/html/yii/framework/web/CController.php:337
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#2 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('view')
+#4 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/view')
+#5 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#6 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/RadarHospital/index.php/default/view
+---
+2018/05/13 09:34:54 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /var/www/html/yii/framework/web/CController.php:337
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#2 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('view')
+#4 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/view')
+#5 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#6 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/RadarHospital/index.php/default/view
+---
+2018/05/13 09:40:58 [error] [php] Undefined variable: form (/var/www/html/RadarHospital/protected/views/default/login.php:6)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(138): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/login
+2018/05/13 09:45:22 [error] [php] Undefined variable: form (/var/www/html/RadarHospital/protected/views/default/login.php:6)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(138): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/login
+2018/05/13 09:45:22 [error] [php] Undefined variable: form (/var/www/html/RadarHospital/protected/views/default/login.php:6)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(138): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/login
+2018/05/13 09:45:22 [error] [php] Undefined variable: form (/var/www/html/RadarHospital/protected/views/default/login.php:6)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(138): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/login
+2018/05/13 09:45:50 [error] [php] Undefined variable: form (/var/www/html/RadarHospital/protected/views/default/login.php:6)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(138): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/login
+2018/05/13 10:03:31 [error] [exception.CException] CException: Property "CDbCriteria.criteria" is not defined. in /var/www/html/yii/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/html/yii/framework/db/schema/CDbCriteria.php(160): CComponent->__set('criteria', 'max(id)')
+#1 /var/www/html/yii/framework/db/schema/CDbCommandBuilder.php(588): CDbCriteria->__construct(Array)
+#2 /var/www/html/yii/framework/db/ar/CActiveRecord.php(1463): CDbCommandBuilder->createCriteria(Array, Array)
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(156): CActiveRecord->find(Array)
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:04:29 [error] [exception.CException] CException: Property "CDbCriteria.condidtion" is not defined. in /var/www/html/yii/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/html/yii/framework/db/schema/CDbCriteria.php(160): CComponent->__set('condidtion', 'max(id)')
+#1 /var/www/html/yii/framework/db/schema/CDbCommandBuilder.php(588): CDbCriteria->__construct(Array)
+#2 /var/www/html/yii/framework/db/ar/CActiveRecord.php(1463): CDbCommandBuilder->createCriteria(Array, Array)
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(156): CActiveRecord->find(Array)
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:06:21 [error] [exception.ParseError] ParseError: syntax error, unexpected ']', expecting ',' or ')' in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:156
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('registerUser/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:06:30 [error] [exception.CException] CException: Property "CDbCriteria.condidtion" is not defined. in /var/www/html/yii/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/html/yii/framework/db/schema/CDbCriteria.php(160): CComponent->__set('condidtion', 'max(id)')
+#1 /var/www/html/yii/framework/db/schema/CDbCommandBuilder.php(588): CDbCriteria->__construct(Array)
+#2 /var/www/html/yii/framework/db/ar/CActiveRecord.php(1477): CDbCommandBuilder->createCriteria(Array, Array)
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(156): CActiveRecord->findAll(Array)
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:07:03 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column) AS maxColumn FROM `usuario` `t` LIMIT 1' at line 1. The SQL statement executed was: SELECT max(column) AS maxColumn FROM `usuario` `t` LIMIT 1.
+2018/05/13 10:07:03 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column) AS maxColumn FROM `usuario` `t` LIMIT 1' at line 1 in /var/www/html/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/html/yii/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/html/yii/framework/db/ar/CActiveRecord.php(1359): CDbCommand->queryRow()
+#2 /var/www/html/yii/framework/db/ar/CActiveRecord.php(1464): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(158): CActiveRecord->find(Object(CDbCriteria))
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:07:53 [error] [exception.CException] CException: Property "Usuario.maxColumn" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('maxColumn')
+#1 /var/www/html/yii/framework/base/CModel.php(596): CActiveRecord->__get('maxColumn')
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(159): CModel->offsetGet('maxColumn')
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:08:11 [error] [exception.CException] CException: Property "Usuario.maxColumn" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('maxColumn')
+#1 /var/www/html/yii/framework/base/CModel.php(596): CActiveRecord->__get('maxColumn')
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(159): CModel->offsetGet('maxColumn')
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:08:29 [error] [exception.CException] CException: Property "Usuario.maxColumn" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('maxColumn')
+#1 /var/www/html/yii/framework/base/CModel.php(596): CActiveRecord->__get('maxColumn')
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(159): CModel->offsetGet('maxColumn')
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:09:08 [error] [exception.CException] CException: Usuario and its behaviors do not have a method or closure named "usuario". in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(229): CComponent->__call('usuario', Array)
+#1 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(158): CActiveRecord->__call('usuario', Array)
+#2 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#3 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#7 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#8 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#9 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:09:28 [error] [exception.CException] CException: Property "Usuario.maxColumn" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('maxColumn')
+#1 /var/www/html/yii/framework/base/CModel.php(596): CActiveRecord->__get('maxColumn')
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(159): CModel->offsetGet('maxColumn')
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:09:50 [error] [exception.CException] CException: Property "Usuario.maxColumn" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('maxColumn')
+#1 /var/www/html/yii/framework/base/CModel.php(596): CActiveRecord->__get('maxColumn')
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(159): CModel->offsetGet('maxColumn')
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:10:54 [error] [exception.CException] CException: Property "Usuario.maxColumn" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('maxColumn')
+#1 /var/www/html/yii/framework/base/CModel.php(596): CActiveRecord->__get('maxColumn')
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(159): CModel->offsetGet('maxColumn')
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:12:56 [error] [exception.Error] Error: Call to a member function max() on array in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:156
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:18:35 [error] [exception.ParseError] ParseError: syntax error, unexpected end of file, expecting function (T_FUNCTION) in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:173
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('registerUser/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:18:49 [error] [exception.CException] CException: Property "Usuario.endereco" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('endereco')
+#1 /var/www/html/yii/framework/validators/CRequiredValidator.php(58): CActiveRecord->__get('endereco')
+#2 /var/www/html/yii/framework/validators/CValidator.php(201): CRequiredValidator->validateAttribute(Object(Usuario), 'endereco')
+#3 /var/www/html/yii/framework/base/CModel.php(159): CValidator->validate(Object(Usuario), Array)
+#4 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(159): CModel->validate()
+#5 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#6 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#8 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#10 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#11 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#12 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:25:43 [error] [exception.CException] CException: Property "Usuario.maxColumn" is not defined. in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/db/ar/CActiveRecord.php(145): CComponent->__get('maxColumn')
+#1 /var/www/html/yii/framework/base/CModel.php(596): CActiveRecord->__get('maxColumn')
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(160): CModel->offsetGet('maxColumn')
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/05/13 10:28:23 [error] [php] strpos() expects parameter 1 to be string, array given (/var/www/html/yii/framework/web/CController.php:709)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(589): CTheme->getViewFile()
+#1 /var/www/html/yii/framework/web/CController.php(870): DefaultController->getViewFile()
+#2 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(164): DefaultController->render()
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#7 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser

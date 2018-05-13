@@ -1,42 +1,31 @@
-<h1>Login</h1>
+<div class="container">
+	<?php $form=$this->beginWidget('CActiveForm', array(
+		'id'=>'login-form',
+		'enableClientValidation'=>true,
+		'clientOptions'=>array(
+			'validateOnSubmit'=>true,
+		),
+	)); ?>
+		<div class="form-group">
+			<h2 class="text-beauty">Faça seu Login</h2>
+			<br>
+			<?=$form->labelEx($model,'username', ['class'=>'text-beauty']); ?>
+			<?=$form->textField($model,'username', ['class'=>'form-control']); ?>
+			<?=$form->error($model,'username'); ?>
+		</div>
 
-<p>Please fill out the following form with your login credentials:</p>
+		<div class="form-group">
+			<?=$form->labelEx($model,'password',['class'=>'text-beauty']); ?>
+			<?=$form->passwordField($model,'password',['class'=>'form-control']); ?>
+			<?=$form->error($model,'password'); ?>
+		</div>
 
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
-	'enableClientValidation'=>true,
-	'clientOptions'=>array(
-		'validateOnSubmit'=>true,
-	),
-)); ?>
+		<div class="form-group">
+			<?=CHtml::submitButton('Enviar', ['class'=>'btn btn-success'])?>
+		</div>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-		</p>
-	</div>
-
-	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-</div><!-- form -->
+		<div class="form-group">
+			<?=CHtml::tag("a", ['class'=>'text-beauty', 'href'=>'http://localhost/RadarHospital/index.php/default/registerUser'], "Ainda não se cadastrou? Clique aqui e faça seu cadastro");?>
+		</div>
+	<?php $this->endWidget(); ?>
+</div>
