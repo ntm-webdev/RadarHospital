@@ -20,6 +20,10 @@
     margin-left:auto
 }
 
+.text-normal {
+    color: gray;
+}
+
 .select-evaluate {
     font-family : 'FontAwesome', Arial;
 }

@@ -1,3 +1,14 @@
+<?php 
+	
+	if (Yii::app()->user->hasState("nome") && Yii::app()->user->hasState("id")) {
+		$id = Yii::app()->user->getState("id");
+		$usuario = usuario::model()->findByPk($id);
+		$favoritado = favorites::model()->findByAttributes(['id_hospital'=>$model->id, 'id_usuario'=>$id]);
+		echo CHtml::hiddenField("iduser",$id);
+		echo CHtml::hiddenField("idhosp",$model->id);
+	}
+	
+?>
 <div class="container-fluid">
 
 	<div class="row">
@@ -13,7 +24,7 @@
 							<?php else : ?>
 								<li data-target="#gallery" data-slide-to="<?=$i?>"></li>
 							<?php endif; 
-					$i++; 
+							$i++; 
 						endforeach; 
 					endif;
 				?>
@@ -67,7 +78,7 @@
 		    </li>
 
 		    <li role="presentation">
-		    	<a class="text-beauty" aria-controls="mapa" role="tab" data-toggle="tab" aria-expanded="false">
+		    	<a class="<?=(!empty($favoritado)) ? 'text-beauty' : 'text-normal'?>" aria-controls="favorite" role="tab" data-toggle="tab" aria-expanded="false" id="favorite">
 		    		<span class="glyphicon glyphicon-heart"></span>
 		    	</a>
 		    </li>
@@ -89,3 +100,25 @@
 		</div>  
 	</div> 
 </div>
+
+<?php
+	
+	if (!Yii::app()->user->isGuest) {
+		Yii::app()->clientScript->registerScript('actionFavorite', '
+			$("#favorite").on("click", function() {
+				var iduser = $("#iduser").val();
+				var idhosp = $("#idhosp").val();
+				
+				if($("#favorite").prop("class") == "text-beauty") {
+					$.post("'.Yii::app()->createUrl("default/Unfavorite").'", {id_usuario:iduser, id_hospital:idhosp}, function(){
+						window.location.reload();
+					});
+				} else {
+					$.post("'.Yii::app()->createUrl("default/favorite").'",{id_usuario:iduser, id_hospital:idhosp}, function(){
+						window.location.reload();
+					});
+				}
+			});
+		');	
+	}
+?>

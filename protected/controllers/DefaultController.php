@@ -169,5 +169,18 @@ class DefaultController extends CController
 			]);
 		}
 	}
+
+	public function actionFavorite()
+	{
+		$model = new favorites();
+		$model->id_hospital = $_POST['id_hospital'];
+		$model->id_usuario = $_POST['id_usuario'];
+		
+		$model->save();
+	}
 	
+	public function actionUnfavorite()
+	{
+		favorites::model()->deleteAllByAttributes(['id_hospital' => $_POST['id_hospital'], 'id_usuario'  => $_POST['id_usuario']]);
+	}
 }
