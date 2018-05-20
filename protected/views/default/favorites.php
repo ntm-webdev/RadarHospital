@@ -1,5 +1,6 @@
 <div class="container">
-	<h2 class="text-beauty">Olá, <?=$model->nome?>, esses são seus hospitais favoritos</h2>
+	<h4 class="text-beauty">Olá, <?=$model->nome?>, esses são seus hospitais favoritos</h4>
+	<hr class="hr-beauty">
 	<?php
         $this->widget('zii.widgets.CListView', array(
            'dataProvider'=>$dataProvider,

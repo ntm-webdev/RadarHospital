@@ -118,6 +118,7 @@ class hospital extends CActiveRecord
 
         $criteria->together = true;
         $criteria->with = ['fkplanosaude','fkregiao','fkbairro','fkespecialidade'];
+       
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,

@@ -5,7 +5,8 @@
 				'method' => 'GET',
 				'action' => Yii::app()->createUrl("Default/evaluate", ['idHospital'=>$_GET['idHospital']]),
 				'htmlOptions' => [
-					'id' => 'evaluate-form'
+					'id' => 'evaluate-form',
+					'class' => 'form-centered',
 				]
 			]);
 		?>

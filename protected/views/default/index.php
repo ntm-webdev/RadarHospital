@@ -5,13 +5,15 @@
 			<?=(Yii::app()->user->hasState("id") ? Yii::app()->user->getState("nome") : "Faça seu Login") ?>
 		</span>
 	</a>
+	<br>
 	<img style="height: 230px" src="<?= Yii::app()->theme->baseUrl?>/imgs/main-logo.png" alt="Radar Hospital" class="img img-responsive center">
 	
 	<?php $form=$this->beginWidget("CActiveForm", array(
         'action' => Yii::app()->createUrl("Default/resultado"),
         'method' => 'POST',
         'htmlOptions'=> [
-            'id' => 'form-index'
+            'class' => 'form-centered',
+            'id' => 'form-index',
         ],
     )) ;?>
 

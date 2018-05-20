@@ -5,6 +5,9 @@
 		'clientOptions'=>array(
 			'validateOnSubmit'=>true,
 		),
+		'htmlOptions'=> [
+			'class' => 'form-centered',
+		]
 	)); ?>
 		<div class="form-group">
 			<h2 class="text-beauty">Faça seu Login</h2>

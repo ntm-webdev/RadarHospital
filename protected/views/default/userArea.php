@@ -1,6 +1,8 @@
 <?php if(Yii::app()->user->hasState("nome")) : ?>
 	<div class="container-fluid spec">
-		<img class="img img-responsive" src="<?=Yii::app()->theme->baseUrl?>/imgs/banner.jpg"">
+		<div style="height: 200px">
+			<img class="img img-responsive" style="width: 100%; height: inherit;" src="<?=Yii::app()->theme->baseUrl?>/imgs/banner.jpg">
+		</div>
 		<div id="list">
 			<ul>
 				<li><?=CHtml::tag("a", ['href'=>'favorites'], "<i class='fa fa-fw fa-heart'></i> Lista de Hospitais")?></li>

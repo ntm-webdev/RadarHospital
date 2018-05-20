@@ -6,7 +6,7 @@
     margin: 0 auto;
 }
 
-#form-index {
+.form-centered {
     position: relative;
     top:35%;
     left:10%;
@@ -218,9 +218,16 @@
     width: 100%;
 }
 
+
+
 #list ul li {
     border-bottom: 1px solid;
     padding: 5%;
+    margin: 0 0 40px 0;
+}
+
+#list ul li:first-child {
+  margin-top: 40px;
 }
 
 #list ul li a {
