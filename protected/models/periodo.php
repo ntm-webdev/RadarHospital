@@ -32,6 +32,7 @@ class periodo extends CActiveRecord
         return array(
             array('id_dia_da_semana', 'numerical', 'integerOnly'=>true),
             array('horario_inicial, horario_final', 'length', 'max'=>15),
+            array('id_hospital', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, horario_inicial, horario_final, id_dia_da_semana', 'safe', 'on'=>'search'),
@@ -46,7 +47,8 @@ class periodo extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'idDiaDaSemana' => array(self::BELONGS_TO, 'DiaDaSemana', 'id_dia_da_semana'),
+            'idDiaDaSemana' => array(self::BELONGS_TO, 'dia_da_semana', 'id_dia_da_semana'),
+            'idHospital' => array(self::BELONGS_TO, 'Hospital', 'id_hospital'),
         );
     }
 

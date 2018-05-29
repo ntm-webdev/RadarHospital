@@ -52,7 +52,6 @@ class Usuario extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'fkfeedback' => array(self::MANY_MANY, 'Feedback', 'feedback_usuario(codusuario, codfeedback)'),
             'fkplanosaude' => array(self::BELONGS_TO, 'PlanoSaude', 'id_planosaude'),
             'fkbairro' => array(self::BELONGS_TO, 'Bairro', 'id_bairro'),
             'fkfavoritos' => array(self::MANY_MANY, 'hospital', 'favorites(id_usuario, id_hospital)'),

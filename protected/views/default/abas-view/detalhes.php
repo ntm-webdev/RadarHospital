@@ -1,3 +1,22 @@
+<?php
+	$criteria = new CDbCriteria;
+	$criteria->addCondition('id_hospital =:id');
+	$criteria->params = [
+		':id' => $model->id
+	]; 
+	$periodo = periodo::model()->findAll($criteria);
+
+	$dias = [
+		1 => 'Domingo',
+		2 => 'Segunda-Feira',
+		3 => 'Terça-Feira',
+		4 => 'Quarta-Feira',
+		5 => 'Quinta-Feira',
+		6 => 'Sexta-Feira',
+		7 => 'Sábado',
+	];
+?>
+
 <div class="row row-avaliacoes">
 		    		
 	<div>
@@ -11,13 +30,9 @@
 
 	<div>
 		<p class="text-beauty">Horário de Funcionamento</p>
-		<?php 
-			foreach ($model->fkdias as $dia) : ?>
-				<p><b><?=$dia->descricao?>:</b>
-				<?php foreach ($dia->fkperiodos as $periodo) : ?>
-					<?=$periodo->horario_inicial?> às <?=$periodo->horario_final?>
-		<?php   endforeach;
-		    endforeach; ?>
+		<?php foreach ($periodo as $key => $value) : ?>
+			<?="<p><b>".$dias[$value->id_dia_da_semana].": </b> ".$value->horario_inicial." às ". $value->horario_final . "</p>";?>
+		<?php endforeach; ?>
 		<hr>
 	</div>
 
