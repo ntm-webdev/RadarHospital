@@ -6,17 +6,9 @@ class DefaultController extends CController
 	public function actionIndex()
 	{	
 		$model = new hospital;
-		$planos = plano_saude::model()->findAll();
-		$regioes = regiao::model()->findAll();
-		$bairros = bairro::model()->findAll();
-		$especialidades = especialidades::model()->findAll();
 
     	$this->render('index', [
     		'model' => $model,
-    		'planos' => $planos,
-    		'regioes' => $regioes,
-    		'bairros' => $bairros,
-    		'especialidades' => $especialidades,
     	]);
 	}
 
@@ -24,23 +16,46 @@ class DefaultController extends CController
 	{	
     	$model = new hospital();
     	$model->unsetAttributes();
+		$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
 
-    	$planos = plano_saude::model()->findAll();
-		$regioes = regiao::model()->findAll();
-		$bairros = bairro::model()->findAll();
-		$especialidades = especialidades::model()->findAll();
+    	if (Yii::app()->user->hasState("nome")) {
 
-    	if (isset($_POST['hospital'])) {
-			$model->attributes = $_POST['hospital'];
-		}
+    		if (isset($_POST['hospital'])) {
+    			$model->attributes = $_POST['hospital'];
+    			$dataProvider = $model->search();
+    			return $this->render('resultado', array('model' => $model, 'dataProvider' => $dataProvider));
+    		} else {
+	    		$regiao = regiao::model()->findByPk($usuario->id_regiao)->nome;
+	    		$bairro = bairro::model()->findByPk($usuario->id_bairro)->nome;
+	    		$planoSaude = plano_saude::model()->findByPk($usuario->id_planosaude)->nome;
 
+	  			$model->_regiao = $regiao;
+	  			$model->_bairro = $bairro;
+	  			$model->_plano_saude = $planoSaude;
+
+	    		$criteria = new CDbCriteria();
+	    		$criteria->compare('fkregiao.nome', $regiao);
+	    		$criteria->compare('fkplanosaude.nome', $planoSaude);
+	    		$criteria->compare('fkbairro.nome', $bairro);
+
+
+	    		$criteria->together = true;
+	        	$criteria->with = ['fkplanosaude','fkregiao','fkbairro'];
+	    		
+	    		$dataProvider=new CActiveDataProvider($model, array('criteria' => $criteria));
+	     		return $this->render('resultado', array('model' => $model, 'dataProvider' => $dataProvider));
+	     	}
+    	
+    	} else {
+	    	if (isset($_POST['hospital'])) {
+				$model->attributes = $_POST['hospital'];
+			}
+			$dataProvider = $model->search();
+    	}
+    	
     	$this->render('resultado', [
-    		'dataProvider' => $model->search(),
+    		'dataProvider' => $dataProvider,
     		'model' => $model,
-    		'planos' => $planos,
-    		'regioes' => $regioes,
-    		'bairros' => $bairros,
-    		'especialidades' => $especialidades,
     	]);
 	}
 

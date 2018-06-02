@@ -24,14 +24,14 @@
 		
 
 		<div class="form-group">
-			<?=CHtml::activeLabel($model, 'filtros[plano_saude]', ['class'=>'text-beauty'])?>
-			<?=CHtml::activeDropDownList($model, 'filtros[plano_saude]', CHtml::ListData($planos, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+			<?=CHtml::activeLabel($model, '_plano_saude', ['class'=>'text-beauty'])?>
+			<?=CHtml::activeDropDownList($model, '_plano_saude', CHtml::ListData(plano_saude::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 	  	</div>
 		
 
 		<div class="form-group">
-			<?=CHtml::activeLabel($model, 'filtros[regiao]', ['class'=>'text-beauty']);?>
-		    <?=CHtml::activeDropDownList($model, 'filtros[regiao]', CHtml::ListData($regioes, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+			<?=CHtml::activeLabel($model, '_regiao', ['class'=>'text-beauty']);?>
+		    <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 	  	</div>
 	  	
 	  	<div class="form-group">

@@ -24,7 +24,10 @@ class hospital extends CActiveRecord
         return 'hospital';
     }
 
-    protected $filtros;
+    protected $_regiao;
+    protected $_bairro;
+    protected $_plano_saude;
+    protected $_especialidade;
 
     /**
      * @return array validation rules for model attributes.
@@ -40,7 +43,7 @@ class hospital extends CActiveRecord
             array('nome', 'length', 'max'=>60),
             array('endereco', 'length', 'max'=>80),
             array('telefone', 'length', 'max'=>15),
-            array('filtros, id', 'safe'),
+            array('id,_regiao,_bairro,_plano_saude,_especialidade ', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, nome, endereco, latitude, longitude, id_plano_saude, id_regiao, id_bairro, telefone', 'safe', 'on'=>'search'),
@@ -78,10 +81,10 @@ class hospital extends CActiveRecord
             'longitude' => 'Longitude',
             'id_regiao' => 'Id Regiao',
             'id_bairro' => 'Id Bairro',
-            'filtros[plano_saude]' => 'Plano de Saude',
-            'filtros[regiao]' => 'Região',
-            'filtros[bairro]' => 'Bairro',
-            'filtros[especialidade]' => 'Especialidade',
+            '_plano_saude' => 'Plano de Saude',
+            '_regiao' => 'Região',
+            '_bairro' => 'Bairro',
+            '_especialidade' => 'Especialidade',
         );
     }
 
@@ -102,7 +105,7 @@ class hospital extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria=new CDbCriteria;
-
+       
         $criteria->compare('t.id',$this->id);
         $criteria->compare('t.nome',$this->nome,true);
         $criteria->compare('t.endereco',$this->endereco,true);
@@ -111,10 +114,10 @@ class hospital extends CActiveRecord
         $criteria->compare('t.id_regiao',$this->id_regiao);
         $criteria->compare('t.id_bairro',$this->id_bairro);
         $criteria->compare('t.telefone',$this->telefone,true);
-        $criteria->compare('fkplanosaude.nome', $this->filtros['plano_saude']??null);
-        $criteria->compare('fkregiao.nome', $this->filtros['regiao']??null);
-        $criteria->compare('fkbairro.nome', $this->filtros['bairro']??null);
-        $criteria->compare('fkespecialidade.nome', $this->filtros['especialidade']??null);
+        $criteria->compare('fkplanosaude.nome', $this->_plano_saude);
+        $criteria->compare('fkregiao.nome', $this->_regiao);
+        $criteria->compare('fkbairro.nome', $this->_bairro);
+        $criteria->compare('fkespecialidade.nome', $this->_especialidade);
 
         $criteria->together = true;
         $criteria->with = ['fkplanosaude','fkregiao','fkbairro','fkespecialidade'];
@@ -143,13 +146,43 @@ class hospital extends CActiveRecord
         return $hospitais;
     }
 
-    public function getFiltros()
+    public function get_Regiao()
     {
-        return $this->filtros;
+        return $this->_regiao;
     }
 
-    public function setFiltros($val)
+    public function set_Regiao($val)
     {
-        $this->filtros = $val;
+        $this->_regiao = $val;
+    }
+
+    public function get_Bairro()
+    {
+        return $this->_bairro;
+    }
+
+    public function set_Bairro($val)
+    {
+        $this->_bairro = $val;
+    }
+
+    public function get_plano_saude()
+    {
+        return $this->_plano_saude;
+    }
+
+    public function set_plano_saude($val)
+    {
+        $this->_plano_saude = $val;
+    }
+
+    public function get_Especialidade()
+    {
+        return $this->_especialidade;
+    }
+
+    public function set_Especialidade($val)
+    {
+        $this->_especialidade = $val;
     }
 }

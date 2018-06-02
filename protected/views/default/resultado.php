@@ -12,23 +12,23 @@
                         'method' => 'POST'
                     )) ;?>
                     <div class="form-group">
-                        <?=CHtml::activeLabel($model, 'filtros[bairro]', ['class'=>'text-beauty'])?>
-                        <?=CHtml::activeDropDownList($model, 'filtros[bairro]', CHtml::ListData($bairros, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+                        <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
+                        <?=CHtml::activeDropDownList($model, '_bairro', CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
                     </div>
 
                     <div class="form-group">
-                        <?=CHtml::activeLabel($model, 'filtros[especialidade]', ['class'=>'text-beauty'])?>
-                        <?=CHtml::activeDropDownList($model, 'filtros[especialidade]', CHtml::ListData($especialidades, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+                        <?=CHtml::activeLabel($model, '_especialidade', ['class'=>'text-beauty'])?>
+                        <?=CHtml::activeDropDownList($model, '_especialidade', CHtml::ListData(especialidades::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
                     </div>
 
                     <div class="form-group">
-                        <?=CHtml::activeLabel($model, 'filtros[regiao]', ['class'=>'text-beauty'])?>
-                        <?=CHtml::activeDropDownList($model, 'filtros[regiao]', CHtml::ListData($regioes, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+                        <?=CHtml::activeLabel($model, '_regiao', ['class'=>'text-beauty'])?>
+                        <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
                     </div>
 
                     <div class="form-group">
-                        <?=CHtml::activeLabel($model, 'filtros[plano_saude]', ['class'=>'text-beauty'])?>
-                        <?=CHtml::activeDropDownList($model, 'filtros[plano_saude]', CHtml::ListData($planos, 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+                        <?=CHtml::activeLabel($model, '_plano_saude', ['class'=>'text-beauty'])?>
+                        <?=CHtml::activeDropDownList($model, '_plano_saude', CHtml::ListData(plano_saude::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
                     </div>
 
                     <div class="form-group">
