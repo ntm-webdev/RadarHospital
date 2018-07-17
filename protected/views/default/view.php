@@ -121,4 +121,11 @@
 			});
 		');	
 	}
+
+	if (isset($_GET['error']) && $_GET['error'] == "duplicidade") {
+		Yii::app()->clientScript->registerScript('actionFavorite', '
+			$("a[href=\"#avaliacoes\"]").trigger("click");
+			alert("Não é possível avaliar um hospital mais de uma vez");
+		', CClientScript::POS_LOAD);
+	}
 ?>
