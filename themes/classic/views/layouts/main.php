@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/css/range-styles.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/css/style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,5 +19,6 @@
   		<?=$content?>
 		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/script.js"></script>
+		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/circle-progress.js"></script>
 	</body>
 </html>

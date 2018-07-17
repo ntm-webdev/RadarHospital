@@ -42,8 +42,14 @@ class DefaultController extends CController
 	    		$criteria->together = true;
 	        	$criteria->with = ['fkplanosaude','fkregiao','fkbairro'];
 	    		
-	    		$dataProvider=new CActiveDataProvider($model, array('criteria' => $criteria));
-	     		return $this->render('resultado', array('model' => $model, 'dataProvider' => $dataProvider));
+	    		$dataProvider = new CActiveDataProvider($model, [
+	    			'criteria' => $criteria
+	    		]);
+	     		
+	     		return $this->render('resultado', [
+	     			'model' => $model, 
+	     			'dataProvider' => $dataProvider
+	     		]);
 	     	}
     	
     	} else {
