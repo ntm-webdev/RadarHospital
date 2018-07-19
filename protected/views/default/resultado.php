@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="col-xs-4">
-                    <i class="fa fa-map pointer text-beauty"></i>
+                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/map', 'class'=> 'no-link'], '<i class="fa fa-map pointer text-beauty"></i>')?>
                 </div>
 
                 <div class="col-xs-4">

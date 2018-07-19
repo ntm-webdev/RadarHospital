@@ -204,4 +204,14 @@ class DefaultController extends CController
 	{
 		favorites::model()->deleteAllByAttributes(['id_hospital' => $_POST['id_hospital'], 'id_usuario'  => $_POST['id_usuario']]);
 	}
+
+	public function actionMap()
+	{
+		$this->renderPartial("map");
+	}
+
+	public function actionresultMaps()
+	{
+		$this->renderPartial("resultMaps");
+	}
 }
