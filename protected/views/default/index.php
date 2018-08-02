@@ -17,6 +17,9 @@
         ],
     )) ;?>
 
+    	<?=CHtml::activeHiddenField($model, 'latitude')?>
+    	<?=CHtml::activeHiddenField($model, 'longitude')?>
+
 		<div class="form-group">
 			<?=CHtml::activeLabel($model, 'nome', ['class'=>'text-beauty'])?>
 			<?=CHtml::activeTextField($model, 'nome', ['class'=>'form-control', 'empty'=>'Selecione ---'])?>
@@ -34,9 +37,50 @@
 		    <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 	  	</div>
 	  	
-	  	<div class="form-group">
-	  		<?=CHtml::submitButton('Pesquisar', ['class'=>'btn btn-success'])?>
+		<div class="form-group">
+	  		<?=CHtml::checkBox('radioLocation',false, ['class'=>'form-check-input'])?>
+			<?=CHtml::label('Buscar hospitais através de minha posição atual?','lblPosition',['class'=>'text-beauty form-check-label'])?>
 		</div>
+
+	  	<div class="form-group">
+	  		<?=CHtml::submitButton('Pesquisar', ['class'=>'btn btn-success', 'id'=>'btnPesq1'])?>
+		</div>
+
 		
 	<?php $this->endWidget() ?>
-</div>	
+</div>
+<?php
+
+    Yii::app()->clientScript->registerScript('askGeolocation', '
+        
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+
+        function success(pos) {
+        	var crd = pos.coords;
+
+          	$("#hospital_latitude").val(crd.latitude);	
+          	$("#hospital_longitude").val(crd.longitude);	
+        };
+
+        function error(err) {
+          console.warn(err.message);
+        };
+
+        $("#radioLocation").on("change", function() {
+        	if(this.checked) {
+        		$("#hospital__regiao").prop("disabled", true);
+            	navigator.geolocation.getCurrentPosition(success, error, options);
+        	} else {
+        		$("#hospital__regiao").prop("disabled", false);
+
+        		$("#hospital_latitude").val("");	
+            	$("#hospital_longitude").val("");
+        	}
+        	
+        });
+    ');
+?>	

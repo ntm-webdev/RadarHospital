@@ -7304,3 +7304,22 @@ Stack trace:
 #9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
 #10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
 REQUEST_URI=/RadarHospital/index.php/default/resultMaps
+2018/07/30 21:41:22 [error] [php] htmlspecialchars() expects parameter 1 to be string, array given (/var/www/html/yii/framework/web/helpers/CHtml.php:108)
+Stack trace:
+#0 /var/www/html/yii/framework/web/helpers/CHtml.php(163): renderAttributes()
+#1 /var/www/html/yii/framework/web/helpers/CHtml.php(595): tag()
+#2 /var/www/html/RadarHospital/protected/views/default/index.php(38): label()
+#3 /var/www/html/yii/framework/web/CBaseController.php(126): require()
+#4 /var/www/html/yii/framework/web/CBaseController.php(95): DefaultController->renderInternal()
+#5 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#6 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#7 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(11): DefaultController->render()
+#8 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionIndex()
+#9 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#11 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#12 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#13 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/

@@ -109,8 +109,6 @@ class hospital extends CActiveRecord
         $criteria->compare('t.id',$this->id);
         $criteria->compare('t.nome',$this->nome,true);
         $criteria->compare('t.endereco',$this->endereco,true);
-        $criteria->compare('t.latitude',$this->latitude);
-        $criteria->compare('t.longitude',$this->longitude);
         $criteria->compare('t.id_regiao',$this->id_regiao);
         $criteria->compare('t.id_bairro',$this->id_bairro);
         $criteria->compare('t.telefone',$this->telefone,true);
@@ -121,7 +119,31 @@ class hospital extends CActiveRecord
 
         $criteria->together = true;
         $criteria->with = ['fkplanosaude','fkregiao','fkbairro','fkespecialidade'];
-       
+        
+        if (!empty($this->latitude) && !empty($this->longitude)) {
+            $criteria->select = '
+                *,
+                ( 
+                    3959 
+                        * 
+                        acos( cos( radians(:latitude) ) 
+                        * 
+                        cos( radians( latitude ) ) 
+                        * 
+                        cos( radians( longitude ) - radians(:longitude) ) 
+                        + 
+                        sin( radians(:latitude) ) 
+                        * 
+                        sin( radians( latitude ) ) ) 
+                ) AS distance 
+            ';
+            $criteria->params = [
+                ':latitude' => $this->latitude,
+                ':longitude' => $this->longitude,
+            ];
+            $criteria->having = 'distance <= 10';
+            $criteria->order = 'distance';
+        }
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
