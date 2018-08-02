@@ -22,6 +22,23 @@
     <div id="map"></div>
 
     <script>
+
+      var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+
+        function success(pos) {
+            crd = pos.coords;
+        };
+
+        function error(err) {
+          console.warn(err.message);
+        };
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
       var customLabel = {
         restaurant: {
           label: 'R'
@@ -33,8 +50,8 @@
 
         function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: new google.maps.LatLng(-23.770065, -46.677567),
-          zoom: 11
+          center: new google.maps.LatLng(crd.latitude, crd.longitude),
+          zoom: 12
         });
         var infoWindow = new google.maps.InfoWindow;
 
