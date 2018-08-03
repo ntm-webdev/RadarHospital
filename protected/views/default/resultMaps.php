@@ -1,13 +1,13 @@
 <?php
 
-function parseToXML($htmlStr)
-{
-$xmlStr=str_replace('<','&lt;',$htmlStr);
-$xmlStr=str_replace('>','&gt;',$xmlStr);
-$xmlStr=str_replace('"','&quot;',$xmlStr);
-$xmlStr=str_replace("'",'&#39;',$xmlStr);
-$xmlStr=str_replace("&",'&amp;',$xmlStr);
-return $xmlStr;
+function parseToXML($htmlStr) {
+  $xmlStr=str_replace('<','&lt;',$htmlStr);
+  $xmlStr=str_replace('>','&gt;',$xmlStr);
+  $xmlStr=str_replace('"','&quot;',$xmlStr);
+  $xmlStr=str_replace("'",'&#39;',$xmlStr);
+  $xmlStr=str_replace("&",'&amp;',$xmlStr);
+  
+  return $xmlStr;
 }
 
 // Opens a connection to a MySQL server
@@ -30,7 +30,7 @@ echo "<?xml version='1.0' encoding='UTF-8'?>";
 echo '<markers>';
 $ind=0;
 // Iterate through the rows, printing XML nodes for each
-while ($row = mysqli_fetch_assoc($result)){
+while ($row = mysqli_fetch_assoc($result)) {
   // Add to XML document node
   echo '<marker ';
   echo 'id="' . $row['id'] . '" ';
@@ -40,6 +40,7 @@ while ($row = mysqli_fetch_assoc($result)){
   echo 'lng="' . $row['longitude'] . '" ';
   echo 'type="' . "bar" . '" ';
   echo '/>';
+  
   $ind = $ind + 1;
 }
 

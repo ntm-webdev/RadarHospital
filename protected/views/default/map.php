@@ -2,7 +2,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <title>Using MySQL and PHP with Google Maps</title>
+    <title>Mapa dos Hospitais mais próximos</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -24,20 +24,20 @@
     <script>
 
       var options = {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
-        };
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
 
-        function success(pos) {
-            crd = pos.coords;
-        };
+      function success(pos) {
+        crd = pos.coords;
+      };
 
-        function error(err) {
-          console.warn(err.message);
-        };
+      function error(err) {
+        console.warn(err.message);
+      };
 
-        navigator.geolocation.getCurrentPosition(success, error, options);
+      navigator.geolocation.getCurrentPosition(success, error, options);
 
       var customLabel = {
         restaurant: {
@@ -48,37 +48,39 @@
         }
       };
 
-        function initMap() {
+      function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(crd.latitude, crd.longitude),
           zoom: 12
         });
+        
         var infoWindow = new google.maps.InfoWindow;
 
-          // Change this depending on the name of your PHP or XML file
-          downloadUrl('http://localhost/RadarHospital/index.php/default/resultMaps', function(data) {
-            var xml = data.responseXML;
-            console.log(data);
-            var markers = xml.documentElement.getElementsByTagName('marker');
-            Array.prototype.forEach.call(markers, function(markerElem) {
-              var id = markerElem.getAttribute('id');
-              var name = markerElem.getAttribute('name');
-              var address = markerElem.getAttribute('address');
-              var type = "bar";
-              var point = new google.maps.LatLng(
-                  parseFloat(markerElem.getAttribute('lat')),
-                  parseFloat(markerElem.getAttribute('lng')));
+        // Change this depending on the name of your PHP or XML file
+        downloadUrl('http://localhost/RadarHospital/index.php/default/resultMaps', function(data) {
+          var xml = data.responseXML;
+          var markers = xml.documentElement.getElementsByTagName('marker');
+          
+          Array.prototype.forEach.call(markers, function(markerElem) {
+            var id = markerElem.getAttribute('id');
+            var name = markerElem.getAttribute('name');
+            var address = markerElem.getAttribute('address');
+            var type = "bar";
+            
+            var point = new google.maps.LatLng(
+              parseFloat(markerElem.getAttribute('lat')),
+              parseFloat(markerElem.getAttribute('lng')));
 
               var infowincontent = document.createElement('div');
               var strong = document.createElement('strong');
               strong.textContent = name
               infowincontent.appendChild(strong);
               infowincontent.appendChild(document.createElement('br'));
-
               var text = document.createElement('text');
               text.textContent = address
               infowincontent.appendChild(text);
               var icon = customLabel[type] || {};
+              
               var marker = new google.maps.Marker({
                 map: map,
                 position: point,
@@ -92,25 +94,21 @@
           });
         }
 
+        function downloadUrl(url, callback) {
+          var request = window.ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest;
 
+          request.onreadystatechange = function() {
+            if (request.readyState == 4) {
+              request.onreadystatechange = doNothing;
+              callback(request, request.status);
+            }
+          };
 
-      function downloadUrl(url, callback) {
-        var request = window.ActiveXObject ?
-            new ActiveXObject('Microsoft.XMLHTTP') :
-            new XMLHttpRequest;
+          request.open('GET', url, true);
+          request.send(null);
+        }
 
-        request.onreadystatechange = function() {
-          if (request.readyState == 4) {
-            request.onreadystatechange = doNothing;
-            callback(request, request.status);
-          }
-        };
-
-        request.open('GET', url, true);
-        request.send(null);
-      }
-
-      function doNothing() {}
+        function doNothing() {}
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OCUeWyGg5dPkzT7DvUh9agP3y0YlKTw&callback=initMap"></script>
   </body>

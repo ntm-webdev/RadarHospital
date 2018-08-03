@@ -53,6 +53,8 @@
 
     Yii::app()->clientScript->registerScript('askGeolocation', '
         
+        $("#radioLocation").prop("checked", false);
+        
         var options = {
           enableHighAccuracy: true,
           timeout: 5000,

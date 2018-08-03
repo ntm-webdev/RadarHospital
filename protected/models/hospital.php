@@ -105,21 +105,7 @@ class hospital extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria=new CDbCriteria;
-       
-        $criteria->compare('t.id',$this->id);
-        $criteria->compare('t.nome',$this->nome,true);
-        $criteria->compare('t.endereco',$this->endereco,true);
-        $criteria->compare('t.id_regiao',$this->id_regiao);
-        $criteria->compare('t.id_bairro',$this->id_bairro);
-        $criteria->compare('t.telefone',$this->telefone,true);
-        $criteria->compare('fkplanosaude.nome', $this->_plano_saude);
-        $criteria->compare('fkregiao.nome', $this->_regiao);
-        $criteria->compare('fkbairro.nome', $this->_bairro);
-        $criteria->compare('fkespecialidade.nome', $this->_especialidade);
 
-        $criteria->together = true;
-        $criteria->with = ['fkplanosaude','fkregiao','fkbairro','fkespecialidade'];
-        
         if (!empty($this->latitude) && !empty($this->longitude)) {
             $criteria->select = '
                 *,
@@ -141,9 +127,23 @@ class hospital extends CActiveRecord
                 ':latitude' => $this->latitude,
                 ':longitude' => $this->longitude,
             ];
-            $criteria->having = 'distance <= 10';
+            $criteria->having = 'distance < 10';
             $criteria->order = 'distance';
         }
+       
+        $criteria->compare('t.id',$this->id);
+        $criteria->compare('t.nome',$this->nome,true);
+        $criteria->compare('t.endereco',$this->endereco,true);
+        $criteria->compare('t.id_regiao',$this->id_regiao);
+        $criteria->compare('t.id_bairro',$this->id_bairro);
+        $criteria->compare('t.telefone',$this->telefone,true);
+        $criteria->compare('fkplanosaude.nome', $this->_plano_saude);
+        $criteria->compare('fkregiao.nome', $this->_regiao);
+        $criteria->compare('fkbairro.nome', $this->_bairro);
+        $criteria->compare('fkespecialidade.nome', $this->_especialidade);
+
+        $criteria->together = true;
+        $criteria->with = ['fkplanosaude','fkregiao','fkbairro','fkespecialidade'];
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
