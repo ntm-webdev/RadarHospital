@@ -28,6 +28,8 @@ class hospital extends CActiveRecord
     protected $_bairro;
     protected $_plano_saude;
     protected $_especialidade;
+    protected $_distancia;
+    private $distancia;
 
     /**
      * @return array validation rules for model attributes.
@@ -43,7 +45,7 @@ class hospital extends CActiveRecord
             array('nome', 'length', 'max'=>60),
             array('endereco', 'length', 'max'=>80),
             array('telefone', 'length', 'max'=>15),
-            array('id,_regiao,_bairro,_plano_saude,_especialidade ', 'safe'),
+            array('id,_regiao,_bairro,_plano_saude,_especialidade,_distancia', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, nome, endereco, latitude, longitude, id_plano_saude, id_regiao, id_bairro, telefone', 'safe', 'on'=>'search'),
@@ -105,6 +107,12 @@ class hospital extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria=new CDbCriteria;
+        
+        if (!empty($this->_distancia)) {
+            $distancia = $this->_distancia;
+        } else {
+            $distancia = 10;
+        }
 
         if (!empty($this->latitude) && !empty($this->longitude)) {
             $criteria->select = '
@@ -127,7 +135,8 @@ class hospital extends CActiveRecord
                 ':latitude' => $this->latitude,
                 ':longitude' => $this->longitude,
             ];
-            $criteria->having = 'distance < 10';
+            
+            $criteria->having = 'distance <'.$distancia;
             $criteria->order = 'distance';
         }
        
@@ -206,5 +215,15 @@ class hospital extends CActiveRecord
     public function set_Especialidade($val)
     {
         $this->_especialidade = $val;
+    }
+
+    public function get_Distancia()
+    {
+        return $this->_distancia;
+    }
+
+    public function set_Distancia($val)
+    {
+        $this->_distancia = $val;
     }
 }

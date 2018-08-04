@@ -11,6 +11,10 @@
                         ],
                         'method' => 'POST'
                     )) ;?>
+                    
+                    <?=CHtml::activeHiddenField($model, 'latitude')?>
+                    <?=CHtml::activeHiddenField($model, 'longitude')?>
+
                     <div class="form-group">
                         <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
                         <?=CHtml::activeDropDownList($model, '_bairro', CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
@@ -32,9 +36,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="text-beauty" for="regiao">Distância</label>
+                        <?=CHtml::activeLabel($model, '_distancia', ['class'=>'text-beauty'])?>
                         <div class="slidecontainer">
-                            <input type="range" min="1" max="100" value="1" class="slider" id="myRange">
+                            <?=CHtml::activeRangeField($model, '_distancia', ['class'=>'form-control'])?>
                             <p><span id="demo"></span></p>
                         </div>
                     </div>

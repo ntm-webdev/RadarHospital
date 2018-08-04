@@ -64,8 +64,11 @@
         function success(pos) {
         	var crd = pos.coords;
 
-          	$("#hospital_latitude").val(crd.latitude);	
-          	$("#hospital_longitude").val(crd.longitude);	
+          	$("#form-index #hospital_latitude").val(crd.latitude);	
+          	$("#form-index #hospital_longitude").val(crd.longitude);
+
+            $("#form-result #hospital_latitude").val(crd.latitude);
+            $("#form-result #hospital_latitude").val(crd.longitude);	
         };
 
         function error(err) {
@@ -79,8 +82,11 @@
         	} else {
         		$("#hospital__regiao").prop("disabled", false);
 
-        		$("#hospital_latitude").val("");	
-            	$("#hospital_longitude").val("");
+        		$("#form-index #hospital_latitude").val("");	
+            	$("#form-index #hospital_longitude").val("");
+
+                $("#form-result #hospital_latitude").val("");
+                $("#form-result #hospital_latitude").val("");
         	}
         	
         });
