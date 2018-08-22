@@ -56,7 +56,6 @@ class DefaultController extends CController
     	} else {
 	    	if (isset($_POST['hospital'])) {
 				$model->attributes = $_POST['hospital'];
-				
 			}
 			$dataProvider = $model->search();
     	}

@@ -53,7 +53,7 @@
 
     Yii::app()->clientScript->registerScript('askGeolocation', '
         
-        $("#radioLocation").prop("checked", false);
+        $("#form-index #radioLocation").prop("checked", false);
         
         var options = {
           enableHighAccuracy: true,
@@ -75,7 +75,7 @@
           console.warn(err.message);
         };
 
-        $("#radioLocation").on("change", function() {
+        $("#form-index #radioLocation").on("change", function() {
         	if(this.checked) {
         		$("#hospital__regiao").prop("disabled", true);
             	navigator.geolocation.getCurrentPosition(success, error, options);
