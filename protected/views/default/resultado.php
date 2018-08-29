@@ -3,74 +3,77 @@
         <div class="container">
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                
-                <?php $form=$this->beginWidget("CActiveForm", array(
-                        'htmlOptions'=> [
-                            'id' => 'form-result'
-                        ],
-                        'method' => 'POST'
-                    )) ;?>
-                    
-                    <?=CHtml::activeHiddenField($model, 'latitude')?>
-                    <?=CHtml::activeHiddenField($model, 'longitude')?>
+                <div id="sidenav-content">
+                    <?php $form=$this->beginWidget("CActiveForm", array(
+                            'htmlOptions'=> [
+                                'id' => 'form-result'
+                            ],
+                            'method' => 'POST'
+                        )) ;?>
+                        
+                        <?=CHtml::activeHiddenField($model, 'latitude')?>
+                        <?=CHtml::activeHiddenField($model, 'longitude')?>
 
-                    <div class="form-group">
-                        <?=CHtml::activeLabel($model, '_regiao', ['class'=>'text-beauty'])?>
-                        <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
-                        <?=CHtml::label("Para fazer a pesquisa de região, desative o filtro de localização mais abaixo","",['style'=>'display: none', 'id'=>"regiao", 'class'=>'text-warning'])?>
-                    </div>
-                    
-                    <div class="form-group">
-                        <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
-                        <?=CHtml::activeDropDownList($model, '_bairro', CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
-                        <?=CHtml::label("Para fazer a pesquisa de bairro, desative o filtro de localização mais abaixo","",['style'=>'display: none', 'id'=>"bairro", 'class'=>'text-warning'])?>
-                    </div>
-
-                    <div class="form-group">
-                        <?=CHtml::activeLabel($model, '_especialidade', ['class'=>'text-beauty'])?>
-                        <?=CHtml::activeDropDownList($model, '_especialidade', CHtml::ListData(especialidades::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
-                    </div>
-
-
-                    <div class="form-group">
-                        <?=CHtml::activeLabel($model, '_plano_saude', ['class'=>'text-beauty'])?>
-                        <?=CHtml::activeDropDownList($model, '_plano_saude', CHtml::ListData(plano_saude::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
-                    </div>
-
-                    <div class="form-group">
-                        <?=CHtml::activeLabel($model, '_distancia', ['class'=>'text-beauty'])?>
-                        <div class="slidecontainer">
-                            <?=CHtml::activeRangeField($model, '_distancia', ['class'=>'form-control'])?>
-                            <p><span id="demo"></span></p>
+                        <div class="form-group">
+                            <?php (!empty($model->latitude)) ? $attr = true : $attr = false ?>
+                            <?=CHtml::checkBox('radioLocation', $attr, ['class'=>'form-check-input'])?>
+                            <?=CHtml::label('Buscar hospitais através de minha posição atual?','lblPosition',['class'=>'text-beauty form-check-label'])?>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <?php (!empty($model->latitude)) ? $attr = true : $attr = false ?>
-                        <?=CHtml::checkBox('radioLocation', $attr, ['class'=>'form-check-input'])?>
-                        <?=CHtml::label('Buscar hospitais através de minha posição atual?','lblPosition',['class'=>'text-beauty form-check-label'])?>
-                    </div>
+                        <div class="form-group">
+                            <?=CHtml::activeLabel($model, '_regiao', ['class'=>'text-beauty'])?>
+                            <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
+                            <?=CHtml::label("Para fazer a pesquisa de região, desative o filtro de localização mais abaixo","",['style'=>'display: none', 'id'=>"regiao", 'class'=>'text-warning'])?>
+                        </div>
+                        
+                        <div class="form-group">
+                            <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
+                            <?=CHtml::activeDropDownList($model, '_bairro', CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
+                            <?=CHtml::label("Para fazer a pesquisa de bairro, desative o filtro de localização mais abaixo","",['style'=>'display: none', 'id'=>"bairro", 'class'=>'text-warning'])?>
+                        </div>
 
-                    <div class="form-group">
-                        <?=CHtml::submitButton('Pesquisar', ['class'=>'btn btn-success', 'id'=>'btnResultado'])?>
-                    </div>
+                        <div class="form-group">
+                            <?=CHtml::activeLabel($model, '_plano_saude', ['class'=>'text-beauty'])?>
+                            <?=CHtml::activeDropDownList($model, '_plano_saude', CHtml::ListData(plano_saude::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+                        </div>
 
-                <?php $this->endWidget() ?>
+                        <div class="form-group">
+                            <?=CHtml::activeLabel($model, '_especialidade', ['class'=>'text-beauty'])?>
+                            <?=CHtml::activeDropDownList($model, '_especialidade', CHtml::ListData(especialidades::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+                        </div>
+
+
+                        <div class="form-group">
+                            <?=CHtml::activeLabel($model, '_distancia', ['class'=>'text-beauty'])?>
+                            <div class="slidecontainer">
+                                <?=CHtml::activeRangeField($model, '_distancia', ['class'=>'form-control-range'])?>
+                                <p><span id="demo"></span></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <?=CHtml::submitButton('Pesquisar', ['class'=>'btn btn-success', 'id'=>'btnResultado'])?>
+                        </div>
+
+                    <?php $this->endWidget() ?>
+                </div>
             </div>
 
             <div class="row resultado">
                 <p></p>
 
-                <div class="col-xs-4">
-                    <i class="fa fa-filter pointer text-beauty" onclick="openNav()"></i>
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn-default btn-sm" onclick="openNav()">
+                        <i class="fa fa-filter text-beauty"></i> Filtro
+                    </button>
                 </div>
 
-                <div class="col-xs-4">
-                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/map', 'class'=> 'no-link'], '<i class="fa fa-map pointer text-beauty"></i>')?>
+                <div class="col-xs-3">
+                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/map', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-map text-beauty"></i> Mapa</button>')?>
                 </div>
 
-                <div class="col-xs-4">
-                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/userArea', 'class'=> 'no-link'], '<i class="fa fa-user pointer text-beauty"></i>')?>
+                <div class="col-xs-3">
+                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/userArea', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
                 </div>
 
                 <br>

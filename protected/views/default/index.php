@@ -2,7 +2,7 @@
 	<a href="http://localhost/RadarHospital/index.php/default/userArea">
 		<span class="text-beauty pull-right">
 			<i class="fa fa-fw fa-lg pointer fa-user"></i>
-			<?=(Yii::app()->user->hasState("id") ? Yii::app()->user->getState("nome") : "Faça seu Login") ?>
+			<?=(Yii::app()->user->hasState("id") ? "Olá, ".Yii::app()->user->getState("nome") : "Faça seu Login") ?>
 		</span>
 	</a>
 	<br>
@@ -31,17 +31,16 @@
 			<?=CHtml::activeDropDownList($model, '_plano_saude', CHtml::ListData(plano_saude::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 	  	</div>
 		
+        <div class="form-group">
+            <?=CHtml::checkBox('radioLocation',false, ['class'=>'form-check-input'])?>
+            <?=CHtml::label('Buscar hospitais através de minha posição atual?','lblPosition',['class'=>'text-beauty form-check-label'])?>
+        </div>
 
 		<div class="form-group">
 			<?=CHtml::activeLabel($model, '_regiao', ['class'=>'text-beauty']);?>
 		    <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 	  	</div>
 	  	
-		<div class="form-group">
-	  		<?=CHtml::checkBox('radioLocation',false, ['class'=>'form-check-input'])?>
-			<?=CHtml::label('Buscar hospitais através de minha posição atual?','lblPosition',['class'=>'text-beauty form-check-label'])?>
-		</div>
-
 	  	<div class="form-group">
 	  		<?=CHtml::submitButton('Pesquisar', ['class'=>'btn btn-success', 'id'=>'btnPesq1'])?>
 		</div>

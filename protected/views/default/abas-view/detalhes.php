@@ -25,6 +25,8 @@
 		<p><b>Região:</b> <?=$model->fkregiao->nome?></p>
 		<p><b>Bairro:</b> <?=$model->fkbairro->nome?></p>
 		<p><b>Endereço:</b> <?=$model->endereco?></p>
+		<p><b>Site:</b> <?=CHtml::tag('a',['href'=>$model->site, 'target'=>'_blank'], 'Website')?></p>
+		<p><b>Telefone:</b> <?=$model->telefone?></p>
 		<hr>
 	</div>
 
@@ -55,13 +57,6 @@
 					<p><?=$plano->nome?></p>	
 		<?php   endforeach; 
 			endif?>
-		<hr>
-	</div>
-
-	<div>
-		<p class="text-beauty">Contato</p>
-		<p><i class="fa fa-link"></i> <?=CHtml::tag('a',['href'=>$model->site], 'Website')?></p>
-		<p><i class="fa fa-phone"></i> <?=$model->telefone?></p>
 		<hr>
 	</div>
 </div>

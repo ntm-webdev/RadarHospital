@@ -63,12 +63,32 @@
 
 <?php
 	endfor;
+	
 	$numAvaliacoes = count($feedback);
 
-	$avgAtendimento = (($somaAtendimento * 100) / ($numAvaliacoes * 4) / 100); 
-	$avgAtendimentoMedico = (($somaAtendimentoMedico * 100) / ($numAvaliacoes * 4) / 100); 
-	$avgHigiente = (($somaHigiene * 100) / ($numAvaliacoes * 4) / 100); 
-	$avgInfraestrutura = (($somaInfraestrutura * 100) / ($numAvaliacoes * 4) / 100); 
+	if (!empty($somaAtendimento) && !empty($numAvaliacoes)) {
+		$avgAtendimento = (($somaAtendimento * 100) / ($numAvaliacoes * 4) / 100); 
+	} else {
+		$avgAtendimento = 0;
+	}
+	
+	if (!empty($somaAtendimentoMedico) && !empty($numAvaliacoes)) {
+		$avgAtendimentoMedico = (($somaAtendimentoMedico * 100) / ($numAvaliacoes * 4) / 100); 
+	} else {
+		$avgAtendimentoMedico = 0;
+	}
+
+	if (!empty($somaHigiene) && !empty($numAvaliacoes)) {
+		$avgHigiente = (($somaHigiene * 100) / ($numAvaliacoes * 4) / 100); 
+	} else {
+		$avgHigiente = 0;
+	}
+
+	if (!empty($somaInfraestrutura) && !empty($numAvaliacoes)) {
+		$avgInfraestrutura = (($somaInfraestrutura * 100) / ($numAvaliacoes * 4) / 100); 
+	} else {
+		$avgInfraestrutura = 0;
+	}
 ?>
 
 <?php
