@@ -109,9 +109,9 @@ class hospital extends CActiveRecord
         $criteria=new CDbCriteria;
         
         if (!empty($this->_distancia)) {
-            $distancia = $this->_distancia;
+            $distancia = $this->_distancia / 1.609;
         } else {
-            $distancia = 10;
+            $distancia = 1.24274;
         }
 
         if (!empty($this->latitude) && !empty($this->longitude)) {

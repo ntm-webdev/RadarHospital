@@ -17,16 +17,18 @@
                         <div class="form-group">
                             <?=CHtml::button("Limpar filtros", ['class'=>'btn btn-default', 'id'=>'cleanFilter'])?>
                             <?php
-                                echo CHtml::ajaxSubmitButton('Refazer filtros',Yii::app()->createUrl('default/rebuildFilter'),
-                                array(
-                                    'type'=>'POST',
-                                    'dataType'=> 'json',                       
-                                    'success'=>'js:function(data){
-                                        $("#hospital__regiao").val(data.regiao);
-                                        $("#hospital__bairro").val(data.bairro);
-                                        $("#hospital__plano_saude").val(data.planoSaude);
-                                    }'           
-                                ),array('class'=>'btn btn-primary',));
+                                if (Yii::app()->user->hasState("id")) {
+                                    echo CHtml::ajaxSubmitButton('Refazer filtros',Yii::app()->createUrl('default/rebuildFilter'),
+                                    array(
+                                        'type'=>'POST',
+                                        'dataType'=> 'json',                       
+                                        'success'=>'js:function(data){
+                                            $("#hospital__regiao").val(data.regiao);
+                                            $("#hospital__bairro").val(data.bairro);
+                                            $("#hospital__plano_saude").val(data.planoSaude);
+                                        }'           
+                                    ),array('class'=>'btn btn-primary',));
+                                }
                             ?>
                         </div>
 
@@ -62,7 +64,7 @@
                         <div class="form-group">
                             <?=CHtml::activeLabel($model, '_distancia', ['class'=>'text-beauty'])?>
                             <div class="slidecontainer">
-                                <?=CHtml::activeRangeField($model, '_distancia', ['class'=>'form-control-range'])?>
+                                <?=CHtml::activeRangeField($model, '_distancia', ['class'=>'form-control-range','max'=>'20'])?>
                                 <p><span id="demo"></span></p>
                             </div>
                         </div>
@@ -102,6 +104,7 @@
                 $this->widget('zii.widgets.CListView', array(
                    'dataProvider'=>$dataProvider,
                    'itemView'=> 'list',
+                   'enablePagination' => true
                 )); 
 
             ?>
@@ -173,7 +176,8 @@
         });
 
         $("#cleanFilter").on("click", function(){
-            $("#form-result").find("select").val("");
+            $("#form-result").find("select, :hidden").val("");
+            $("#form-result").find(":checkbox").prop("checked", false);
         });
     ');
 ?>  

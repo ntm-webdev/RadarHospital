@@ -44,7 +44,7 @@ class DefaultController extends CController
 	        	$criteria->with = ['fkplanosaude','fkregiao','fkbairro'];
 	    		
 	    		$dataProvider = new CActiveDataProvider($model, [
-	    			'criteria' => $criteria
+	    			'criteria' => $criteria,
 	    		]);
 	     		
 	     		return $this->render('resultado', [
