@@ -25,7 +25,7 @@ class DefaultController extends CController
     			
     			$dataProvider = $model->search();
     			return $this->render('resultado', array('model' => $model, 'dataProvider' => $dataProvider));
-    		} else {
+    		} else {   			
 	    		$regiao = regiao::model()->findByPk($usuario->id_regiao)->nome;
 	    		$bairro = bairro::model()->findByPk($usuario->id_bairro)->nome;
 	    		$planoSaude = plano_saude::model()->findByPk($usuario->id_planosaude)->nome;
@@ -79,7 +79,13 @@ class DefaultController extends CController
 
 	public function actionEvaluate()
 	{	
-		$model = new feedback();
+		$newRecord = feedback::model()->findByAttributes(['id_hospital'=> $_GET['idHospital'], 'id_usuario'=>Yii::app()->user->getState("id")]);
+
+		if (!empty($newRecord)) {
+			$model = $newRecord;
+		} else {
+			$model = new feedback();
+		}
 
 		if (!empty($_GET['Feedback'])) {
 			$model->attributes = $_GET['Feedback'];
@@ -184,6 +190,10 @@ class DefaultController extends CController
 			
 			if ($model->save()) {
 				$this->redirect(['login']);
+			} else {
+				$this->render("registeruser", [
+					'model'=>$model
+				]);
 			}
 		} else {
 			$this->render("registeruser", [
@@ -214,5 +224,26 @@ class DefaultController extends CController
 	public function actionresultMaps()
 	{
 		$this->renderPartial("resultMaps");
+	}
+
+	public function actionrebuildFilter()
+	{
+		$model = new hospital();
+    	$model->unsetAttributes();
+		$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
+
+		$regiao = regiao::model()->findByPk($usuario->id_regiao)->nome;
+		$bairro = bairro::model()->findByPk($usuario->id_bairro)->nome;
+		$planoSaude = plano_saude::model()->findByPk($usuario->id_planosaude)->nome;
+
+		exit(
+			json_encode(
+				array(
+					'regiao' => $regiao, 
+					'bairro' => $bairro, 
+					'planoSaude'=>$planoSaude
+				)
+			)
+		);
 	}
 }

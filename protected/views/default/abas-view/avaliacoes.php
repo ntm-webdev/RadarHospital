@@ -26,7 +26,13 @@
 </div>
 <div class="row row-avaliacoes">
 	<hr class="hr-beauty">
-	<?=CHtml::link('Adicionar avaliação', ['Default/evaluate', 'idHospital'=>$model->id], ['class'=>'btn btn-purple','style'=>'font-size: 15px'])?>
+	<?php 
+		$checkAvaliacao = feedback::model()->findByAttributes(['id_usuario' => Yii::app()->user->getState("id"), 'id_hospital'=>$model->id]);
+
+		$texto = (!empty($checkAvaliacao)) ? "Atualizar avaliação" : "Adicionar avaliação";
+	
+	 	echo CHtml::link($texto, ['Default/evaluate', 'idHospital'=>$model->id], ['class'=>'btn btn-purple','style'=>'font-size: 15px']);
+	?>
 </div>
 
 <?php for($i=0;$i < count($feedback); $i++) : ?>

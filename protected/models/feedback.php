@@ -117,23 +117,6 @@ class Feedback extends CActiveRecord
         return parent::model($className);
     }
 
-    public function beforeValidate() 
-    {
-
-        $criteria = new CDbCriteria();
-        $criteria->addCondition('t.id_usuario = :idUsuario and t.id_hospital = :idHospital');
-        $criteria->params = [
-            ':idUsuario' => $this->id_usuario,
-            ':idHospital' => $this->id_hospital,
-        ];
-
-        if ($this::model()->count($criteria) > 0) {
-           Yii::app()->request->redirect('View/'.$this->id_hospital.'?error=duplicidade');
-        }
-
-        return parent::beforeValidate();
-    }
-
     public function beforeSave() {
         $this->datahora = new CDbExpression('NOW()');
         return parent::beforeSave();

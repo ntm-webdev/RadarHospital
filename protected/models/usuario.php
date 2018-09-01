@@ -18,7 +18,9 @@
  */
 class Usuario extends CActiveRecord
 {
-        public $maxColumn;
+    public $maxColumn;
+    public $confEmail;
+    public $confPwd;
     /**
      * @return string the associated database table name
      */
@@ -35,9 +37,10 @@ class Usuario extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id, nome, id_bairro, id_planosaude, id_regiao', 'required'),
+            array('id, nome, pwd, email, id_bairro, id_planosaude, id_regiao, confEmail, confPwd', 'required'),
             array('id, id_bairro, id_planosaude, id_regiao', 'numerical', 'integerOnly'=>true),
             array('nome, email, pwd', 'length', 'max'=>150),
+            array('confEmail, email, pwd, confpwd', 'confirmacao'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, nome, id_bairro, id_planosaude, id_regiao, email, pwd', 'safe', 'on'=>'search'),
@@ -71,6 +74,8 @@ class Usuario extends CActiveRecord
             'id_planosaude' => 'Id Planosaude',
             'email' => 'E-mail',
             'pwd' => 'Senha',
+            'confEmail' => 'Confirme seu e-mail',
+            'confPwd' => 'Confirme sua senha',
         );
     }
 
@@ -112,5 +117,38 @@ class Usuario extends CActiveRecord
     public static function model($className=__CLASS__)
     {
         return parent::model($className);
+    }
+
+    public function getconfEmail()
+    {
+        return $this->confEmail;
+    }
+
+    public function setconfEmail($val)
+    {
+        $this->confEmail = $val;
+    }
+
+    public function getconfPwd()
+    {
+        return $this->confPwd;
+    }
+
+    public function setconfPwd($val)
+    {
+        $this->confPwd = $val;
+    }
+
+    public function confirmacao()
+    {
+        if ($this->confEmail != $this->email) {
+            $this->addError("confEmail", "Os emails não correspondem");
+            $this->addError("email", "Os emails não correspondem");
+        }
+
+        if ($this->confPwd != $this->pwd) {
+            $this->addError("confPwd", "As senhas não correspondem");
+            $this->addError("pwd", "As senhas não correspondem");
+        }
     }
 }

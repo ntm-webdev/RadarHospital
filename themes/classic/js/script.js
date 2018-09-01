@@ -1,6 +1,6 @@
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {
-    $("#mySidenav").css('width', '75%');
+    $("#mySidenav").css('width', '55%');
     $("#main").css('marginLeft', '75%');
     $(".resultado").css('opacity', '0.3');
 }

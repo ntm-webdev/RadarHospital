@@ -15,6 +15,22 @@
                         <?=CHtml::activeHiddenField($model, 'longitude')?>
 
                         <div class="form-group">
+                            <?=CHtml::button("Limpar filtros", ['class'=>'btn btn-default', 'id'=>'cleanFilter'])?>
+                            <?php
+                                echo CHtml::ajaxSubmitButton('Refazer filtros',Yii::app()->createUrl('default/rebuildFilter'),
+                                array(
+                                    'type'=>'POST',
+                                    'dataType'=> 'json',                       
+                                    'success'=>'js:function(data){
+                                        $("#hospital__regiao").val(data.regiao);
+                                        $("#hospital__bairro").val(data.bairro);
+                                        $("#hospital__plano_saude").val(data.planoSaude);
+                                    }'           
+                                ),array('class'=>'btn btn-primary',));
+                            ?>
+                        </div>
+
+                        <div class="form-group">
                             <?php (!empty($model->latitude)) ? $attr = true : $attr = false ?>
                             <?=CHtml::checkBox('radioLocation', $attr, ['class'=>'form-check-input'])?>
                             <?=CHtml::label('Buscar hospitais através de minha posição atual?','lblPosition',['class'=>'text-beauty form-check-label'])?>
@@ -154,6 +170,10 @@
             } else {
                 $.post("'.Yii::app()->createUrl("default/Resultado").'");
             }
+        });
+
+        $("#cleanFilter").on("click", function(){
+            $("#form-result").find("select").val("");
         });
     ');
 ?>  

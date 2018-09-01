@@ -24,7 +24,7 @@
 
 
 				$str = implode(",", $planos);
-				echo "<span style='color: #333'>".$str."</span>";
+				echo "<div class='content-planos'>".$str."</div>";
 			?>
 			</h5>
 	  	</div>
