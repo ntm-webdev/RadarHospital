@@ -302,3 +302,22 @@
         height: 800px;
     }
 }
+
+.main-container{
+ position: relative; /* Set to absolute */
+}
+.alert-container {
+ position: absolute; /* Set to absolute and positioned at top corner*/
+ top: 0;
+ left: 0;
+}
+.alert-content {
+ position: absolute;   /* This moves it to the bottom (initial state) */
+ bottom: 90%; 
+ width: 100%;
+ height: 10%;
+ transition: bottom 1s;
+}
+.main-container:hover .alert-content {
+  bottom: 50%;   /* This moves it to the middle (only on hover) */
+}

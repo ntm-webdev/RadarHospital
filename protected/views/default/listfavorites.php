@@ -23,7 +23,7 @@
 
 
 					$str = implode(",", $planos);
-					echo trim(str_replace(' ', '', $str));
+					echo "<div class='content-planos'>".$str."</div>";
 				?>
 		  	</div>
 		  	<hr>

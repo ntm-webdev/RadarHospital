@@ -78,6 +78,16 @@
 		
 		$("#btnRegisterUser").on("click", function(){
 			$.post("'.Yii::app()->createUrl("Default/registerUser").'");
+
+			$.gritter.add({
+                title: "Sucesso!",
+                text: "O usuário foi cadastrado com sucesso.",
+                class_name: "gritter-success"
+            });
+
+            setTimeout(function(){ 
+            	window.location = '.Yii::app()->createUrl("Default/login").'; 
+            }, 4000);
 		});
 	');
 

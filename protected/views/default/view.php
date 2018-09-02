@@ -9,6 +9,7 @@
 	}
 	
 ?>
+
 <div class="container-fluid">
 
 	<div class="row">
@@ -77,11 +78,13 @@
 		    	<a href="#mapa" class="text-beauty" aria-controls="mapa" role="tab" data-toggle="tab" aria-expanded="false">Mapa</a>
 		    </li>
 
-		    <li role="presentation">
-		    	<a class="<?=(!empty($favoritado)) ? 'text-beauty' : 'text-normal'?>" aria-controls="favorite" role="tab" data-toggle="tab" aria-expanded="false" id="favorite">
-		    		<span class="glyphicon glyphicon-heart"></span>
-		    	</a>
-		    </li>
+		    <?php if (!Yii::app()->user->isGuest) : ?>
+			    <li role="presentation">
+			    	<a class="<?=(!empty($favoritado)) ? 'text-beauty' : 'text-normal'?>" aria-controls="favorite" role="tab" data-toggle="tab" aria-expanded="false" id="favorite">
+			    		<span class="glyphicon glyphicon-heart"></span>
+			    	</a>
+			    </li>
+			<?php endif ?>
   		</ul>
 
 	  	<!-- Abas -->
@@ -111,11 +114,25 @@
 				
 				if($("#favorite").prop("class") == "text-beauty") {
 					$.post("'.Yii::app()->createUrl("default/Unfavorite").'", {id_usuario:iduser, id_hospital:idhosp}, function(){
-						window.location.reload();
+						
+						$.gritter.add({
+			                title: "Sucesso!",
+			                text: "Hospital desfavoritado com sucesso.",
+			                class_name: "gritter-success"
+			            });
+
+			            setTimeout(function(){ window.location.reload(); }, 4000);
 					});
 				} else {
-					$.post("'.Yii::app()->createUrl("default/favorite").'",{id_usuario:iduser, id_hospital:idhosp}, function(){
-						window.location.reload();
+					$.post("'.Yii::app()->createUrl("default/favorite").'",{id_usuario:iduser, id_hospital:idhosp}, function(data){
+						
+			            $.gritter.add({
+			                title: "Sucesso!",
+			                text: "Hospital favoritado com sucesso.",
+			                class_name: "gritter-success"
+			            });
+
+			            setTimeout(function(){ window.location.reload(); }, 4000);
 					});
 				}
 			});

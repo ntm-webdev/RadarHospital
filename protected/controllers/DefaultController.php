@@ -116,6 +116,10 @@ class DefaultController extends CController
 
 			if ($model->save()) {
 				$this->redirect(['userArea']);
+			} else {
+				$this->render("preferences", [
+					'model'=>$model
+				]);
 			}
 		} else {
 	    	$this->render('preferences',[
@@ -188,9 +192,7 @@ class DefaultController extends CController
 			$somevariable = $row['maxColumn'] + 1;
 			$model->id = $somevariable;
 			
-			if ($model->save()) {
-				$this->redirect(['login']);
-			} else {
+			if (!$model->save()) {
 				$this->render("registeruser", [
 					'model'=>$model
 				]);
