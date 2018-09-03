@@ -2,7 +2,6 @@
 	<?php 
 		$form = $this->beginWidget("CActiveForm", [
 			'method' => 'POST',
-			'action' => Yii::app()->createUrl("Default/preferences"),
 			'htmlOptions' => [
 				'id' => 'preferences-form'
 			]
@@ -45,7 +44,23 @@
 		</div>
 
 		<div class="form-group">
-			<?=CHtml::submitButton('Gravar', ['class'=>'btn btn-success'])?>
+			<?=CHtml::ajaxSubmitButton('Gravar',Yii::app()->createUrl("Default/preferences"),
+                array(
+                    'type'=>'POST',
+                    'dataType'=> 'json',                       
+                    'success'=>'js:function(data){
+                        $.gritter.add({
+			                title: "Sucesso!",
+			                text: data.msg,
+			                class_name: "gritter-success"
+			            });
+
+			            setTimeout(function(){ 
+			            	window.location = "'.Yii::app()->createUrl("Default/userArea").'"; 
+			            }, 4000);
+                    }'           
+                ),array('class'=>'btn btn-success'));
+            ?>
 		</div>
 	<?php $this->endWidget(); ?>
 </div>

@@ -2,8 +2,6 @@
 	<div class="container">
 		<?php 
 			$form = $this->beginWidget("CActiveForm", [
-				'method' => 'GET',
-				'action' => Yii::app()->createUrl("Default/evaluate", ['idHospital'=>$_GET['idHospital']]),
 				'htmlOptions' => [
 					'id' => 'evaluate-form',
 					'class' => 'form-centered',
@@ -62,7 +60,20 @@
 			</div>
 
 			<div class="form-group">
-				<?=CHtml::submitButton('Enviar', ['class'=>'btn btn-success'])?>
+				<?=CHtml::ajaxSubmitButton('Gravar',Yii::app()->createUrl("default/Evaluate", ['idHospital'=>$_GET['idHospital']]), array(
+                    'type'=>'GET',
+                    'dataType'=> 'json',                       
+                    'success'=>'js:function(data){
+                        $.gritter.add({
+			                title: "Sucesso!",
+			                text: data.msg,
+			                class_name: "gritter-success"
+			            });
+
+			            
+			        }'           
+                ),array('class'=>'btn btn-success'));
+            ?>
 			</div>
 		<?php $this->endWidget(); ?>
 	</div>

@@ -93,7 +93,8 @@ class DefaultController extends CController
 			$model->id_usuario = Yii::app()->user->getState("id");
 			
 			if ($model->save()) {
-				$this->redirect(['view', 'id'=>$_GET['idHospital']]);
+				$data = json_encode(array('msg' => "Feedback salvo com sucesso."));
+				exit($data);
 			}
 		} else {
 	    	$this->render('evaluate',[
@@ -115,7 +116,8 @@ class DefaultController extends CController
 			$model->attributes = $_POST['Usuario'];
 
 			if ($model->save()) {
-				$this->redirect(['userArea']);
+				$data = json_encode(array('msg' => "O cadastro foi atualizado com sucesso."));
+				exit($data);
 			} else {
 				$this->render("preferences", [
 					'model'=>$model
@@ -191,15 +193,23 @@ class DefaultController extends CController
 			$row = $model->model()->find($criteria);
 			$somevariable = $row['maxColumn'] + 1;
 			$model->id = $somevariable;
+
+			$valid = $model->validate(); 
+			$error = CActiveForm::validate($model);
 			
-			if (!$model->save()) {
-				$this->render("registeruser", [
-					'model'=>$model
-				]);
+			if($valid == false) {
+                $data = json_encode(array('fields' => $error, 'status'=>'error'));
+				exit($data);
+			} else {
+				if($model->save()) {
+					$data = json_encode(array('msg' => 'O usuário foi cadastrado com sucesso.', 'status'=>'ok'));
+					exit($data);
+				}
 			}
+			
 		} else {
 			$this->render("registeruser", [
-				'model'=>$model
+				'model'=>$model,
 			]);
 		}
 	}

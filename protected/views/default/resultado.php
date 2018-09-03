@@ -27,7 +27,7 @@
                                             $("#hospital__bairro").val(data.bairro);
                                             $("#hospital__plano_saude").val(data.planoSaude);
                                         }'           
-                                    ),array('class'=>'btn btn-primary',));
+                                    ),array('class'=>'btn btn-primary'));
                                 }
                             ?>
                         </div>

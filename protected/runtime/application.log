@@ -9281,3 +9281,581 @@ Stack trace:
 REQUEST_URI=/RadarHospital/index.php/default/favorites
 HTTP_REFERER=http://localhost/RadarHospital/index.php/default/userArea
 ---
+2018/09/01 22:44:24 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:201
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/09/01 22:54:11 [error] [exception.ParseError] ParseError: syntax error, unexpected '',' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /var/www/html/RadarHospital/protected/views/default/registeruser.php:78
+Stack trace:
+#0 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/R...', Array, true)
+#1 /var/www/html/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/html/R...', Array, true)
+#2 /var/www/html/yii/framework/web/CController.php(785): CController->renderPartial('registeruser', Array, true)
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(200): CController->render('registeruser', Array)
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/09/01 22:54:35 [error] [php] Illegal string offset 'msg' (/var/www/html/RadarHospital/protected/views/default/registeruser.php:73)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(200): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+2018/09/01 22:54:51 [error] [php] Trying to get property of non-object (/var/www/html/RadarHospital/protected/views/default/registeruser.php:73)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(200): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+2018/09/01 22:57:08 [error] [php] Undefined variable: data (/var/www/html/RadarHospital/protected/views/default/registeruser.php:74)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(205): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+2018/09/01 22:57:38 [error] [php] Undefined variable: data (/var/www/html/RadarHospital/protected/views/default/registeruser.php:74)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(205): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+2018/09/01 22:57:40 [error] [php] Undefined variable: data (/var/www/html/RadarHospital/protected/views/default/registeruser.php:74)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(205): DefaultController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#4 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+2018/09/01 23:25:44 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:82
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:25:47 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:82
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:26:06 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:82
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:26:06 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:82
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:26:06 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:82
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:26:06 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:82
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:26:07 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:82
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:29:14 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:29:32 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:29:33 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:29:33 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:29:33 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:30:12 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:30:14 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:30:32 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:30:32 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:30:33 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:30:33 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:30:33 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:86
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionEvaluate()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('Evaluate')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/Evaluat...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate?idHospital=1
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/evaluate?idHospital=1
+---
+2018/09/01 23:35:49 [error] [php] Undefined index: idHospital (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:82)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#1 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#2 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#3 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#5 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate
+2018/09/01 23:35:54 [error] [php] Undefined index: idHospital (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:82)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#1 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#2 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#3 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#5 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate
+2018/09/01 23:36:25 [error] [php] Undefined index: idHospital (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:82)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#1 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#2 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#3 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#5 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/default/Evaluate
+2018/09/02 07:13:34 [error] [exception.CException] CException: DefaultController and its behaviors do not have a method or closure named "performAjaxValidation". in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(187): CComponent->__call('performAjaxVali...', Array)
+#1 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#2 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#6 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#7 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#8 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+---
+2018/09/02 07:28:14 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:200
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/09/02 07:28:18 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:200
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/09/02 07:28:18 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:200
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/09/02 07:28:19 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:200
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/09/02 07:28:19 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:200
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/09/02 07:28:19 [error] [exception.Exception] Exception: Error Processing Request in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:200
+Stack trace:
+#0 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#1 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#3 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#5 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/registe...')
+#6 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#7 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/registerUser
+---
+2018/09/03 16:20:05 [error] [exception.ParseError] ParseError: syntax error, unexpected ')' in /var/www/html/RadarHospital/protected/views/default/registeruser.php:10
+Stack trace:
+#0 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/R...', Array, true)
+#1 /var/www/html/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/html/R...', Array, true)
+#2 /var/www/html/yii/framework/web/CController.php(785): CController->renderPartial('registeruser', Array, true)
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(213): CController->render('registeruser', Array)
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+HTTP_REFERER=http://localhost/RadarHospital/index.php/default/login
+---
+2018/09/03 16:33:14 [error] [exception.ParseError] ParseError: syntax error, unexpected 'code' (T_STRING) in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:208
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('registerUser/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+---
+2018/09/03 16:33:47 [error] [exception.ParseError] ParseError: syntax error, unexpected 'code' (T_STRING) in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:207
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('registerUser/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+---
+2018/09/03 16:33:47 [error] [exception.ParseError] ParseError: syntax error, unexpected 'code' (T_STRING) in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:207
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('registerUser/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+---
+2018/09/03 16:33:50 [error] [exception.ParseError] ParseError: syntax error, unexpected 'code' (T_STRING) in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:207
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('registerUser/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+---
+2018/09/03 16:38:45 [error] [exception.ParseError] ParseError: syntax error, unexpected ''error'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /var/www/html/RadarHospital/protected/views/default/registeruser.php:77
+Stack trace:
+#0 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/R...', Array, true)
+#1 /var/www/html/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/html/R...', Array, true)
+#2 /var/www/html/yii/framework/web/CController.php(785): CController->renderPartial('registeruser', Array, true)
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(215): CController->render('registeruser', Array)
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+---
+2018/09/03 17:00:20 [error] [exception.ParseError] ParseError: syntax error, unexpected ''error'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /var/www/html/RadarHospital/protected/views/default/registeruser.php:79
+Stack trace:
+#0 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/R...', Array, true)
+#1 /var/www/html/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/html/R...', Array, true)
+#2 /var/www/html/yii/framework/web/CController.php(785): CController->renderPartial('registeruser', Array, true)
+#3 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(212): CController->render('registeruser', Array)
+#4 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionregisterUser()
+#5 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('registerUser')
+#9 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/registe...')
+#10 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/RadarHospital/index.php/default/registerUser
+---

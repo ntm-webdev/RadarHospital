@@ -1,10 +1,6 @@
 <div class="container">
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'method'=>'POST',
-		'enableClientValidation'=>true,
-		'clientOptions'=>array(
-			'validateOnSubmit'=>true,
-		),
 	)); ?>
 
 		<div class="form-group">
@@ -67,28 +63,95 @@
 		</div>
 
 		<div class="form-group">
-			<?=CHtml::submitButton('Enviar', ['class'=>'btn btn-success', 'id'=>'btnRegisterUser'])?>
+			<?=CHtml::ajaxSubmitButton('Gravar',Yii::app()->createUrl("Default/registerUser"),
+                array(
+                    'type'=>'POST',
+                    'dataType'=> 'json',                       
+                    'success'=>'js:function(data){
+                    	if(data.status == "ok") {
+	                        $.gritter.add({
+				                title: "Sucesso!",
+				                text: data.msg,
+				                class_name: "gritter-success"
+				            });
+
+				            $("label .user-error").remove();
+
+				            setTimeout(function(){ 
+			            		window.location = "'.Yii::app()->createUrl("Default/login").'"; 
+			            	}, 4000);
+				        } else {
+				        	var fields = data.fields;
+				        	console.log(data.fields);
+
+				        	if (fields.search("Nome cannot be blank.") > 0) {
+				        		$("#nome-error").remove();
+				        		$("#Usuario_nome").after("<label class=\"user-error\" id=\"nome-error\" style=\"color: red\">Nome não pode ser vazio</label>")
+				        	} else {
+				        		$("#nome-error").remove();
+				        	}
+
+				        	if (fields.search("Senha cannot be blank.") > 0) {
+				        		$("#pwd-error").remove();
+				        		$("#Usuario_pwd").after("<label class=\"user-error\" id=\"pwd-error\" style=\"color: red\">Senha não pode ser vazia</label>")
+				        	} else {
+				        		$("#pwd-error").remove();
+				        	}
+
+				        	if (fields.search("E-mail cannot be blank.") > 0) {
+				        		$("#email-error").remove();
+				        		$("#Usuario_email").after("<label class=\"user-error\" id=\"email-error\" style=\"color: red\">E-mail não pode ser vazio</label>")
+				        	} else {
+				        		$("#email-error").remove();
+				        	}
+
+				        	if (fields.search("Confirme seu e-mail cannot be blank.") > 0) {
+				        		$("#confemail-error").remove();
+				        		$("#Usuario_confEmail").after("<label class=\"user-error\" id=\"confemail-error\" style=\"color: red\">Confirme seu e-mail não pode ser vazio</label>")
+				        	} else {
+				        		$("#confemail-error").remove();
+				        	}
+
+				        	if (fields.search("Confirme sua senha cannot be blank.") > 0) {
+				        		$("#confpwd-error").remove();
+				        		$("#Usuario_confPwd").after("<label id=\"confpwd-error\" class=\"user-error\" style=\"color: red\">Confirme sua senha não pode ser vazia</label>")
+				        	} else {
+				        		$("#confpwd-error").remove();
+				        	}
+
+				        	if (fields.search("E-mail is not a valid email address.") > 0) {
+				        		$("#emailinvalid").remove();
+				        		$("#Usuario_email").after("<label id=\"emailinvalid\" class=\"user-error\" style=\"color: red\">Esse não é um e-mail válido</label>")
+				        	} else {
+				        		$("#emailinvalid").remove();
+				        	}
+
+				        	if (fields.search("Confirme seu e-mail is not a valid email address.") > 0) {
+				        		$("#confemailinvalid-error").remove();
+				        		$("#Usuario_confEmail").after("<label id=\"confemailinvalid-error\" class=\"user-error\" style=\"color: red\">Esse não é um e-mail válido</label>")
+				        	} else {
+				        		$("#confemailinvalid-error").remove();
+				        	}
+
+				        	if (fields.search("Os emails nao correspondem.") > 0) {
+				        		$("#confemailcorrespondent-error, #emailcorrespondent-error").remove();
+				        		$("#Usuario_email").after("<label id=\"confemailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label>");
+				        		$("#Usuario_confEmail").after("<label id=\"emailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label>")
+				        	} else {
+				        		$("#confemailcorrespondent-error, #emailcorrespondent-error").remove();
+				        	}
+
+				        	if (fields.search("As senhas nao correspondem.") > 0) {
+				        		$("#confpwdcorrespondent-error, #pwdcorrespondent-error").remove();
+				        		$("#Usuario_pwd").after("<label id=\"confpwdcorrespondent-error\" class=\"user-error\" style=\"color: red\">As senhas não correspondem</label>");
+				        		$("#Usuario_confPwd").after("<label id=\"pwdcorrespondent-error\" class=\"user-error\" style=\"color: red\">As senhas não correspondem</label>")
+				        	} else {
+				        		$("#confpwdcorrespondent-error, #pwdcorrespondent-error").remove();
+				        	}
+				        }
+			        }'	       
+                ),array('class'=>'btn btn-success'));
+            ?>
 		</div>
 	<?php $this->endWidget(); ?>
 </div>
-
-<?php
-	
-	Yii::app()->clientScript->registerScript('registerUser', '
-		
-		$("#btnRegisterUser").on("click", function(){
-			$.post("'.Yii::app()->createUrl("Default/registerUser").'");
-
-			$.gritter.add({
-                title: "Sucesso!",
-                text: "O usuário foi cadastrado com sucesso.",
-                class_name: "gritter-success"
-            });
-
-            setTimeout(function(){ 
-            	window.location = '.Yii::app()->createUrl("Default/login").'; 
-            }, 4000);
-		});
-	');
-
-?>
