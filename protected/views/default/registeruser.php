@@ -82,7 +82,12 @@
 			            	}, 4000);
 				        } else {
 				        	var fields = data.fields;
-				        	console.log(data.fields);
+				        	
+				        	$.gritter.add({
+				                title: "Erro!",
+				                text: data.msg,
+				                class_name: "gritter-error"
+				            });
 
 				        	if (fields.search("Nome cannot be blank.") > 0) {
 				        		$("#nome-error").remove();
@@ -135,8 +140,8 @@
 
 				        	if (fields.search("Os emails nao correspondem.") > 0) {
 				        		$("#confemailcorrespondent-error, #emailcorrespondent-error").remove();
-				        		$("#Usuario_email").after("<label id=\"confemailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label>");
-				        		$("#Usuario_confEmail").after("<label id=\"emailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label>")
+				        		$("#Usuario_email").after("<label id=\"confemailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label><br>");
+				        		$("#Usuario_confEmail").after("<label id=\"emailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label><br>")
 				        	} else {
 				        		$("#confemailcorrespondent-error, #emailcorrespondent-error").remove();
 				        	}

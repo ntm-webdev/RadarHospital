@@ -5,7 +5,8 @@
 				'htmlOptions' => [
 					'id' => 'evaluate-form',
 					'class' => 'form-centered',
-				]
+				],
+				'method' => 'GET'
 			]);
 		?>
 			<div class="form-group">
@@ -55,7 +56,7 @@
 			</div>
 
 			<div class="form-group">
-				<?=CHtml::activeLabel($model, 'descricao', ['class'=>'text-beauty'])?>
+				<?=CHtml::label("Comentário", 'Feedback_descricao', ['class'=>'text-beauty'])?>
 				<?=CHtml::activeTextArea($model, 'descricao', ['class'=>'form-control'])?>
 			</div>
 
@@ -64,12 +65,34 @@
                     'type'=>'GET',
                     'dataType'=> 'json',                       
                     'success'=>'js:function(data){
-                        $.gritter.add({
-			                title: "Sucesso!",
-			                text: data.msg,
-			                class_name: "gritter-success"
-			            });
+                        if(data.status == "ok") {
+	                        $.gritter.add({
+				                title: "Sucesso!",
+				                text: data.msg,
+				                class_name: "gritter-success"
+				            });
 
+				            $("label .feedback-error").remove();
+
+				            setTimeout(function(){ 
+			            		window.location = "'.Yii::app()->createUrl("Default/view/".$_GET['idHospital']).'"; 
+			            	}, 4000);
+				        } else {
+				        	$.gritter.add({
+				                title: "Erro!",
+				                text: data.msg,
+				                class_name: "gritter-error"
+				            });
+
+				            var fields = data.fields;
+							
+							if (fields.search("Comentario cannot be blank.") > 0) {
+				        		$("#comentario-error").remove();
+				        		$("#Feedback_descricao").after("<label class=\"feedback-error\" id=\"comentario-error\" style=\"color: red\">Comentário não pode ser vazio</label>")
+				        	} else {
+				        		$("#comentario-error").remove();
+				        	}
+				        }
 			            
 			        }'           
                 ),array('class'=>'btn btn-success'));

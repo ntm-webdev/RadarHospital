@@ -49,15 +49,23 @@
                     'type'=>'POST',
                     'dataType'=> 'json',                       
                     'success'=>'js:function(data){
-                        $.gritter.add({
-			                title: "Sucesso!",
-			                text: data.msg,
-			                class_name: "gritter-success"
-			            });
+                    	if(data.status == "ok") {
+	                        $.gritter.add({
+				                title: "Sucesso!",
+				                text: data.msg,
+				                class_name: "gritter-success"
+				            });
 
-			            setTimeout(function(){ 
-			            	window.location = "'.Yii::app()->createUrl("Default/userArea").'"; 
-			            }, 4000);
+				            setTimeout(function(){ 
+				            	window.location = "'.Yii::app()->createUrl("Default/userArea").'"; 
+				            }, 4000);
+				        } else {
+							$.gritter.add({
+				                title: "Erro!",
+				                text: data.msg,
+				                class_name: "gritter-error"
+				            });				        	
+				        }
                     }'           
                 ),array('class'=>'btn btn-success'));
             ?>

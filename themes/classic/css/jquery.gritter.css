@@ -89,7 +89,7 @@
 	width:220px;
 	float:right;
 }
-/* for the light (white) version of the gritter notice */
+
 .gritter-success .gritter-item,
 .gritter-success .gritter-bottom,
 .gritter-success .gritter-top,
@@ -99,6 +99,19 @@
     font-size: 16px;
 }
 .gritter-success .gritter-title {
+    text-shadow: none;
+    font-size: 18px;
+}
+
+.gritter-error .gritter-item,
+.gritter-error .gritter-bottom,
+.gritter-error .gritter-top,
+.gritter-error .gritter-close {
+    background-color: red;
+    color: white;
+    font-size: 16px;
+}
+.gritter-error .gritter-title {
     text-shadow: none;
     font-size: 18px;
 }

@@ -64,7 +64,7 @@ class Feedback extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'descricao' => 'Comentário',
+            'descricao' => 'Comentario',
             'atendimento' => 'Atendimento',
             'atendimento_medico' => 'Atendimento Médico',
             'higiene' => 'Higiene',

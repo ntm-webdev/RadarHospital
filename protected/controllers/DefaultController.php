@@ -79,7 +79,7 @@ class DefaultController extends CController
 
 	public function actionEvaluate()
 	{	
-		$newRecord = feedback::model()->findByAttributes(['id_hospital'=> $_GET['idHospital'], 'id_usuario'=>Yii::app()->user->getState("id")]);
+		$newRecord = feedback::model()->findByAttributes(['id_hospital'=> $_REQUEST['idHospital'], 'id_usuario'=>Yii::app()->user->getState("id")]);
 
 		if (!empty($newRecord)) {
 			$model = $newRecord;
@@ -87,14 +87,22 @@ class DefaultController extends CController
 			$model = new feedback();
 		}
 
-		if (!empty($_GET['Feedback'])) {
-			$model->attributes = $_GET['Feedback'];
-			$model->id_hospital = $_GET['idHospital'];
+		if (!empty($_REQUEST['Feedback'])) {
+			$model->attributes = $_REQUEST['Feedback'];
+			$model->id_hospital = $_REQUEST['idHospital'];
 			$model->id_usuario = Yii::app()->user->getState("id");
+
+			$valid = $model->validate(); 
+			$error = CActiveForm::validate($model);
 			
-			if ($model->save()) {
-				$data = json_encode(array('msg' => "Feedback salvo com sucesso."));
+			if($valid == false) {
+                $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'O Feedback não pode ser salvo'));
 				exit($data);
+			} else {
+				if($model->save()) {
+					$data = json_encode(array('msg' => 'Feedback salvo com sucesso.', 'status'=>'ok'));
+					exit($data);
+				}
 			}
 		} else {
 	    	$this->render('evaluate',[
@@ -115,13 +123,17 @@ class DefaultController extends CController
 		if (isset($_POST['Usuario'])) {
 			$model->attributes = $_POST['Usuario'];
 
-			if ($model->save()) {
-				$data = json_encode(array('msg' => "O cadastro foi atualizado com sucesso."));
+			$valid = $model->validate(); 
+			$error = CActiveForm::validate($model);
+			
+			if($valid == false) {
+                $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'Falha ao atualizar o cadastro'));
 				exit($data);
 			} else {
-				$this->render("preferences", [
-					'model'=>$model
-				]);
+				if($model->save()) {
+					$data = json_encode(array('msg' => 'O cadastro foi atualizado com sucesso.', 'status'=>'ok'));
+					exit($data);
+				}
 			}
 		} else {
 	    	$this->render('preferences',[
@@ -198,7 +210,7 @@ class DefaultController extends CController
 			$error = CActiveForm::validate($model);
 			
 			if($valid == false) {
-                $data = json_encode(array('fields' => $error, 'status'=>'error'));
+                $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'O usuário não pode ser cadastrado'));
 				exit($data);
 			} else {
 				if($model->save()) {
