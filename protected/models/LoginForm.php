@@ -22,7 +22,7 @@ class LoginForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('username, password', 'required'),
+			array('username, password', 'require'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
@@ -72,6 +72,17 @@ class LoginForm extends CFormModel
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	public function require()
+	{
+		if (empty($this->username)) {
+			$this->addError("username", "Usuário não pode ser vazio");
+		}
+
+		if (empty($this->password)) {
+			$this->addError("password", "Senha não pode ser vazia");
 		}
 	}
 }
