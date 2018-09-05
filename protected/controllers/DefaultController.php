@@ -6,6 +6,18 @@ class DefaultController extends CController
 	public function actionIndex()
 	{	
 		$model = new hospital;
+		$model->unsetAttributes();
+		$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
+
+		if (Yii::app()->user->hasState("nome")) {
+	    	$regiao = regiao::model()->findByPk($usuario->id_regiao)->nome;
+    		$bairro = bairro::model()->findByPk($usuario->id_bairro)->nome;
+    		$planoSaude = plano_saude::model()->findByPk($usuario->id_planosaude)->nome;
+
+  			$model->_regiao = $regiao;
+  			$model->_bairro = $bairro;
+  			$model->_plano_saude = $planoSaude;
+	    }
 
     	$this->render('index', [
     		'model' => $model,
@@ -256,16 +268,19 @@ class DefaultController extends CController
     	$model->unsetAttributes();
 		$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
 
-		$regiao = regiao::model()->findByPk($usuario->id_regiao)->nome;
-		$bairro = bairro::model()->findByPk($usuario->id_bairro)->nome;
-		$planoSaude = plano_saude::model()->findByPk($usuario->id_planosaude)->nome;
+		$regiao = regiao::model()->findByPk($usuario->id_regiao);
+		$bairro = bairro::model()->findByPk($usuario->id_bairro);
+		$planoSaude = plano_saude::model()->findByPk($usuario->id_planosaude);
 
 		exit(
 			json_encode(
 				array(
-					'regiao' => $regiao, 
-					'bairro' => $bairro, 
-					'planoSaude'=>$planoSaude
+					'regiao' => $regiao->nome, 
+					'bairro' => $bairro->nome, 
+					'planoSaude'=>$planoSaude->nome,
+					'indiceRegiao' =>$regiao->id,
+					'indiceBairro' =>$bairro->id,
+					'indicePlanoSaude' =>$planoSaude->id
 				)
 			)
 		);

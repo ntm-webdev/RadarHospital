@@ -23,9 +23,9 @@
                                         'type'=>'POST',
                                         'dataType'=> 'json',                       
                                         'success'=>'js:function(data){
-                                            $("#hospital__regiao").val(data.regiao);
-                                            $("#hospital__bairro").val(data.bairro);
-                                            $("#hospital__plano_saude").val(data.planoSaude);
+                                            $("#form-result #hospital__regiao").val(data.regiao);
+                                            $("#form-result #hospital__bairro").val(data.bairro);
+                                            $("#form-result #hospital__plano_saude").val(data.planoSaude);
                                         }'           
                                     ),array('class'=>'btn btn-primary'));
                                 }
@@ -149,7 +149,9 @@
         $("#form-result #radioLocation").on("change", function() {
             if(this.checked) {
                 $("#form-result #hospital__regiao").prop("disabled", true);
+                $("#form-result #hospital__regiao").val("");
                 $("#form-result #hospital__bairro").prop("disabled", true);
+                $("#form-result #hospital__bairro").val("");
                 $("#regiao, #bairro").css("display","");
                 navigator.geolocation.getCurrentPosition(success, error, options);
             } else {
@@ -178,6 +180,7 @@
         $("#cleanFilter").on("click", function(){
             $("#form-result").find("select, :hidden").val("");
             $("#form-result").find(":checkbox").prop("checked", false);
+            $("#radioLocation").trigger("change");
         });
     ');
 ?>  

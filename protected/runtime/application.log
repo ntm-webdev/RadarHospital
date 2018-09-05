@@ -9926,3 +9926,12 @@ Stack trace:
 #7 {main}
 REQUEST_URI=/RadarHospital/index.php/Default/view/userArea
 ---
+2018/09/05 17:03:44 [error] [exception.ParseError] ParseError: syntax error, unexpected ';', expecting ')' in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:281
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('index/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/index')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/index
+---
