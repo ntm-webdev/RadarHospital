@@ -117,7 +117,7 @@
 						
 						$.gritter.add({
 			                title: "Sucesso!",
-			                text: "Hospital desfavoritado com sucesso.",
+			                text: "O hospital foi retirado dos seus favoritos.",
 			                class_name: "gritter-success"
 			            });
 

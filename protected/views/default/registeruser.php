@@ -131,13 +131,6 @@
 				        		$("#emailinvalid").remove();
 				        	}
 
-				        	if (fields.search("Confirme seu e-mail is not a valid email address.") > 0) {
-				        		$("#confemailinvalid-error").remove();
-				        		$("#Usuario_confEmail").after("<label id=\"confemailinvalid-error\" class=\"user-error\" style=\"color: red\">Esse não é um e-mail válido</label>")
-				        	} else {
-				        		$("#confemailinvalid-error").remove();
-				        	}
-
 				        	if (fields.search("Os emails nao correspondem.") > 0) {
 				        		$("#confemailcorrespondent-error, #emailcorrespondent-error").remove();
 				        		$("#Usuario_email").after("<label id=\"confemailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label><br>");

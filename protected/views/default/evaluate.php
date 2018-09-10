@@ -85,13 +85,6 @@
 				            });
 
 				            var fields = data.fields;
-							
-							if (fields.search("Comentario cannot be blank.") > 0) {
-				        		$("#comentario-error").remove();
-				        		$("#Feedback_descricao").after("<label class=\"feedback-error\" id=\"comentario-error\" style=\"color: red\">Comentário não pode ser vazio</label>")
-				        	} else {
-				        		$("#comentario-error").remove();
-				        	}
 				        }
 			            
 			        }'           

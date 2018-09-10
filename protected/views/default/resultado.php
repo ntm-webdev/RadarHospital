@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <?=CHtml::activeLabel($model, '_distancia', ['class'=>'text-beauty'])?>
                             <div class="slidecontainer">
-                                <?=CHtml::activeRangeField($model, '_distancia', ['class'=>'form-control-range','max'=>'20'])?>
+                                <?=CHtml::activeRangeField($model, '_distancia', ['class'=>'form-control-range','max'=>'20', 'disabled'=>'true'])?>
                                 <p><span id="demo"></span></p>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
             $("#form-result #hospital__regiao").prop("disabled", true);
             $("#regiao, #bairro").css("display","");
             $("#form-result #hospital__bairro").prop("disabled", true);
-            
+            $("#hospital__distancia").attr("disabled", false);
         }
 
         var options = {
@@ -153,6 +153,7 @@
                 $("#form-result #hospital__bairro").prop("disabled", true);
                 $("#form-result #hospital__bairro").val("");
                 $("#regiao, #bairro").css("display","");
+                $("#hospital__distancia").attr("disabled", false);
                 navigator.geolocation.getCurrentPosition(success, error, options);
             } else {
                 $("#form-result #hospital__regiao").prop("disabled", false);
@@ -164,17 +165,12 @@
                 $("#form-result #hospital_latitude").val("");
                 $("#form-result #hospital_longitude").val("");
                 $("#regiao, #bairro").css("display","none");
+                $("#hospital__distancia").attr("disabled", true);
             }
-            
         });
 
         $("#btnResultado").on("click", function() {
-            val = $("#hospital__distancia").val();
-            if(val > 0 && $("#form-result #hospital_latitude").val() == "") {
-                alert("Para utilizar o filtro de distância, favor ativar a localização do dispositivo");
-            } else {
-                $.post("'.Yii::app()->createUrl("default/Resultado").'");
-            }
+            $.post("'.Yii::app()->createUrl("default/Resultado").'");
         });
 
         $("#cleanFilter").on("click", function(){
