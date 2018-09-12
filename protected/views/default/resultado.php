@@ -15,7 +15,7 @@
                         <?=CHtml::activeHiddenField($model, 'longitude')?>
 
                         <div class="form-group">
-                            <?=CHtml::button("Limpar filtros", ['class'=>'btn btn-default', 'id'=>'cleanFilter'])?>
+                            <?=CHtml::resetButton("Limpar filtros", ['class'=>'btn btn-default', 'id'=>'cleanFilter'])?>
                             <?php
                                 if (Yii::app()->user->hasState("id")) {
                                     echo CHtml::ajaxSubmitButton('Refazer filtros',Yii::app()->createUrl('default/rebuildFilter'),
@@ -23,10 +23,10 @@
                                         'type'=>'POST',
                                         'dataType'=> 'json',                       
                                         'success'=>'js:function(data){
-                                            $("#form-result #hospital__regiao").val(data.regiao);
-                                            $("#form-result #hospital__bairro").val(data.bairro);
-                                            $("#form-result #hospital__plano_saude").val(data.planoSaude);
-                                        }'           
+                                            $("#form-result #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
+                                            $("#form-result #hospital__bairro").prop("selectedIndex", data.indiceBairro);
+                                            $("#form-result #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
+                                        }'            
                                     ),array('class'=>'btn btn-primary'));
                                 }
                             ?>
@@ -104,7 +104,6 @@
                 $this->widget('zii.widgets.CListView', array(
                    'dataProvider'=>$dataProvider,
                    'itemView'=> 'list',
-                   'enablePagination' => true
                 )); 
 
             ?>
@@ -174,7 +173,8 @@
         });
 
         $("#cleanFilter").on("click", function(){
-            $("#form-result").find("select, :hidden").val("");
+            $("#form-result").find(":hidden").val("");
+            $("option:selected").removeAttr("selected");
             $("#form-result").find(":checkbox").prop("checked", false);
             $("#radioLocation").trigger("change");
         });

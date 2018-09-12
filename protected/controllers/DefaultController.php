@@ -34,8 +34,8 @@ class DefaultController extends CController
 
     		if (isset($_POST['hospital'])) {
     			$model->attributes = $_POST['hospital'];
-    			
     			$dataProvider = $model->search();
+    			
     			return $this->render('resultado', array('model' => $model, 'dataProvider' => $dataProvider));
     		} else {   			
 	    		$regiao = regiao::model()->findByPk($usuario->id_regiao)->nome;

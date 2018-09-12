@@ -130,12 +130,12 @@
 		if ($("#especialidade-area").find(".especs").length >= 5) {
 			$("#vejaMaisEspecialidade").css("display","");
 			$("#especialidade-area .especs:eq(4)").append("<span>...</span>");
-			$("#especialidade-area .especs").not("#especialidade-area .especs:eq(0), #especialidade-area .especs:eq(1), #especialidade-area .especs:eq(2), #especialidade-area .especs:eq(3), #especialidade-area .especs:eq(4), #especialidade-area .especs:eq(5)").css("display","none");
+			$("#especialidade-area .especs").not("#especialidade-area .especs:eq(0), #especialidade-area .especs:eq(1), #especialidade-area .especs:eq(2), #especialidade-area .especs:eq(3), #especialidade-area .especs:eq(4)").css("display","none");
 		}
 
 		if ($("#planoSaude-area").find(".planos").length >= 5) {
 			$("#vejaMaisPlanoSaude").css("display","");
 			$("#planoSaude-area .planos:eq(4)").append("<span>...</span>");
-			$("#planoSaude-area .planos").not("#planoSaude-area .planos:eq(0), #planoSaude-area .planos:eq(1), #planoSaude-area .planos:eq(2), #planoSaude-area .planos:eq(3), #planoSaude-area .planos:eq(4), #planoSaude-area .planos:eq(5)").css("display","none");
+			$("#planoSaude-area .planos").not("#planoSaude-area .planos:eq(0), #planoSaude-area .planos:eq(1), #planoSaude-area .planos:eq(2), #planoSaude-area .planos:eq(3), #planoSaude-area .planos:eq(4)").css("display","none");
 		}
 	');

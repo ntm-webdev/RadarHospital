@@ -37,6 +37,7 @@ class Feedback extends CActiveRecord
         // will receive user inputs.
         return array(
             array('atendimento, atendimento_medico, higiene, infraestrutura, id_hospital', 'required'),
+            array('descricao', 'safe'),
             array('id_hospital, id_usuario', 'numerical', 'integerOnly'=>true),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.

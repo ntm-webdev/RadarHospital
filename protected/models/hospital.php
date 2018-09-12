@@ -29,7 +29,7 @@ class hospital extends CActiveRecord
     protected $_plano_saude;
     protected $_especialidade;
     protected $_distancia;
-    private $distancia;
+    protected $distancia;
 
     /**
      * @return array validation rules for model attributes.
@@ -153,7 +153,7 @@ class hospital extends CActiveRecord
 
         $criteria->together = true;
         $criteria->with = ['fkplanosaude','fkregiao','fkbairro','fkespecialidade'];
-
+        
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));

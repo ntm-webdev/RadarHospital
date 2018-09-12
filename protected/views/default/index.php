@@ -50,7 +50,7 @@
 	  	
 	  	<div class="form-group buttons-index">
 	  		<?=CHtml::submitButton('Pesquisar', ['class'=>'btn btn-success', 'id'=>'btnPesq1'])?>
-            <?=CHtml::button("Limpar filtros", ['class'=>'btn btn-default', 'id'=>'cleanFilter'])?>
+            <?=CHtml::resetButton("Limpar filtros", ['class'=>'btn btn-default', 'id'=>'cleanFilter'])?>
             <?php
                 if (Yii::app()->user->hasState("id")) {
                     echo CHtml::ajaxSubmitButton('Refazer filtros',Yii::app()->createUrl('default/rebuildFilter'),
@@ -119,9 +119,9 @@
         });
 
         $("#cleanFilter").on("click", function(){
-            $("#form-index").find("#hospital_nome").val("");
-            $("#form-index").find("select, :hidden").val("");
-            $("#form-index").find(":checkbox").prop("checked", false);
+            $("#form-result").find(":hidden").val("");
+            $("option:selected").removeAttr("selected");
+            $("#form-result").find(":checkbox").prop("checked", false);
             $("#radioLocation").trigger("change");
         });
     ');
