@@ -119,10 +119,31 @@
         });
 
         $("#cleanFilter").on("click", function(){
-            $("#form-result").find(":hidden").val("");
-            $("option:selected").removeAttr("selected");
-            $("#form-result").find(":checkbox").prop("checked", false);
-            $("#radioLocation").trigger("change");
+            $("#form-index").find(":hidden").val("");
+            $("#form-index option:selected").removeAttr("selected");
+            $("#form-index").find(":checkbox").prop("checked", false);
+            $("#form-index #radioLocation").trigger("change");
+            $("#form-index #hospital__regiao").trigger("change");
+        });
+
+        $("#form-index #hospital__regiao").on("change", function() {
+            var descricao = $(this).val();
+            $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
+                $("#form-index #hospital__bairro").empty();
+                var bairros = data.bairros;
+                bairros = bairros.substring(0, (bairros.length-1));
+                arrayBairros = bairros.split(",");
+
+                var strOpcoesBairros = "";
+                strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+
+                for (var i=0;i<=arrayBairros.length;i++) {
+                    if(arrayBairros[i] != undefined && arrayBairros != "") {
+                        strOpcoesBairros += "<option value="+arrayBairros[i]+">"+arrayBairros[i]+"</option>";
+                    }
+                }
+                $("#form-index #hospital__bairro").append(strOpcoesBairros);
+            }, "json");
         });
     ');
 ?>	

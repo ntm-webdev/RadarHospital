@@ -285,4 +285,47 @@ class DefaultController extends CController
 			)
 		);
 	}
+
+	public function actionAssociaBairroRegiao()
+	{
+		if(empty($_POST['regiao'])) {
+			$bairros = bairro::model()->findAll();
+			
+			$nomeBairros = [];
+			for ($i=0; $i < count($bairros); $i++) { 
+				$nomeBairros[$i] = $bairros[$i]->nome.",";
+			}
+
+			$strBairros = str_replace(",,", ",",implode(",", $nomeBairros));
+			$strBairros .= "";
+			
+			exit(
+				json_encode(
+					array( 
+						'bairros' => $strBairros, 
+					)
+				)
+			);
+		} else {
+			$idRegiao = regiao::model()->findByAttributes(['nome'=>$_POST['regiao']])->id;
+			$bairros = bairro::model()->findAllByAttributes([
+				'id_regiao'=>$idRegiao
+			]);
+			
+			$nomeBairros = [];
+			for ($i=0; $i < count($bairros); $i++) { 
+				$nomeBairros[$i] = $bairros[$i]->nome.",";
+			}
+
+			$strBairros = str_replace(",,", ",",implode(",", $nomeBairros));
+			
+			exit(
+				json_encode(
+					array( 
+						'bairros' => $strBairros, 
+					)
+				)
+			);
+		}	
+	}
 }

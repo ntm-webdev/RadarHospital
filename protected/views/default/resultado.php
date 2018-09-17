@@ -174,9 +174,30 @@
 
         $("#cleanFilter").on("click", function(){
             $("#form-result").find(":hidden").val("");
-            $("option:selected").removeAttr("selected");
+            $("#form-result option:selected").removeAttr("selected");
             $("#form-result").find(":checkbox").prop("checked", false);
-            $("#radioLocation").trigger("change");
+            $("#form-result #radioLocation").trigger("change");
+            $("#form-result #hospital__regiao").trigger("change");
+        });
+
+        $("#form-result #hospital__regiao").on("change", function() {
+            var descricao = $(this).val();
+            $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
+                $("#form-result #hospital__bairro").empty();
+                var bairros = data.bairros;
+                bairros = bairros.substring(0, (bairros.length-1));
+                arrayBairros = bairros.split(",");
+
+                var strOpcoesBairros = "";
+                strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+
+                for (var i=0;i<=arrayBairros.length;i++) {
+                    if(arrayBairros[i] != undefined && arrayBairros != "") {
+                        strOpcoesBairros += "<option value="+arrayBairros[i]+">"+arrayBairros[i]+"</option>";
+                    }
+                }
+                $("#form-result #hospital__bairro").append(strOpcoesBairros);
+            }, "json");
         });
     ');
 ?>  
