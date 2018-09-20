@@ -59,8 +59,14 @@
                         'dataType'=> 'json',                       
                         'success'=>'js:function(data){
                             $("#form-index #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
+                            $("#form-index #hospital__regiao option:selected").val(data.regiao);
+
                             $("#form-index #hospital__bairro").prop("selectedIndex", data.indiceBairro);
+                            $("#form-index #hospital__bairro option:selected").val(data.bairro);
+
+
                             $("#form-index #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
+                            $("#form-index #hospital__plano_saude option:selected").val(data.planoSaude);
                         }'           
                     ),array('class'=>'btn btn-primary'));
                 }
@@ -118,18 +124,16 @@
         	
         });
 
-        $("#cleanFilter").on("click", function(){
-            $("#form-index").find(":hidden").val("");
-            $("#form-index option:selected").removeAttr("selected");
+        $("#form-index #cleanFilter").on("click", function(){
             $("#form-index").find(":checkbox").prop("checked", false);
             $("#form-index #radioLocation").trigger("change");
-            $("#form-index #hospital__regiao").trigger("change");
+            $("#form-index option:selected").attr("selected", false);
+            $("#form-index")[0].reset();
         });
 
         $("#form-index #hospital__regiao").on("change", function() {
             var descricao = $(this).val();
             $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
-                $("#form-index #hospital__bairro").empty();
                 var bairros = data.bairros;
                 bairros = bairros.substring(0, (bairros.length-1));
                 arrayBairros = bairros.split(",");
@@ -142,7 +146,7 @@
                         strOpcoesBairros += "<option value="+arrayBairros[i]+">"+arrayBairros[i]+"</option>";
                     }
                 }
-                $("#form-index #hospital__bairro").append(strOpcoesBairros);
+                $("#form-index #hospital__bairro").empty().append(strOpcoesBairros);
             }, "json");
         });
     ');

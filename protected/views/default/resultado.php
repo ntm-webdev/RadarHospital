@@ -24,8 +24,14 @@
                                         'dataType'=> 'json',                       
                                         'success'=>'js:function(data){
                                             $("#form-result #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
+                                            $("#form-result #hospital__regiao option:selected").val(data.regiao);
+
                                             $("#form-result #hospital__bairro").prop("selectedIndex", data.indiceBairro);
+                                            $("#form-result #hospital__bairro option:selected").val(data.bairro);
+
+
                                             $("#form-result #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
+                                            $("#form-result #hospital__plano_saude option:selected").val(data.planoSaude);
                                         }'            
                                     ),array('class'=>'btn btn-primary'));
                                 }
@@ -172,12 +178,11 @@
             $.post("'.Yii::app()->createUrl("default/Resultado").'");
         });
 
-        $("#cleanFilter").on("click", function(){
-            $("#form-result").find(":hidden").val("");
-            $("#form-result option:selected").removeAttr("selected");
+        $("#form-result #cleanFilter").on("click", function(){
             $("#form-result").find(":checkbox").prop("checked", false);
             $("#form-result #radioLocation").trigger("change");
-            $("#form-result #hospital__regiao").trigger("change");
+            $("#form-result option:selected").attr("selected", false);
+            $("#form-result")[0].reset();
         });
 
         $("#form-result #hospital__regiao").on("change", function() {
