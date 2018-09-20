@@ -1,6 +1,6 @@
 <?php if(Yii::app()->user->hasState("nome")) : ?>
 	<div class="container-fluid spec">
-		<div style="height: 200px">
+		<div id="img-userarea">
 			<img class="img img-responsive" style="width: 100%; height: inherit;" src="<?=Yii::app()->theme->baseUrl?>/imgs/banner.jpg">
 		</div>
 		<div id="list">
