@@ -47,13 +47,13 @@
                         <div class="form-group">
                             <?=CHtml::activeLabel($model, '_regiao', ['class'=>'text-beauty'])?>
                             <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
-                            <?=CHtml::label("Para fazer a pesquisa de região, desative o filtro de localização mais abaixo","",['style'=>'display: none', 'id'=>"regiao", 'class'=>'text-warning'])?>
+                            <?=CHtml::label("Para fazer a pesquisa de região, desative o filtro de localização","",['style'=>'display: none', 'id'=>"regiao", 'class'=>'text-warning'])?>
                         </div>
                         
                         <div class="form-group">
                             <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
                             <?=CHtml::activeDropDownList($model, '_bairro', CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
-                            <?=CHtml::label("Para fazer a pesquisa de bairro, desative o filtro de localização mais abaixo","",['style'=>'display: none', 'id'=>"bairro", 'class'=>'text-warning'])?>
+                            <?=CHtml::label("Para fazer a pesquisa de bairro, desative o filtro de localização","",['style'=>'display: none', 'id'=>"bairro", 'class'=>'text-warning'])?>
                         </div>
 
                         <div class="form-group">
@@ -71,6 +71,7 @@
                             <?=CHtml::activeLabel($model, '_distancia', ['class'=>'text-beauty'])?>
                             <div class="slidecontainer">
                                 <?=CHtml::activeRangeField($model, '_distancia', ['class'=>'form-control-range','max'=>'20', 'disabled'=>'true'])?>
+                                <?=CHtml::label("Para fazer a pesquisa de distânica, ative o filtro de localização","",['id'=>"distancia", 'class'=>'text-warning'])?>
                                 <p><span id="demo"></span></p>
                             </div>
                         </div>
@@ -100,6 +101,13 @@
                     <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/userArea', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
                 </div>
 
+                <div class="col-xs-3">
+                    <span class="text-beauty pull-right">
+                        <i class="fa fa-fw fa-lg pointer fa-user"></i>
+                        <?=(Yii::app()->user->hasState("id") ? "Olá, ".Yii::app()->user->getState("nome") : "Faça seu Login") ?>
+                    </span>
+                </div>
+
                 <br>
             </div>
             
@@ -127,6 +135,7 @@
         if($("#form-result #radioLocation").is(":checked")) {
             $("#form-result #hospital__regiao").prop("disabled", true);
             $("#regiao, #bairro").css("display","");
+            $("#distancia").css("display","none");
             $("#form-result #hospital__bairro").prop("disabled", true);
             $("#hospital__distancia").attr("disabled", false);
         }
@@ -158,6 +167,7 @@
                 $("#form-result #hospital__bairro").prop("disabled", true);
                 $("#form-result #hospital__bairro").val("");
                 $("#regiao, #bairro").css("display","");
+                $("#distancia").css("display","none");
                 $("#hospital__distancia").attr("disabled", false);
                 navigator.geolocation.getCurrentPosition(success, error, options);
             } else {
@@ -169,8 +179,10 @@
 
                 $("#form-result #hospital_latitude").val("");
                 $("#form-result #hospital_longitude").val("");
-                $("#regiao, #bairro").css("display","none");
+                $("#regiao, #bairro, #distancia").css("display","none");
+                $("#distancia").css("display","");
                 $("#hospital__distancia").attr("disabled", true);
+
             }
         });
 

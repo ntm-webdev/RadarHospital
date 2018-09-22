@@ -39,13 +39,13 @@
 		<div class="form-group">
 			<?=CHtml::activeLabel($model, '_regiao', ['class'=>'text-beauty']);?>
 		    <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
-            <?=CHtml::label("Para fazer a pesquisa de região, desative o filtro de localização mais abaixo","",['style'=>'display: none', 'id'=>"regiao", 'class'=>'text-warning'])?>
+            <?=CHtml::label("Para fazer a pesquisa de região, desative o filtro de localização","",['style'=>'display: none', 'id'=>"regiao", 'class'=>'text-warning'])?>
 	  	</div>
 
         <div class="form-group">
             <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
             <?=CHtml::activeDropDownList($model, '_bairro', CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
-            <?=CHtml::label("Para fazer a pesquisa de bairro, desative o filtro de localização mais abaixo","",['style'=>'display: none', 'id'=>"bairro", 'class'=>'text-warning'])?>
+            <?=CHtml::label("Para fazer a pesquisa de bairro, desative o filtro de localização","",['style'=>'display: none', 'id'=>"bairro", 'class'=>'text-warning'])?>
         </div>
 	  	
 	  	<div class="form-group buttons-index">

@@ -23,6 +23,7 @@ class LoginForm extends CFormModel
 		return array(
 			// username and password are required
 			array('username, password', 'require'),
+			array('username', 'verifyEmail'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
@@ -83,6 +84,13 @@ class LoginForm extends CFormModel
 
 		if (empty($this->password)) {
 			$this->addError("password", "Senha não pode ser vazia");
+		}
+	}
+
+	public function verifyEmail()
+	{
+		if (!filter_var($this->username, FILTER_VALIDATE_EMAIL)) {
+		    $this->addError("username", "Esse não é um e-mail válido");
 		}
 	}
 }

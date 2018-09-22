@@ -1,3 +1,4 @@
+<?php if(Yii::app()->user->hasState("nome")) : ?>
 <div class="container">
 	<?php 
 		$form = $this->beginWidget("CActiveForm", [
@@ -72,3 +73,8 @@
 		</div>
 	<?php $this->endWidget(); ?>
 </div>
+<?php 
+	else : 
+		$this->redirect(["login"]);
+	endif;	
+?>

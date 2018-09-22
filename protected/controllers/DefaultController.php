@@ -91,36 +91,38 @@ class DefaultController extends CController
 
 	public function actionEvaluate()
 	{	
-		$newRecord = feedback::model()->findByAttributes(['id_hospital'=> $_REQUEST['idHospital'], 'id_usuario'=>Yii::app()->user->getState("id")]);
+		if (!empty($_REQUEST['idHospital'])) {
+			$newRecord = feedback::model()->findByAttributes(['id_hospital'=> $_REQUEST['idHospital'], 'id_usuario'=>Yii::app()->user->getState("id")]);
 
-		if (!empty($newRecord)) {
-			$model = $newRecord;
-		} else {
-			$model = new feedback();
-		}
-
-		if (!empty($_REQUEST['Feedback'])) {
-			$model->attributes = $_REQUEST['Feedback'];
-			$model->id_hospital = $_REQUEST['idHospital'];
-			$model->id_usuario = Yii::app()->user->getState("id");
-
-			$valid = $model->validate(); 
-			$error = CActiveForm::validate($model);
-			
-			if($valid == false) {
-                $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'O Feedback não pode ser salvo'));
-				exit($data);
+			if (!empty($newRecord)) {
+				$model = $newRecord;
 			} else {
-				if($model->save()) {
-					$data = json_encode(array('msg' => 'Feedback salvo com sucesso.', 'status'=>'ok'));
-					exit($data);
-				}
+				$model = new feedback();
 			}
-		} else {
-	    	$this->render('evaluate',[
-	    		'model' => $model
-	    	], false, true, true);
-	    }
+
+			if (!empty($_REQUEST['Feedback'])) {
+				$model->attributes = $_REQUEST['Feedback'];
+				$model->id_hospital = $_REQUEST['idHospital'];
+				$model->id_usuario = Yii::app()->user->getState("id");
+
+				$valid = $model->validate(); 
+				$error = CActiveForm::validate($model);
+				
+				if($valid == false) {
+	                $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'O Feedback não pode ser salvo'));
+					exit($data);
+				} else {
+					if($model->save()) {
+						$data = json_encode(array('msg' => 'Feedback salvo com sucesso.', 'status'=>'ok'));
+						exit($data);
+					}
+				}
+			} else {
+		    	$this->render('evaluate',[
+		    		'model' => $model
+		    	], false, true, true);
+		    }
+		}
 	}
 
 	public function actionuserArea()
