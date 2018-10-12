@@ -1,7 +1,4 @@
 <div class="container">
-    <p>
-        teste
-    </p>
 	<a href="http://localhost/RadarHospital/index.php/default/userArea">
 		<span class="text-beauty pull-right">
 			<i class="fa fa-fw fa-lg pointer fa-user"></i>
@@ -61,13 +58,11 @@
                         'type'=>'POST',
                         'dataType'=> 'json',                       
                         'success'=>'js:function(data){
-                            alert("rebuildFilter");
                             $("#form-index #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
                             $("#form-index #hospital__regiao option:selected").val(data.regiao);
 
                             $("#form-index #hospital__bairro").prop("selectedIndex", data.indiceBairro);
                             $("#form-index #hospital__bairro option:selected").val(data.bairro);
-                            console.log(data.bairro);
 
 
                             $("#form-index #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
@@ -129,8 +124,7 @@
         	
         });
 
-        $("#form-index #cleanFilter").on("click", function() {
-            alert("limpou filtro");
+        $("#form-index #cleanFilter").on("click", function(){
             $("#form-index").find(":checkbox").prop("checked", false);
             $("#form-index #radioLocation").trigger("change");
             $("#form-index option:selected").attr("selected", false);
