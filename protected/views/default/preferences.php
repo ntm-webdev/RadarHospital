@@ -77,4 +77,28 @@
 	else : 
 		$this->redirect(["login"]);
 	endif;	
-?>
+
+Yii::app()->clientScript->registerScript('relationRegiaoBairro', '
+	
+	$("#Usuario_id_regiao").trigger("change");
+
+	$("#preferences-form #Usuario_id_regiao").on("change", function() {
+        var descricao = $(this).val();
+        alert("teste");
+        $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
+            var bairros = data.bairros;
+            bairros = bairros.substring(0, (bairros.length-1));
+            arrayBairros = bairros.split(",");
+
+            var strOpcoesBairros = "";
+            strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+
+            for (var i=0;i<=arrayBairros.length;i++) {
+                if(arrayBairros[i] != undefined && arrayBairros != "") {
+                    strOpcoesBairros += "<option value="+arrayBairros[i]+">"+arrayBairros[i]+"</option>";
+                }
+            }
+            $("#preferences-form #Usuario_id_bairro").empty().append(strOpcoesBairros);
+        }, "json");
+    });
+');
