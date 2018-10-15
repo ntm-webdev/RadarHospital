@@ -21,6 +21,7 @@ class DefaultController extends CController
 
     	$this->render('index', [
     		'model' => $model,
+    		'usuario' => $usuario
     	]);
 	}
 
@@ -36,7 +37,12 @@ class DefaultController extends CController
     			$model->attributes = $_POST['hospital'];
     			$dataProvider = $model->search();
     			
-    			return $this->render('resultado', array('model' => $model, 'dataProvider' => $dataProvider));
+    			return $this->render('resultado', array(
+						'model' => $model, 
+						'dataProvider' => $dataProvider,
+						'usuario'=>$usuario
+					)
+    			);
     		} else {   			
 	    		$regiao = regiao::model()->findByPk($usuario->id_regiao)->nome;
 	    		$bairro = bairro::model()->findByPk($usuario->id_bairro)->nome;
@@ -61,7 +67,8 @@ class DefaultController extends CController
 	     		
 	     		return $this->render('resultado', [
 	     			'model' => $model, 
-	     			'dataProvider' => $dataProvider
+	     			'dataProvider' => $dataProvider,
+	     			'usuario'=>$usuario
 	     		]);
 	     	}
     	
@@ -73,8 +80,9 @@ class DefaultController extends CController
     	}
     	
     	$this->render('resultado', [
-    		'dataProvider' => $dataProvider,
     		'model' => $model,
+    		'dataProvider' => $dataProvider,
+    		'usuario'=> $usuario
     	]);
 	}
 

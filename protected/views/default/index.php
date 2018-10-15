@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
-            <?=CHtml::activeDropDownList($model, '_bairro', CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
+            <?=CHtml::activeDropDownList($model, '_bairro', (Yii::app()->user->hasState("nome")) ? CHtml::ListData(bairro::model()->findAllByAttributes(['id_regiao'=>$usuario->id_regiao]), 'nome', 'nome') : CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
             <?=CHtml::label("Para fazer a pesquisa de bairro, desative o filtro de localização","",['style'=>'display: none', 'id'=>"bairro", 'class'=>'text-warning'])?>
         </div>
 	  	
@@ -126,9 +126,11 @@
 
         $("#form-index #cleanFilter").on("click", function(){
             $("#form-index").find(":checkbox").prop("checked", false);
+            $("#form-index #radioLocation").prop("checked", false);
             $("#form-index #radioLocation").trigger("change");
             $("#form-index option:selected").attr("selected", false);
             $("#form-index")[0].reset();
+            $("#form-index #hospital__regiao").val("").trigger("change");
         });
 
         $("#form-index #hospital__regiao").on("change", function() {

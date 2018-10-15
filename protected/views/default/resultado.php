@@ -22,9 +22,10 @@
                                     array(
                                         'type'=>'POST',
                                         'dataType'=> 'json',                       
-                                        'success'=>'js:function(data){
+                                        'success'=>'js:function(data) {
                                             $("#form-result #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
                                             $("#form-result #hospital__regiao option:selected").val(data.regiao);
+                                            $("#form-result #hospital__regiao").trigger("change");
 
                                             $("#form-result #hospital__bairro").prop("selectedIndex", data.indiceBairro);
                                             $("#form-result #hospital__bairro option:selected").val(data.bairro);
@@ -32,6 +33,9 @@
 
                                             $("#form-result #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
                                             $("#form-result #hospital__plano_saude option:selected").val(data.planoSaude);
+
+                                            console.log("indice do bairro:" + data.indiceBairro + " || " + "Bairro: " + data.bairro);
+                                            console.log("indice da regiao:" + data.indiceRegiao + " || " + "Bairro: " + data.regiao);
                                         }'            
                                     ),array('class'=>'btn btn-primary'));
                                 }
@@ -52,7 +56,7 @@
                         
                         <div class="form-group">
                             <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
-                            <?=CHtml::activeDropDownList($model, '_bairro', CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
+                            <?=CHtml::activeDropDownList($model, '_bairro', (Yii::app()->user->hasState("nome")) ? CHtml::ListData(bairro::model()->findAllByAttributes(['id_regiao'=>$usuario->id_regiao]), 'nome', 'nome') : CHtml::ListData(bairro::model()->findAll(), 'nome', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
                             <?=CHtml::label("Para fazer a pesquisa de bairro, desative o filtro de localização","",['style'=>'display: none', 'id'=>"bairro", 'class'=>'text-warning'])?>
                         </div>
 
@@ -103,8 +107,7 @@
 
                 <div class="col-xs-3">
                     <span class="text-beauty pull-right">
-                        <i class="fa fa-fw fa-lg pointer fa-user"></i>
-                        <?=(Yii::app()->user->hasState("id") ? "Olá, ".Yii::app()->user->getState("nome") : "Faça seu Login") ?>
+                        <?=(Yii::app()->user->hasState("id") ? "<i class='fa fa-fw fa-lg pointer fa-user'></i>Olá, ".Yii::app()->user->getState("nome") : "") ?>
                     </span>
                 </div>
 
@@ -149,8 +152,8 @@
         function success(pos) {
             var crd = pos.coords;
 
-            $("#form-index #hospital_latitude").val(crd.latitude);  
-            $("#form-index #hospital_longitude").val(crd.longitude);
+            $("#form-result #hospital_latitude").val(crd.latitude);  
+            $("#form-result #hospital_longitude").val(crd.longitude);
 
             $("#form-result #hospital_latitude").val(crd.latitude);
             $("#form-result #hospital_longitude").val(crd.longitude);    
@@ -174,8 +177,8 @@
                 $("#form-result #hospital__regiao").prop("disabled", false);
                 $("#form-result #hospital__bairro").prop("disabled", false);
 
-                $("#form-index #hospital_latitude").val("");    
-                $("#form-index #hospital_longitude").val("");
+                $("#form-result #hospital_latitude").val("");    
+                $("#form-result #hospital_longitude").val("");
 
                 $("#form-result #hospital_latitude").val("");
                 $("#form-result #hospital_longitude").val("");
@@ -195,6 +198,7 @@
             $("#form-result #radioLocation").trigger("change");
             $("#form-result option:selected").attr("selected", false);
             $("#form-result")[0].reset();
+            $("#form-result #hospital__regiao").val("").trigger("change");
         });
 
         $("#form-result #hospital__regiao").on("change", function() {
