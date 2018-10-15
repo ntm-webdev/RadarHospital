@@ -159,7 +159,7 @@ class DefaultController extends CController
 			}
 		} else {
 	    	$this->render('preferences',[
-	    		'model' => $model
+	    		'model' => $model,
 	    	]);
 	    }
 	}
@@ -317,7 +317,12 @@ class DefaultController extends CController
 				)
 			);
 		} else {
-			$idRegiao = regiao::model()->findByAttributes(['nome'=>$_POST['regiao']])->id;
+			if (!is_numeric($_POST['regiao'])) {
+				$idRegiao = regiao::model()->findByAttributes(['nome'=>$_POST['regiao']])->id;
+			} else {
+				$idRegiao = $_POST['regiao'];
+			}
+			
 			$bairros = bairro::model()->findAllByAttributes([
 				'id_regiao'=>$idRegiao
 			]);

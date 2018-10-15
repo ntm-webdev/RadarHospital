@@ -24,18 +24,12 @@
                                         'dataType'=> 'json',                       
                                         'success'=>'js:function(data) {
                                             $("#form-result #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
-                                            $("#form-result #hospital__regiao option:selected").val(data.regiao);
                                             $("#form-result #hospital__regiao").trigger("change");
-
-                                            $("#form-result #hospital__bairro").prop("selectedIndex", data.indiceBairro);
-                                            $("#form-result #hospital__bairro option:selected").val(data.bairro);
-
-
+                                            setTimeout(function(){
+                                                $("#form-result #hospital__bairro option[value=\'"+data.bairro+"\']").prop("selected", "true")
+                                            }, 100);
                                             $("#form-result #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
-                                            $("#form-result #hospital__plano_saude option:selected").val(data.planoSaude);
-
-                                            console.log("indice do bairro:" + data.indiceBairro + " || " + "Bairro: " + data.bairro);
-                                            console.log("indice da regiao:" + data.indiceRegiao + " || " + "Bairro: " + data.regiao);
+                                            
                                         }'            
                                     ),array('class'=>'btn btn-primary'));
                                 }
@@ -218,6 +212,7 @@
                     }
                 }
                 $("#form-result #hospital__bairro").append(strOpcoesBairros);
+
             }, "json");
         });
     ');

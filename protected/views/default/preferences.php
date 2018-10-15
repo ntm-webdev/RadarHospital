@@ -38,7 +38,7 @@
 		<div class="form-group">
 			<label class="text-beauty">Bairro</label>
 			<?=CHtml::activeDropDownList($model, 'id_bairro', [
-					CHtml::listData(bairro::model()->findAll(), 'id', 'nome') 
+					CHtml::ListData(bairro::model()->findAllByAttributes(['id_regiao'=>$model->id_regiao]), 'id', 'nome') 
 				],['class'=>'form-control'])
 			?>
 			<?=$form->error($model,'id_regiao'); ?>
@@ -79,12 +79,8 @@
 	endif;	
 
 Yii::app()->clientScript->registerScript('relationRegiaoBairro', '
-	
-	$("#Usuario_id_regiao").trigger("change");
-
 	$("#preferences-form #Usuario_id_regiao").on("change", function() {
         var descricao = $(this).val();
-        alert("teste");
         $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
             var bairros = data.bairros;
             bairros = bairros.substring(0, (bairros.length-1));
