@@ -53,7 +53,7 @@
 		<div class="row">
 			<div class="col-xs-8"></div>
 			<div class="col-xs-4">
-				<span style="display: none" id="vejaMaisEspecialidade" class="text-beauty" data-toggle="modal" data-target="#modalEspecialidade">Veja Mais(+)</span>
+				<span style="display: none; cursor: pointer;" id="vejaMaisEspecialidade" class="text-beauty" data-toggle="modal" data-target="#modalEspecialidade">Veja Mais(+)</span>
 			</div>
 		</div>
 	</div>
@@ -96,7 +96,7 @@
 		<div class="row">
 			<div class="col-xs-8"></div>
 			<div class="col-xs-4">
-				<span style="display: none" id="vejaMaisPlanoSaude" class="text-beauty" data-toggle="modal" data-target="#modalPlanoSaude">Veja Mais(+)</span>
+				<span style="display: none; cursor: pointer;" id="vejaMaisPlanoSaude" class="text-beauty" data-toggle="modal" data-target="#modalPlanoSaude">Veja Mais(+)</span>
 			</div>
 		</div>
 	</div>

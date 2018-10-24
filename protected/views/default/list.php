@@ -29,7 +29,7 @@
 			</h5>
 	  	</div>
 	  	<hr>
-	  	<?=CHtml::link("Detalhes", ['default/view', 'id'=>$data->id], ['class'=>'btn btn-success pull-right'])?>
+	  	<?=CHtml::link("Detalhes", ['Default/View', 'id'=>$data->id], ['class'=>'btn btn-success pull-right'])?>
 	</div>
 
 	<p></p>

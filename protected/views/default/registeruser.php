@@ -110,6 +110,13 @@
 				        		$("#email-error").remove();
 				        	}
 
+				        	if (fields.search("Ja existe uma conta para o e-mail informado.") > 0) {
+				        		$("#email-error").remove();
+				        		$("#Usuario_email").after("<label class=\"user-error\" id=\"email-error\" style=\"color: red\">Já existe uma conta para o e-mail informado</label>")
+				        	} else {
+				        		$("#email-error").remove();
+				        	}
+
 				        	if (fields.search("Confirme seu e-mail cannot be blank.") > 0) {
 				        		$("#confemail-error").remove();
 				        		$("#Usuario_confEmail").after("<label class=\"user-error\" id=\"confemail-error\" style=\"color: red\">Confirme seu e-mail não pode ser vazio</label>")

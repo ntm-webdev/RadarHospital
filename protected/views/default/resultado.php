@@ -101,7 +101,7 @@
 
                 <div class="col-xs-3">
                     <span class="text-beauty pull-right">
-                        <?=(Yii::app()->user->hasState("id") ? "<i class='fa fa-fw fa-lg pointer fa-user'></i>Olá, ".Yii::app()->user->getState("nome") : "") ?>
+                        <?=(Yii::app()->user->hasState("id") ? "<i class='fa fa-fw fa-lg fa-user'></i>Olá, ".Yii::app()->user->getState("nome") : "") ?>
                     </span>
                 </div>
 
@@ -154,7 +154,11 @@
         };
 
         function error(err) {
-          console.warn(err.message);
+            if (error.code == error.PERMISSION_DENIED) {
+                alert("Não será possível realizar operações com a Geolocalização, para desfazer essa ação, favor acessar o navegador e desabilitar a desautorização");
+            } else {
+                console.warn(err.message);
+            }
         };
 
         $("#form-result #radioLocation").on("change", function() {

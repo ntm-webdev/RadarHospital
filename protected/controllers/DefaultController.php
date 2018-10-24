@@ -130,6 +130,8 @@ class DefaultController extends CController
 		    		'model' => $model
 		    	], false, true, true);
 		    }
+		} else {
+			$this->redirect(['Login']);
 		}
 	}
 
@@ -173,10 +175,14 @@ class DefaultController extends CController
 	{	
 		$model = usuario::model()->findByPk(Yii::app()->user->getState("id"));
 
-    	$this->render('favorites', [
-    		'model' => $model,
-    		'dataProvider' => $model->search()
-    	]);
+		if (empty($model)) {
+			$this->redirect(['Login']);
+		} else {
+	    	$this->render('favorites', [
+	    		'model' => $model,
+	    		'dataProvider' => $model->search()
+	    	]);
+	    }
 	}
 
 	/**
@@ -250,16 +256,24 @@ class DefaultController extends CController
 
 	public function actionFavorite()
 	{
-		$model = new favorites();
-		$model->id_hospital = $_POST['id_hospital'];
-		$model->id_usuario = $_POST['id_usuario'];
-		
-		$model->save();
+		if (isset($_POST['id_hospital']) && isset($_POST['id_usuario'])) {
+			$model = new favorites();
+			$model->id_hospital = $_POST['id_hospital'];
+			$model->id_usuario = $_POST['id_usuario'];
+			
+			$model->save();
+		} else {
+			$this->redirect(['Login']);
+		}
 	}
 	
 	public function actionUnfavorite()
 	{
-		favorites::model()->deleteAllByAttributes(['id_hospital' => $_POST['id_hospital'], 'id_usuario'  => $_POST['id_usuario']]);
+		if (isset($_POST['id_hospital']) && isset($_POST['id_usuario'])) {
+			favorites::model()->deleteAllByAttributes(['id_hospital' => $_POST['id_hospital'], 'id_usuario'  => $_POST['id_usuario']]);
+		} else {
+			$this->redirect(['Login']);
+		}
 	}
 
 	public function actionMap()

@@ -97,7 +97,11 @@
         };
 
         function error(err) {
-          console.warn(err.message);
+            if (error.code == error.PERMISSION_DENIED) {
+                alert("Não será possível realizar operações com a Geolocalização, para desfazer essa ação, favor acessar o navegador e desabilitar a desautorização");
+            } else {
+                console.warn(err.message);
+            }
         };
 
         $("#form-index #radioLocation").on("change", function() {

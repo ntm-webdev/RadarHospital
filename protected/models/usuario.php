@@ -154,4 +154,19 @@ class Usuario extends CActiveRecord
             $this->addError("pwd", "As senhas nao correspondem.");
         }
     }
+
+    public function beforeValidate()
+    {
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("email = :email");
+        $criteria->params = [
+            ':email' => $this->email,
+        ];
+
+        if (self::model()->count($criteria) > 0) {
+            $this->addError("email", "Ja existe uma conta para o e-mail informado.");
+        }
+
+        return parent::beforeValidate();
+    }
 }
