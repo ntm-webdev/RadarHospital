@@ -104,10 +104,10 @@
 				        	}
 
 				        	if (fields.search("E-mail cannot be blank.") > 0) {
-				        		$("#email-error").remove();
-				        		$("#Usuario_email").after("<label class=\"user-error\" id=\"email-error\" style=\"color: red\">E-mail não pode ser vazio</label>")
+				        		$("#email-blankerror").remove();
+				        		$("#Usuario_email").after("<label class=\"user-error\" id=\"email-blankerror\" style=\"color: red\">E-mail não pode ser vazio</label>")
 				        	} else {
-				        		$("#email-error").remove();
+				        		$("#email-blankerror").remove();
 				        	}
 
 				        	if (fields.search("Ja existe uma conta para o e-mail informado.") > 0) {
