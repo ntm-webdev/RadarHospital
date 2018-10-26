@@ -92,11 +92,11 @@
                 </div>
 
                 <div class="col-xs-3">
-                    <?=CHtml::tag('a', ['href'=>'http://www.radarhospital.epizy.com/index.php/Default/map', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-map text-beauty"></i> Mapa</button>')?>
+                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/map', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-map text-beauty"></i> Mapa</button>')?>
                 </div>
 
                 <div class="col-xs-3">
-                    <?=CHtml::tag('a', ['href'=>'http://www.radarhospital.epizy.com/index.php/Default/userArea', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
+                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/userArea', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
                 </div>
 
                 <div class="col-xs-3">
