@@ -58,13 +58,12 @@
                         'type'=>'POST',
                         'dataType'=> 'json',                       
                         'success'=>'js:function(data) {
+                            $("#form-index #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
                             $("#form-index #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
                             $("#form-index #hospital__regiao").trigger("change");
                             setTimeout(function(){
                                 $("#form-index #hospital__bairro option[value=\'"+data.bairro+"\']").prop("selected", "true")
-                            }, 100);
-                            $("#form-index #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
-                            
+                            }, 2000);
                         }'           
                     ),array('class'=>'btn btn-primary'));
                 }

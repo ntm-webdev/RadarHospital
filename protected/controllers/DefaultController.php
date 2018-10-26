@@ -316,17 +316,22 @@ class DefaultController extends CController
 			$bairros = bairro::model()->findAll();
 			
 			$nomeBairros = [];
+			$idBairros = [];
 			for ($i=0; $i < count($bairros); $i++) { 
 				$nomeBairros[$i] = $bairros[$i]->nome.",";
+				$idBairros[$i] = $bairros[$i]->id.",";
 			}
 
 			$strBairros = str_replace(",,", ",",implode(",", $nomeBairros));
 			$strBairros .= "";
+			$strIdBairros = str_replace(",,", ",",implode(",", $idBairros));
+			$strIdBairros .= "";
 			
 			exit(
 				json_encode(
 					array( 
 						'bairros' => $strBairros, 
+						'idBairros' => $strIdBairros, 
 					)
 				)
 			);
@@ -342,16 +347,20 @@ class DefaultController extends CController
 			]);
 			
 			$nomeBairros = [];
+			$idBairros = [];
 			for ($i=0; $i < count($bairros); $i++) { 
 				$nomeBairros[$i] = $bairros[$i]->nome.",";
+				$idBairros[$i] = $bairros[$i]->id.",";
 			}
 
 			$strBairros = str_replace(",,", ",",implode(",", $nomeBairros));
+			$strIdBairros = str_replace(",,", ",",implode(",", $idBairros));
 			
 			exit(
 				json_encode(
 					array( 
 						'bairros' => $strBairros, 
+						'idBairros' => $strIdBairros, 
 					)
 				)
 			);

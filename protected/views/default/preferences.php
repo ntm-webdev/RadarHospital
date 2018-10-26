@@ -83,15 +83,20 @@ Yii::app()->clientScript->registerScript('relationRegiaoBairro', '
         var descricao = $(this).val();
         $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
             var bairros = data.bairros;
+            var idsBairros = data.idBairros;
+            
             bairros = bairros.substring(0, (bairros.length-1));
+            idsBairros = idsBairros.substring(0, (idsBairros.length-1));
+            
             arrayBairros = bairros.split(",");
+            arrayIdsBairros = idsBairros.split(",");
 
             var strOpcoesBairros = "";
             strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
 
             for (var i=0;i<=arrayBairros.length;i++) {
                 if(arrayBairros[i] != undefined && arrayBairros != "") {
-                    strOpcoesBairros += "<option value="+arrayBairros[i]+">"+arrayBairros[i]+"</option>";
+                    strOpcoesBairros += "<option value="+arrayIdsBairros[i]+">"+arrayBairros[i]+"</option>";
                 }
             }
             $("#preferences-form #Usuario_id_bairro").empty().append(strOpcoesBairros);

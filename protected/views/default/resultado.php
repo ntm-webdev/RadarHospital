@@ -23,12 +23,12 @@
                                         'type'=>'POST',
                                         'dataType'=> 'json',                       
                                         'success'=>'js:function(data) {
+                                            $("#form-result #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
                                             $("#form-result #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
                                             $("#form-result #hospital__regiao").trigger("change");
                                             setTimeout(function(){
                                                 $("#form-result #hospital__bairro option[value=\'"+data.bairro+"\']").prop("selected", "true")
-                                            }, 100);
-                                            $("#form-result #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
+                                            }, 2000);
                                             
                                         }'            
                                     ),array('class'=>'btn btn-primary'));
@@ -98,13 +98,6 @@
                 <div class="col-xs-3">
                     <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/userArea', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
                 </div>
-
-                <div class="col-xs-3">
-                    <span class="text-beauty pull-right">
-                        <?=(Yii::app()->user->hasState("id") ? "<i class='fa fa-fw fa-lg fa-user'></i>Olá, ".Yii::app()->user->getState("nome") : "") ?>
-                    </span>
-                </div>
-
                 <br>
             </div>
             
