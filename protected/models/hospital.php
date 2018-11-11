@@ -39,7 +39,7 @@ class hospital extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nome, endereco, latitude, longitude', 'required'),
+            array('nome, endereco, latitude, longitude, id_regiao, id_bairro, telefone, site, url_mapa', 'required'),
             array('id_regiao, id_bairro', 'numerical', 'integerOnly'=>true),
             array('latitude, longitude', 'numerical'),
             array('nome', 'length', 'max'=>60),
@@ -48,7 +48,7 @@ class hospital extends CActiveRecord
             array('id,_regiao,_bairro,_plano_saude,_especialidade,_distancia', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, nome, endereco, latitude, longitude, id_plano_saude, id_regiao, id_bairro, telefone', 'safe', 'on'=>'search'),
+            array('id, nome, endereco, latitude, longitude, id_regiao, id_bairro, telefone', 'safe', 'on'=>'search'),
         );
     }
 
@@ -152,10 +152,11 @@ class hospital extends CActiveRecord
         $criteria->compare('fkespecialidade.nome', $this->_especialidade);
 
         $criteria->together = true;
-        $criteria->with = ['fkplanosaude','fkregiao','fkbairro','fkespecialidade'];
+        $criteria->with = ['fkregiao','fkbairro','fkespecialidade', 'fkplanosaude'];
         
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
+            'pagination' => false,
         ));
     }
 

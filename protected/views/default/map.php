@@ -16,11 +16,12 @@
         padding: 0;
       }
     </style>
+
   </head>
 
   <body>
     <div id="map"></div>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTzjThurao6p0icJFAiZ8Z176p3Q2ZqXE&callback=initMap" async defer ></script>
     <script>
 
       var options = {
@@ -35,7 +36,7 @@
 
       function error(err) {
         if (error.code == error.PERMISSION_DENIED) {
-          alert("Não será possível realizar operações com a Geolocalização, para desfazer essa ação, favor acessar o navegador e desabilitar a desautorização");
+          alert("Permission denied");
         } else {
           console.warn(err.message);
         }
@@ -114,6 +115,5 @@
 
         function doNothing() {}
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OCUeWyGg5dPkzT7DvUh9agP3y0YlKTw&callback=initMap"></script>
   </body>
 </html>

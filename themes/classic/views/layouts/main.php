@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/css/style.css">
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/css/jquery.gritter.css">
+		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/css/bootstrap-multiselect.css">
 		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/jquery-3.3.1.min.js"></script>
 	</head>
 	<body>
@@ -22,5 +23,6 @@
 		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/script.js"></script>
 		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/circle-progress.js"></script>
 		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/jquery.gritter.js"></script>
+		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/bootstrap-multiselect.js"></script>
 	</body>
 </html>

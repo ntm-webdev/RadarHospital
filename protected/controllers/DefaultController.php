@@ -241,7 +241,7 @@ class DefaultController extends CController
                 $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'O usuário não pode ser cadastrado'));
 				exit($data);
 			} else {
-				if($model->save()) {
+				if ($model->save()) {
 					$data = json_encode(array('msg' => 'O usuário foi cadastrado com sucesso.', 'status'=>'ok'));
 					exit($data);
 				}
@@ -260,7 +260,6 @@ class DefaultController extends CController
 			$model = new favorites();
 			$model->id_hospital = $_POST['id_hospital'];
 			$model->id_usuario = $_POST['id_usuario'];
-			
 			$model->save();
 		} else {
 			$this->redirect(['Login']);
@@ -365,5 +364,259 @@ class DefaultController extends CController
 				)
 			);
 		}	
+	}
+
+	public function actionPartner() 
+	{
+		$error = [];
+		if (!empty($_POST)) {
+
+			if (empty($_POST['nome'])) {
+				$error[] = "Nome cannot be blank"; 
+			}
+
+			if (empty($_POST['email'])) {
+				$error[] = "E-mail cannot be blank"; 
+			} else {
+				if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+					$error[] = "E-mail not valid"; 
+				}
+			}
+
+			if (empty($_POST['telefone'])) {
+				$error[] = "Telefone cannot be blank"; 
+			} else {
+				if (!filter_var($_POST['telefone'], FILTER_VALIDATE_INT)) {
+					$error[] = "Telefone not valid"; 
+				}
+			}
+
+			if (empty($_POST['mensagem'])) {
+				$error[] = "Mensagem cannot be blank"; 
+			}
+			
+			if (empty($_POST['nome']) || empty($_POST['email']) || empty($_POST['telefone']) || empty($_POST['mensagem'])) {
+				$data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
+				exit($data);
+			} else {
+				Yii::import('application.extensions.phpmailer.JPhpMailer');
+				$mail = new JPhpMailer;
+				$mail->IsSMTP();
+				$mail->SMTPAuth = true;
+				$mail->SMTPSecure = 'tls';
+				$mail->Host = 'smtp.gmail.com';
+				$mail->Port = '587';
+				$mail->Username = 'ntm.webdev@gmail.com';
+				$mail->Password = 't14c20b7';
+				$mail->SetFrom('ntm.webdev@gmail.com', 'Radar Hospital');
+				$mail->Subject = 'Nova parceria';
+				$mail->Body .= "Nome: ".$_POST['nome']."<br>"; 
+				$mail->Body .= "E-mail: ".$_POST['email']."<br>"; 
+				$mail->Body .= "Telefone: ".$_POST['telefone']."<br>"; 
+				$mail->Body .= "Mensagem: ".$_POST['mensagem'];
+				$mail->IsHTML(true); 
+				$mail->AddAddress('suporte.radarhospital@gmail.com', $_POST['nome']);
+				
+				if ($mail->Send()) {
+					$data = json_encode(array('msg' => 'O usuário foi cadastrado com sucesso.', 'status'=>'ok'));
+					exit($data);
+				}
+			}
+		} else {
+			$this->render("partner");
+		}
+	}
+
+	public function actionCreateHospital()
+	{
+		if (isset($_POST['hospital'])) {
+
+			$error = [];
+			$erro = false;
+
+			if (!filter_var($_POST['hospital']['telefone'], FILTER_VALIDATE_INT)) {
+				$error['telefone'] = "Telefone not valid"; 
+			}
+
+			foreach ($_POST['hospital'] as $key => $value) {
+				if (empty($_POST['hospital'][$key])) {
+					$error[$key] = $key." cannot be blank";
+					$erro = true; 
+				}
+			}
+
+			if ($erro == true) {
+				$data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
+				exit($data);
+			} else {
+	        	if (!empty($_FILES)) {
+	        		$fotos = [];
+
+	        		$destino = $_SERVER['DOCUMENT_ROOT']."/RadarHospital/themes/classic/imgs/hosp/".$_POST['hospital']['nome'];
+	        		if(!is_dir($destino)) { 
+		        		mkdir($destino,0777,true);
+		        	}
+
+	        		if (!empty($_FILES['hospital']['tmp_name']['foto1'])) {
+	        			$foto1_tmp = $_FILES['hospital']['tmp_name']['foto1'];
+    					move_uploaded_file($foto1_tmp, $destino."/1.jpg");
+    					$fotos['foto'][] = 1;
+	        		}
+
+	        		if (!empty($_FILES['hospital']['tmp_name']['foto2'])) {
+	        			$foto2_tmp = $_FILES['hospital']['tmp_name']['foto2'];
+    					move_uploaded_file($foto2_tmp, $destino."/2.jpg");
+    					$fotos['foto'][] = 2;
+	        		}
+
+	        		if (!empty($_FILES['hospital']['tmp_name']['foto3'])) {
+	        			$foto3_tmp = $_FILES['hospital']['tmp_name']['foto3'];
+    					move_uploaded_file($foto3_tmp, $destino."/3.jpg");
+    					$fotos['foto'][] = 3;
+	        		}
+
+	        		if (!empty($_FILES['hospital']['tmp_name']['foto4'])) {
+	        			$foto4_tmp = $_FILES['hospital']['tmp_name']['foto4'];
+    					move_uploaded_file($foto4_tmp, $destino."/4.jpg");
+    					$fotos['foto'][] = 4;
+	        		}
+	        	}
+
+	        	$folder = $_SERVER['DOCUMENT_ROOT']."/RadarHospital/themes/classic/json/".$_POST['hospital']['nome'];
+	        	if (!is_dir($folder)) { 
+	        		mkdir($folder,0777,true);
+	        	}
+
+	        	$arr = array_merge($_POST['hospital'], $fotos);
+				$data = json_encode($arr);
+				$fp = fopen($folder.'/data.json', 'w+');
+				fwrite($fp, $data);
+				chmod($folder.'/data.json', 0777);
+				fclose($fp);
+				
+				$data = json_encode(array('msg' => 'Sua solicitação foi realizada com sucesso.', 'status'=>'ok'));
+				exit($data);
+			}
+		} else {
+			if (Yii::app()->user->hasState("specialAccess")) {
+				$horas = [
+					'00:00' => '00:00',
+					'01:00' => '01:00',
+					'02:00' => '02:00',
+					'03:00' => '03:00',
+					'04:00' => '04:00',
+					'05:00' => '05:00',
+					'06:00' => '06:00',
+					'07:00' => '07:00',
+					'08:00' => '08:00',
+					'09:00' => '09:00',
+					'10:00' => '10:00',
+					'11:00' => '11:00',
+					'12:00' => '12:00',
+					'13:00' => '13:00',
+					'14:00' => '14:00',
+					'15:00' => '15:00',
+					'15:00' => '15:00',
+					'16:00' => '16:00',
+					'17:00' => '17:00',
+					'18:00' => '18:00',
+					'19:00' => '19:00',
+					'20:00' => '20:00',
+					'21:00' => '21:00',
+					'22:00' => '22:00',
+					'23:00' => '23:00',
+				];
+				$model = new hospital();
+				$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
+				$this->render("createHospital",[
+					'model'=>$model,
+					'usuario'=>$usuario,
+					'horas'=>$horas
+				]);
+			} else {
+				$this->redirect(['Login']);
+			}
+		}
+	}
+
+	public function actionInsertHospital()
+	{
+		if (isset($_POST['yt0'])) {
+			if (!empty($_FILES['json_file']['name'])) {
+				$str = file_get_contents($_SERVER['DOCUMENT_ROOT']."/RadarHospital/themes/classic/json/".$_POST['nome_hospital'].'/data.json');
+				$json = json_decode($str);
+				
+				$transaction = Yii::app()->db->beginTransaction();
+				try {
+					#hospital
+					$model = new hospital();
+					$model->nome = $json->nome;
+					$model->endereco = $json->endereco;
+					$model->latitude = $json->latitude;
+					$model->longitude = $json->longitude;
+					$model->id_regiao = $json->_regiao;
+					$model->id_bairro = $json->_bairro;
+					$model->telefone = $json->telefone;
+					$model->site = $json->site;
+					$model->url_mapa = $json->url_mapa;
+					$model->save();
+
+					#especialidade
+					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
+					foreach ($json->_especialidade as $key => $value) {
+						$parameters = array(
+							":codespecialidade"=>$value,
+							":codhospital"=>$codhospital,
+						);
+						Yii::app()->db->createCommand('INSERT INTO especialidade_hospital VALUES (:codespecialidade, :codhospital)')->execute($parameters);
+					}
+					
+					#plano saude
+					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
+					foreach ($json->_plano_saude as $key => $value) {
+						$parameters = array(
+							":codplano"=>$value,
+							":codhospital"=>$codhospital,
+						);
+						Yii::app()->db->createCommand('INSERT INTO plano_hospital VALUES (:codplano, :codhospital)')->execute($parameters);
+					}
+
+					#imagens
+					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
+					foreach ($json->foto as $key => $value) {
+						$parameters = array(
+							":codimagem"=>$value,
+							":codhospital"=>$codhospital,
+						);
+						Yii::app()->db->createCommand('INSERT INTO imagem_hospital VALUES (:codhospital, :codimagem)')->execute($parameters);
+						
+					}
+
+
+					//$data = json_encode(array('msg' => 'O hospital foi cadastrado com sucesso.', 'status'=>'ok'));
+					//echo($data);
+					
+					/*
+					echo "<pre>";
+					print_r($model->attributes);
+					echo "</pre>";
+					die;*/
+
+				    $transaction->commit();
+				} catch(Exception $e) {
+				   $transaction->rollBack();
+				}
+
+			} else {
+				$data = json_encode(array('msg' => 'Selecione um arquivo json.', 'status'=>'error'));
+				exit($data);
+			}
+		} else {
+			if (Yii::app()->user->hasState("masterAccess")) {
+				$this->render('insertHospital');
+			} else {
+				$this->redirect(['Login']);
+			}
+		}
 	}
 }

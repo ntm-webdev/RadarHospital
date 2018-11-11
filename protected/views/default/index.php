@@ -70,8 +70,11 @@
             ?>
 		</div>
 
-		
-	<?php $this->endWidget() ?>
+        <div class="form-group">
+            <?=CHtml::link('Deseja cadastrar seu hospital? Clique aqui', ['Default/Partner'], ['class'=>'text-beauty'])?>
+        </div>
+    <?php $this->endWidget() ?>
+
 </div>
 <?php
 

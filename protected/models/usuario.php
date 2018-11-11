@@ -39,7 +39,7 @@ class Usuario extends CActiveRecord
         return array(
             array('id, nome, pwd, email, id_bairro, id_planosaude, id_regiao, confEmail, confPwd', 'required'),
             array('email, confEmail', 'email'),
-            array('id, id_bairro, id_planosaude, id_regiao', 'numerical', 'integerOnly'=>true),
+            array('id, id_bairro, id_planosaude, id_regiao, partner, master', 'numerical', 'integerOnly'=>true),
             array('nome, email, pwd', 'length', 'max'=>150),
             array('confEmail, email', 'confirmacaoEmail'),
             array('pwd, confPwd', 'confirmacaoPwd'),
