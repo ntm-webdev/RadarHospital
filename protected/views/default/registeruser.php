@@ -35,6 +35,14 @@
 			<?=$form->error($model,'confPwd'); ?>
 		</div>
 
+		<?php if (Yii::app()->user->hasState("masterAccess")) : ?>
+			<div class="form-group">
+				<?=CHtml::activeCheckBox($model, 'partner')?>
+				<?=CHtml::activeLabel($model, 'partner', ['class'=>'text-beauty'])?>
+				<?=CHtml::textField('nome_hospital', '', ['class'=>'form-control', 'placeholder'=>'Nome do Hospital', 'style'=>'display:none;'])?>
+			</div>
+		<?php endif; ?>
+
 		<div class="form-group">		
 			<label class="text-beauty">Plano de Saude</label>
 			<?=CHtml::activeDropDownList($model, 'id_planosaude', [
@@ -161,3 +169,17 @@
 		</div>
 	<?php $this->endWidget(); ?>
 </div>
+
+<?php
+
+	Yii::app()->clientScript->registerScript('registeruserJS', '
+		$("#Usuario_partner").on("change", function(){
+			if (this.checked) {
+				$("#nome_hospital").css("display", "");
+			} else {
+				$("#nome_hospital").val("");
+				$("#nome_hospital").css("display", "none");
+			}
+		});
+	');
+?>

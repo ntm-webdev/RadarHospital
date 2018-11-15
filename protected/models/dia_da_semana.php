@@ -44,7 +44,7 @@ class dia_da_semana extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'fkhospitals' => array(self::MANY_MANY, 'hospital', 'dia_hospital(id_dia_da_semana, id_hospital)'),
+            //'fkhospitals' => array(self::MANY_MANY, 'hospital', 'dia_hospital(id_dia_da_semana, id_hospital)'),
             'fkperiodos' => array(self::HAS_MANY, 'periodo', 'id_dia_da_semana'),
         );
     }

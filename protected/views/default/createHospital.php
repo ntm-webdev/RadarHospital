@@ -1,3 +1,7 @@
+<?php 
+	$model->getRelated("fkplanosaude", true);
+	$model->getRelated("fkespecialidade", true);
+?>
 <div class="container">
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'method'=>'POST',
@@ -5,7 +9,7 @@
 	)); ?>
 
 		<div class="form-group">
-			<h2 class="text-beauty">Cadastre seu Hospital</h2>
+			<h2 class="text-beauty">Dados do Hospital</h2>
 			<br>
 			<?=CHtml::activeLabel($model, 'nome', ['class'=>'text-beauty'])?>
 			<?=CHtml::activeTextField($model, 'nome', ['class'=>'form-control'])?>
@@ -25,8 +29,14 @@
 		</div>
 
 		<div class="form-group">
+			<?=CHtml::activeLabel($model, 'longitude', ['class'=>'text-beauty'])?>
+			<?=CHtml::activeTextField($model, 'longitude', ['class'=>'form-control'])?>
+			<?=$form->error($model,'longitude'); ?>
+		</div>
+
+		<div class="form-group">
             <?=CHtml::activeLabel($model, '_plano_saude', ['class'=>'text-beauty'])?><br>
-            <?=CHtml::activeDropDownList($model, '_plano_saude', CHtml::ListData(plano_saude::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---', 'multiple'=>'multiple'])?>
+            <?=CHtml::activeDropDownList($model, 'fkplanosaude', CHtml::ListData(plano_saude::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---', 'multiple'=>'multiple'])?>
         </div>
 
         <div class="form-group">
@@ -67,19 +77,13 @@
 	    </div>
 
 		<div class="form-group">
-			<?=CHtml::activeLabel($model, 'longitude', ['class'=>'text-beauty'])?>
-			<?=CHtml::activeTextField($model, 'longitude', ['class'=>'form-control'])?>
-			<?=$form->error($model,'longitude'); ?>
-		</div>
-
-		<div class="form-group">
-			<?=CHtml::activeLabel($model, '_regiao', ['class'=>'text-beauty']);?>
-		    <?=CHtml::activeDropDownList($model, '_regiao', CHtml::ListData(regiao::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
+			<?=CHtml::activeLabel($model, 'id_regiao', ['class'=>'text-beauty']);?>
+		    <?=CHtml::activeDropDownList($model, 'id_regiao', CHtml::ListData(regiao::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?>
 	  	</div>
 
         <div class="form-group">
-            <?=CHtml::activeLabel($model, '_bairro', ['class'=>'text-beauty'])?>
-            <?=CHtml::activeDropDownList($model, '_bairro', (Yii::app()->user->hasState("nome")) ? CHtml::ListData(bairro::model()->findAllByAttributes(['id_regiao'=>$usuario->id_regiao]), 'id', 'nome') : CHtml::ListData(bairro::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
+            <?=CHtml::activeLabel($model, 'id_bairro', ['class'=>'text-beauty'])?>
+            <?=CHtml::activeDropDownList($model, 'id_bairro', CHtml::ListData(bairro::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---'])?><br>
         </div>
 
         <div class="form-group">
@@ -138,8 +142,11 @@
 
 	Yii::app()->clientScript->registerScript('createHospitalFunctions', '
 
-		$("#hospital__especialidade, #hospital__plano_saude").multiselect();
-
+		/*$(document).on("click","#hospital_fkplanosaude option", function() {
+			var e = jQuery.Event("click");
+			e.ctrlKey = true;
+			$("#hospital_fkplanosaude option").trigger(e); 
+		});*/
 
 		$("#hospital__regiao").on("change", function() {
             var descricao = $(this).val();

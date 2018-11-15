@@ -30,7 +30,7 @@ class UserIdentity extends CUserIdentity
 			$this->setState('id', $user->id);
 			$this->setState('nome', $user->nome);
 			$this->_id= $user->id;
-			if ($user->partner == 1) {
+			if ($user->partner != 0) {
 				$this->setState('specialAccess', 1);
 			}
 			if ($user->master == 1) {

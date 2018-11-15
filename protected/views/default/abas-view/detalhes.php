@@ -4,7 +4,7 @@
 	$criteria->params = [
 		':id' => $model->id
 	]; 
-	$periodo = periodo::model()->findAll($criteria);
+	$periodo = periodo::model()->findAll($criteria->order='id');
 
 	$dias = [
 		1 => 'Domingo',

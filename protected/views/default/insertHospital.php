@@ -28,8 +28,7 @@
 <?php
 
 	Yii::app()->clientScript->registerScript('insertJson', '
-
-		$("#submit").click(function(e){
+		$("#submit").click(function(e) {
 		    var formData = new FormData($("form")[0]);
 		    
 		    $.ajax({

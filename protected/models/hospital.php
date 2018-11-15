@@ -65,7 +65,7 @@ class hospital extends CActiveRecord
             'fkregiao' => array(self::BELONGS_TO, 'regiao', 'id_regiao'),
             'fkbairro' => array(self::BELONGS_TO, 'bairro', 'id_bairro'),
             'fkplanosaude' => array(self::MANY_MANY, 'plano_saude', 'plano_hospital(codhospital, codplano)'),
-            'fkdias' => array(self::MANY_MANY, 'dia_da_semana', 'dia_hospital(id_hospital, id_dia_da_semana)'),
+            //'fkdias' => array(self::MANY_MANY, 'dia_da_semana', 'dia_hospital(id_hospital, id_dia_da_semana)'),
             'fkfavorites' => array(self::MANY_MANY, 'usuarios', 'favorites(id_hospital, id_usuario)'),
         );
     }
@@ -81,8 +81,8 @@ class hospital extends CActiveRecord
             'endereco' => 'Endereco',
             'latitude' => 'Latitude',
             'longitude' => 'Longitude',
-            'id_regiao' => 'Id Regiao',
-            'id_bairro' => 'Id Bairro',
+            'id_regiao' => 'Região',
+            'id_bairro' => 'Bairro',
             '_plano_saude' => 'Plano de Saude',
             '_regiao' => 'Região',
             '_bairro' => 'Bairro',

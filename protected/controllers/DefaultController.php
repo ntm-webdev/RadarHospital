@@ -234,10 +234,20 @@ class DefaultController extends CController
 			$somevariable = $row['maxColumn'] + 1;
 			$model->id = $somevariable;
 
+			if (!empty($_POST['nome_hospital'])) {
+				$model->partner = 1;
+				$hospital = new hospital();
+				$hospital->nome = $_POST['nome_hospital'];
+				$hospital->save(false);
+				$model->id_hospital = $hospital->primaryKey;
+			} else {
+				$model->partner = 0;
+			}
+			
 			$valid = $model->validate(); 
 			$error = CActiveForm::validate($model);
 			
-			if($valid == false) {
+			if ($valid == false) {
                 $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'O usuário não pode ser cadastrado'));
 				exit($data);
 			} else {
@@ -430,7 +440,11 @@ class DefaultController extends CController
 	public function actionCreateHospital()
 	{
 		if (isset($_POST['hospital'])) {
-
+			echo "<pre>";
+			print_r($_POST['hospital']);
+			echo "</pre>";
+			die;
+			/*
 			$error = [];
 			$erro = false;
 
@@ -496,9 +510,9 @@ class DefaultController extends CController
 				
 				$data = json_encode(array('msg' => 'Sua solicitação foi realizada com sucesso.', 'status'=>'ok'));
 				exit($data);
-			}
+			}*/
 		} else {
-			if (Yii::app()->user->hasState("specialAccess")) {
+			if (Yii::app()->user->hasState("specialAccess") || Yii::app()->user->hasState("masterAccess")) {
 				$horas = [
 					'00:00' => '00:00',
 					'01:00' => '01:00',
@@ -526,8 +540,8 @@ class DefaultController extends CController
 					'22:00' => '22:00',
 					'23:00' => '23:00',
 				];
-				$model = new hospital();
 				$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
+				$model = hospital::model()->findByPk($usuario->id_hospital);
 				$this->render("createHospital",[
 					'model'=>$model,
 					'usuario'=>$usuario,
@@ -547,9 +561,21 @@ class DefaultController extends CController
 				$json = json_decode($str);
 				
 				$transaction = Yii::app()->db->beginTransaction();
-				try {
+				try 
+				{
+					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
+
+					if (empty($codhospital)) {
+						$model = new hospital();
+					} else {
+						$model = hospital::model()->findByPk($codhospital);
+						Yii::app()->db->createCommand('DELETE from especialidade_hospital where codhospital=:codhospital')->execute([':codhospital'=>$codhospital]);
+						Yii::app()->db->createCommand('DELETE from plano_hospital where codhospital=:codhospital')->execute([':codhospital'=>$codhospital]);
+						Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital')->execute([':codhospital'=>$codhospital]);
+						Yii::app()->db->createCommand('DELETE from periodo where id_hospital=:codhospital')->execute([':codhospital'=>$codhospital]);
+					}
+
 					#hospital
-					$model = new hospital();
 					$model->nome = $json->nome;
 					$model->endereco = $json->endereco;
 					$model->latitude = $json->latitude;
@@ -562,17 +588,16 @@ class DefaultController extends CController
 					$model->save();
 
 					#especialidade
-					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
 					foreach ($json->_especialidade as $key => $value) {
 						$parameters = array(
 							":codespecialidade"=>$value,
 							":codhospital"=>$codhospital,
 						);
+						
 						Yii::app()->db->createCommand('INSERT INTO especialidade_hospital VALUES (:codespecialidade, :codhospital)')->execute($parameters);
 					}
 					
 					#plano saude
-					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
 					foreach ($json->_plano_saude as $key => $value) {
 						$parameters = array(
 							":codplano"=>$value,
@@ -581,32 +606,26 @@ class DefaultController extends CController
 						Yii::app()->db->createCommand('INSERT INTO plano_hospital VALUES (:codplano, :codhospital)')->execute($parameters);
 					}
 
-					#imagens
-					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
-					foreach ($json->foto as $key => $value) {
-						$parameters = array(
-							":codimagem"=>$value,
-							":codhospital"=>$codhospital,
-						);
-						Yii::app()->db->createCommand('INSERT INTO imagem_hospital VALUES (:codhospital, :codimagem)')->execute($parameters);
-						
+					#horario de funcionamento
+					$hora_inicio_semana = $json->hora_inicio_semana;
+					$hora_fim_semana = $json->hora_fim_semana;
+					$hora_inicio_finalsemana = $json->hora_inicio_finalsemana;
+					$hora_fim_finalsemana = $json->hora_fim_finalsemana;
+
+					Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_finalsemana, :hora_fim_finalsemana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_finalsemana' => $hora_inicio_finalsemana, ':hora_fim_finalsemana' => $hora_fim_finalsemana, ':id_dia_da_semana' => 1, ':idHospital' => $codhospital));
+					for ($i=2; $i <=6 ; $i++) { 
+						Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_semana, :hora_fim_semana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_semana' => $hora_inicio_semana, ':hora_fim_semana' => $hora_fim_semana, ':id_dia_da_semana' => $i, ':idHospital' => $codhospital));
 					}
-
-
-					//$data = json_encode(array('msg' => 'O hospital foi cadastrado com sucesso.', 'status'=>'ok'));
-					//echo($data);
+					Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_finalsemana, :hora_fim_finalsemana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_finalsemana' => $hora_inicio_finalsemana, ':hora_fim_finalsemana' => $hora_fim_finalsemana, ':id_dia_da_semana' => 7, ':idHospital' => $codhospital));
 					
-					/*
-					echo "<pre>";
-					print_r($model->attributes);
-					echo "</pre>";
-					die;*/
+
+					$data = json_encode(array('msg' => 'O hospital foi cadastrado com sucesso.', 'status'=>'ok'));
+					echo($data);
 
 				    $transaction->commit();
 				} catch(Exception $e) {
 				   $transaction->rollBack();
 				}
-
 			} else {
 				$data = json_encode(array('msg' => 'Selecione um arquivo json.', 'status'=>'error'));
 				exit($data);
