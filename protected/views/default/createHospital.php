@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <?=CHtml::activeLabel($model, '_especialidade', ['class'=>'text-beauty'])?><br>
-            <?=CHtml::activeDropDownList($model, '_especialidade', CHtml::ListData(especialidades::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---', 'multiple'=>'multiple'])?>
+            <?=CHtml::activeDropDownList($model, 'fkespecialidade', CHtml::ListData(especialidades::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---', 'multiple'=>'multiple'])?>
         </div>
 
         <div class="form-group">
@@ -108,25 +108,165 @@
 			<div class="form-group">
 				<div class="col-xs-12">
 					<?=CHtml::Label('Foto 1', '', ['class'=>'text-beauty'])?>
-					<?=CHtml::fileField('hospital[foto1]', '', ['class'=>'form-control-file'])?>	
+					<?=CHtml::fileField('hospital[foto1]', '', ['class'=>'form-control-file', 'style'=>'display:none;'])?>
+					<br>
+
+					<?php if (!empty($imagens)): ?>
+						<label class="input-label" for="hospital_foto1"><?=(array_key_exists(0, $imagens)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
+						<?php if (array_key_exists(0, $imagens)) : ?>
+							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>$imagens[0]->codimagem]), array(
+			                    'type'=>'GET',
+			                    'dataType'=> 'json',                       
+			                    'success'=>'js:function(data){
+			                        if(data.status == "ok") {
+				                        $.gritter.add({
+							                title: "Sucesso!",
+							                text: data.msg,
+							                class_name: "gritter-success"
+							            });
+
+							            $("label[for=hospital_foto1]").text("Selecione uma foto");
+							            $("#btn-removePhoto-1").css("display", "none");
+							            
+							        } else {
+							        	$.gritter.add({
+							                title: "Erro!",
+							                text: data.msg,
+							                class_name: "gritter-error"
+							            });
+							        }
+						            
+						        }'),array('class'=>'button-remove','id'=>'btn-removePhoto-1'));
+						    ?>
+						<?php endif; ?>
+					<?php else: ?>
+						<label class="input-label" for="hospital_foto1">Selecione uma foto</label>
+					<?php endif ;?>
+					
+					<br>		
     				<small class="form-text text-muted">Apenas extensões .jpg</small>
 				</div>
 
 				<div class="col-xs-12">
 					<?=CHtml::Label('Foto 2', '', ['class'=>'text-beauty'])?>
-					<?=CHtml::fileField('hospital[foto2]', '', ['class'=>'form-control-file'])?>	
+					<?=CHtml::fileField('hospital[foto2]', '', ['class'=>'form-control-file', 'style'=>'display:none;'])?>
+					<br>
+
+					<?php if (!empty($imagens)): ?>
+						<label class="input-label" for="hospital_foto2"><?=(array_key_exists(1, $imagens)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
+						<?php if (array_key_exists(1, $imagens)) : ?>
+							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>$imagens[1]->codimagem]), array(
+			                    'type'=>'GET',
+			                    'dataType'=> 'json',                       
+			                    'success'=>'js:function(data){
+			                        if(data.status == "ok") {
+				                        $.gritter.add({
+							                title: "Sucesso!",
+							                text: data.msg,
+							                class_name: "gritter-success"
+							            });
+
+							            $("label[for=hospital_foto2]").text("Selecione uma foto");
+							            $("#btn-removePhoto-2").css("display", "none");
+							            
+							        } else {
+							        	$.gritter.add({
+							                title: "Erro!",
+							                text: data.msg,
+							                class_name: "gritter-error"
+							            });
+							        }
+						            
+						        }'),array('class'=>'button-remove','id'=>'btn-removePhoto-2'));
+						    ?>
+						<?php endif; ?>
+					<?php else: ?>
+						<label class="input-label" for="hospital_foto2">Selecione uma foto</label>
+					<?php endif ;?>
+
+					<br>	
     				<small class="form-text text-muted">Apenas extensões .jpg</small>	
 				</div>
 
 				<div class="col-xs-12">
 					<?=CHtml::Label('Foto 3', '', ['class'=>'text-beauty'])?>
-					<?=CHtml::fileField('hospital[foto3]', '', ['class'=>'form-control-file'])?>	
+					<?=CHtml::fileField('hospital[foto3]', '', ['class'=>'form-control-file', 'style'=>'display:none;'])?>
+					<br>
+					
+					<?php if (!empty($imagens)): ?>
+						<label class="input-label" for="hospital_foto3"><?=(array_key_exists(2, $imagens)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
+						<?php if (array_key_exists(2, $imagens)) : ?>
+							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>$imagens[2]->codimagem]), array(
+			                    'type'=>'GET',
+			                    'dataType'=> 'json',                       
+			                    'success'=>'js:function(data){
+			                        if(data.status == "ok") {
+				                        $.gritter.add({
+							                title: "Sucesso!",
+							                text: data.msg,
+							                class_name: "gritter-success"
+							            });
+
+							            $("label[for=hospital_foto3]").text("Selecione uma foto");
+							            $("#btn-removePhoto-3").css("display", "none");
+							            
+							        } else {
+							        	$.gritter.add({
+							                title: "Erro!",
+							                text: data.msg,
+							                class_name: "gritter-error"
+							            });
+							        }
+						            
+						        }'),array('class'=>'button-remove','id'=>'btn-removePhoto-3'));
+						    ?>
+						<?php endif; ?>
+					<?php else: ?>
+						<label class="input-label" for="hospital_foto3">Selecione uma foto</label>
+					<?php endif ;?>
+					
+					<br>	
     				<small class="form-text text-muted">Apenas extensões .jpg</small>
 				</div>
 
 				<div class="col-xs-12">
 					<?=CHtml::Label('Foto 4', '', ['class'=>'text-beauty'])?>
-					<?=CHtml::fileField('hospital[foto4]', '', ['class'=>'form-control-file'])?>	
+					<?=CHtml::fileField('hospital[foto4]', '', ['class'=>'form-control-file', 'style'=>'display:none;'])?>
+					<br>
+
+					<?php if (!empty($imagens)): ?>
+						<label class="input-label" for="hospital_foto4"><?=(array_key_exists(3, $imagens)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
+						<?php if (array_key_exists(3, $imagens)) : ?>
+							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>$imagens[3]->codimagem]), array(
+			                    'type'=>'GET',
+			                    'dataType'=> 'json',                       
+			                    'success'=>'js:function(data){
+			                        if(data.status == "ok") {
+				                        $.gritter.add({
+							                title: "Sucesso!",
+							                text: data.msg,
+							                class_name: "gritter-success"
+							            });
+
+							            $("label[for=hospital_foto4]").text("Selecione uma foto");
+							            $("#btn-removePhoto-4").css("display", "none");
+							            
+							        } else {
+							        	$.gritter.add({
+							                title: "Erro!",
+							                text: data.msg,
+							                class_name: "gritter-error"
+							            });
+							        }
+						            
+						        }'),array('class'=>'button-remove','id'=>'btn-removePhoto-4'));
+						    ?>
+						<?php endif; ?>
+					<?php else: ?>
+						<label class="input-label" for="hospital_foto4">Selecione uma foto</label>
+					<?php endif ;?>
+
+					<br>	
     				<small class="form-text text-muted">Apenas extensões .jpg</small>
 				</div>
 			</div>
@@ -147,6 +287,19 @@
 			e.ctrlKey = true;
 			$("#hospital_fkplanosaude option").trigger(e); 
 		});*/
+
+		$("#hospital_foto1").on("change", function(){
+			$("label[for=hospital_foto1]").text("Foto 1 Selecionada");
+		});
+		$("#hospital_foto2").on("change", function(){
+			$("label[for=hospital_foto2]").text("Foto 2 Selecionada");
+		});
+		$("#hospital_foto3").on("change", function(){
+			$("label[for=hospital_foto3]").text("Foto 3 Selecionada");
+		});
+		$("#hospital_foto4").on("change", function(){
+			$("label[for=hospital_foto1]").text("Foto 4 Selecionada");
+		});
 
 		$("#hospital__regiao").on("change", function() {
             var descricao = $(this).val();

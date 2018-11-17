@@ -33,10 +33,9 @@
 
 			<div class="carousel-inner">
 				<?php
-					if(!empty($model->fkimagens)) : 
+					if (!empty($model->fkimagens)) : 
 						foreach ($model->fkimagens as $imagem) : 
-							if($imagem->nome == "1.jpg") : 
-				?>
+							if ($imagem->nome == "1.jpg") : ?>
 								<div class="item active">
 						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/1.jpg" class="img img-responsive img-view">
 							    </div>
