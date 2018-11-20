@@ -443,10 +443,6 @@ class DefaultController extends CController
 			$error = [];
 			$erro = false;
 
-			if (!filter_var($_POST['hospital']['telefone'], FILTER_VALIDATE_INT)) {
-				$error['telefone'] = "Telefone not valid"; 
-			}
-
 			foreach ($_POST['hospital'] as $key => $value) {
 				if (empty($_POST['hospital'][$key])) {
 					$error[$key] = $key." cannot be blank";
@@ -454,9 +450,22 @@ class DefaultController extends CController
 				}
 			}
 
+			if (empty($_POST['hospital']['fkespecialidade'])) {
+				$error['fkespecialidade'] = "especialidade cannot be blank";
+				$erro = true; 
+			}
+
+			if (empty($_POST['hospital']['fkplanosaude'])) {
+				$error['fkplanosaude'] = "plano de saude cannot be blank";
+				$erro = true; 
+			}
+
+
 			if ($erro == true) {
+				header('Content-Type: application/json');
 				$data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
-				exit($data);
+				echo($data);
+				exit;
 			} else {
 	        	if (!empty($_FILES)) {
 	        		$fotos = [];
@@ -466,25 +475,27 @@ class DefaultController extends CController
 		        		mkdir($destino,0777,true);
 		        	}
 
-	        		if (!empty($_FILES['hospital']['tmp_name']['foto1'])) {
+		        	$codhospital = hospital::model()->findByAttributes(['nome'=>$_POST['hospital']['nome']])->id;
+
+	        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>1,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto1'])) {
 	        			$foto1_tmp = $_FILES['hospital']['tmp_name']['foto1'];
     					move_uploaded_file($foto1_tmp, $destino."/1.jpg");
     					$fotos['foto'][] = 1;
 	        		}
 
-	        		if (!empty($_FILES['hospital']['tmp_name']['foto2'])) {
+	        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>2,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto2'])) {
 	        			$foto2_tmp = $_FILES['hospital']['tmp_name']['foto2'];
     					move_uploaded_file($foto2_tmp, $destino."/2.jpg");
     					$fotos['foto'][] = 2;
 	        		}
 
-	        		if (!empty($_FILES['hospital']['tmp_name']['foto3'])) {
+	        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>3,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto3'])) {
 	        			$foto3_tmp = $_FILES['hospital']['tmp_name']['foto3'];
     					move_uploaded_file($foto3_tmp, $destino."/3.jpg");
     					$fotos['foto'][] = 3;
 	        		}
 
-	        		if (!empty($_FILES['hospital']['tmp_name']['foto4'])) {
+	        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>4,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto4'])) {
 	        			$foto4_tmp = $_FILES['hospital']['tmp_name']['foto4'];
     					move_uploaded_file($foto4_tmp, $destino."/4.jpg");
     					$fotos['foto'][] = 4;
@@ -500,15 +511,16 @@ class DefaultController extends CController
 	        		mkdir($folder,0777,true);
 	        	}
 
-	        	$arr = array_merge($_POST['hospital'], $fotos);
 				$data = json_encode($arr);
 				$fp = fopen($folder.'/data.json', 'w+');
 				fwrite($fp, $data);
 				chmod($folder.'/data.json', 0777);
 				fclose($fp);
 				
+				header('Content-Type: application/json');
 				$data = json_encode(array('msg' => 'Sua solicitação foi realizada com sucesso.', 'status'=>'ok'));
-				exit($data);
+				echo($data);
+				exit;
 			}
 		} else {
 			if (Yii::app()->user->hasState("specialAccess") || Yii::app()->user->hasState("masterAccess")) {
@@ -542,11 +554,16 @@ class DefaultController extends CController
 				$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
 				$model = hospital::model()->findByPk($usuario->id_hospital);
 				$imagens = imagem_hospital::model()->findAllByAttributes(['codhospital'=>$model->id]);
+				$img = [];
+				for ($i=0; $i<count($imagens); $i++) { 
+					$img[] = $imagens[$i]->codimagem;
+				}
 				$this->render("createHospital",[
 					'model'=>$model,
 					'usuario'=>$usuario,
 					'horas'=>$horas,
 					'imagens'=>$imagens,
+					'img'=>$img,
 				]);
 			} else {
 				$this->redirect(['Login']);
@@ -573,19 +590,19 @@ class DefaultController extends CController
 						Yii::app()->db->createCommand('DELETE from especialidade_hospital where codhospital=:codhospital')->execute([':codhospital'=>$codhospital]);
 						Yii::app()->db->createCommand('DELETE from plano_hospital where codhospital=:codhospital')->execute([':codhospital'=>$codhospital]);
 
-						if (!empty($json->foto[0])) {
+						if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>1,'codhospital'=>$codhospital])) || !empty($json->foto[0])) {
 							Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$codhospital, ':codimagem'=>$json->foto[0]]);
-						} if (!empty($json->foto[1])) {
+						} if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>2,'codhospital'=>$codhospital])) || !empty($json->foto[1])) {
 							Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$codhospital, ':codimagem'=>$json->foto[1]]);
-						} if (!empty($json->foto[2])) {
+						} if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>3,'codhospital'=>$codhospital])) || !empty($json->foto[2])) {
 							Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$codhospital, ':codimagem'=>$json->foto[2]]);
-						} if (!empty($json->foto[3])) {
+						} if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>4,'codhospital'=>$codhospital])) || !empty($json->foto[3])) {
 							Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$codhospital, ':codimagem'=>$json->foto[3]]);
 						}
 						
 						Yii::app()->db->createCommand('DELETE from periodo where id_hospital=:codhospital')->execute([':codhospital'=>$codhospital]);
 					}
-
+					
 					#hospital
 					$model->nome = $json->nome;
 					$model->endereco = $json->endereco;
@@ -641,18 +658,11 @@ class DefaultController extends CController
 						Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_semana, :hora_fim_semana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_semana' => $hora_inicio_semana, ':hora_fim_semana' => $hora_fim_semana, ':id_dia_da_semana' => $i, ':idHospital' => $codhospital));
 					}
 					Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_finalsemana, :hora_fim_finalsemana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_finalsemana' => $hora_inicio_finalsemana, ':hora_fim_finalsemana' => $hora_fim_finalsemana, ':id_dia_da_semana' => 7, ':idHospital' => $codhospital));
-					
-
-					$data = json_encode(array('msg' => 'O hospital foi cadastrado com sucesso.', 'status'=>'ok'));
-					echo($data);
 
 				    $transaction->commit();
 				} catch(Exception $e) {
 				   $transaction->rollBack();
 				}
-			} else {
-				$data = json_encode(array('msg' => 'Selecione um arquivo json.', 'status'=>'error'));
-				exit($data);
 			}
 		} else {
 			if (Yii::app()->user->hasState("masterAccess")) {

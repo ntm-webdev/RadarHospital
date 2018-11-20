@@ -112,9 +112,9 @@
 					<br>
 
 					<?php if (!empty($imagens)): ?>
-						<label class="input-label" for="hospital_foto1"><?=(array_key_exists(0, $imagens)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
-						<?php if (array_key_exists(0, $imagens)) : ?>
-							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>$imagens[0]->codimagem]), array(
+						<label class="input-label" for="hospital_foto1"><?=(in_array(1, $img)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
+						<?php if (in_array(1, $img)) : ?>
+							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>1]), array(
 			                    'type'=>'GET',
 			                    'dataType'=> 'json',                       
 			                    'success'=>'js:function(data){
@@ -153,9 +153,9 @@
 					<br>
 
 					<?php if (!empty($imagens)): ?>
-						<label class="input-label" for="hospital_foto2"><?=(array_key_exists(1, $imagens)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
-						<?php if (array_key_exists(1, $imagens)) : ?>
-							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>$imagens[1]->codimagem]), array(
+						<label class="input-label" for="hospital_foto2"><?=(in_array(2, $img)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
+						<?php if (in_array(2, $img)) : ?>
+							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>2]), array(
 			                    'type'=>'GET',
 			                    'dataType'=> 'json',                       
 			                    'success'=>'js:function(data){
@@ -194,9 +194,9 @@
 					<br>
 					
 					<?php if (!empty($imagens)): ?>
-						<label class="input-label" for="hospital_foto3"><?=(array_key_exists(2, $imagens)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
-						<?php if (array_key_exists(2, $imagens)) : ?>
-							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>$imagens[2]->codimagem]), array(
+						<label class="input-label" for="hospital_foto3"><?=(in_array(3, $img)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
+						<?php if (in_array(3, $img)) : ?>
+							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>3]), array(
 			                    'type'=>'GET',
 			                    'dataType'=> 'json',                       
 			                    'success'=>'js:function(data){
@@ -235,9 +235,9 @@
 					<br>
 
 					<?php if (!empty($imagens)): ?>
-						<label class="input-label" for="hospital_foto4"><?=(array_key_exists(3, $imagens)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
-						<?php if (array_key_exists(3, $imagens)) : ?>
-							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>$imagens[3]->codimagem]), array(
+						<label class="input-label" for="hospital_foto4"><?=(in_array(4, $img)) ? "Você já cadastrou uma foto aqui" : "Selecione uma foto"?></label>
+						<?php if (in_array(4, $img)) : ?>
+							<?=CHtml::ajaxSubmitButton('Excluir Foto ?',Yii::app()->createUrl("default/deletePhoto", ['codhospital'=>$model->id, 'codimagem'=>4]), array(
 			                    'type'=>'GET',
 			                    'dataType'=> 'json',                       
 			                    'success'=>'js:function(data){
@@ -298,7 +298,7 @@
 			$("label[for=hospital_foto3]").text("Foto 3 Selecionada");
 		});
 		$("#hospital_foto4").on("change", function(){
-			$("label[for=hospital_foto1]").text("Foto 4 Selecionada");
+			$("label[for=hospital_foto4]").text("Foto 4 Selecionada");
 		});
 
 		$("#hospital__regiao").on("change", function() {
@@ -328,13 +328,13 @@
 		    var formData = new FormData($("form")[0]);
 		    
 		    $.ajax({
-		        url: "'.Yii::app()->createUrl('Default/createHospital').'",  
 		        type: "POST",
-		        //data: formData,
-		        dataType: json,
+		        url: "'.Yii::app()->createUrl('Default/createHospital').'",  
+		        data: formData,
 		        cache: false,
 		        contentType: false,
 		        processData: false,
+		        dataType: "json",
 	            success: function (data) {
 	                if (data.status == "ok") {
 			            $(".user-error").remove();
@@ -345,8 +345,9 @@
 			                class_name: "gritter-success"
 			            });
 
-			            location.reload();
-
+			            window.setTimeout(function() {
+			            	location.reload();
+			            }, 4000);
 					} else {
 			        	var fields = data.fields;
 			        	console.log(fields);
@@ -359,21 +360,15 @@
 
 			            $.each(data.fields, function(index, value) {
 			            	$(".user-error").remove();
-			            	window.setTimeout(function(){
+			            	window.setTimeout(function() {
 			            		$("#hospital_"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\">"+ index + " não pode ser vazio</label>");
 			            	}, 800);
 						});
-
-
-			        	if (fields.search("Telefone not valid") > 0) {
-			        		$("#telefoneinvalid").remove();
-			        		$("#hospital_telefone").after("<label id=\"telefoneinvalid\" class=\"user-error\" style=\"color: red\">Esse não é um telefone válido</label>")
-			        	} else {
-			        		$("#telefoneinvalid").remove();
-			        	}
 			        }
 	            }
 		    });
+
+		    return false;
 		});
                 	
 	');
