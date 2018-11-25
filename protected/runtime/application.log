@@ -851,3 +851,75 @@ Stack trace:
 #4 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
 #5 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
 REQUEST_URI=/RadarHospital/index.php/Default/insertJson
+2018/11/25 13:54:19 [error] [php] Trying to get property of non-object (/var/www/html/RadarHospital/protected/views/default/view.php:6)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(101): DefaultController->render()
+#3 unknown(0): DefaultController->actionView()
+#4 /var/www/html/yii/framework/web/actions/CAction.php(109): ReflectionMethod->invokeArgs()
+#5 /var/www/html/yii/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#8 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#9 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#10 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#12 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/Default/View/13
+2018/11/25 14:30:12 [error] [php] Trying to get property of non-object (/var/www/html/RadarHospital/protected/views/default/view.php:6)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(872): DefaultController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(785): DefaultController->renderPartial()
+#2 /var/www/html/RadarHospital/protected/controllers/DefaultController.php(101): DefaultController->render()
+#3 unknown(0): DefaultController->actionView()
+#4 /var/www/html/yii/framework/web/actions/CAction.php(109): ReflectionMethod->invokeArgs()
+#5 /var/www/html/yii/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#8 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#9 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#10 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#12 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/Default/View/20
+2018/11/25 16:50:41 [error] [php] file_get_contents(/var/www/html/RadarHospital/themes/classic/json/Hospital geral do Grajau/data.json): failed to open stream: No such file or directory (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:656)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#2 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#3 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#4 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#6 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/Default/insertJson
+2018/11/25 16:50:48 [error] [php] file_get_contents(/var/www/html/RadarHospital/themes/classic/json/Hospital geral do Grajau/data.json): failed to open stream: No such file or directory (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:656)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#2 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#3 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#4 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#6 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/Default/insertJson
+2018/11/25 17:05:57 [error] [exception.ParseError] ParseError: syntax error, unexpected '=' in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:549
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('createHospital/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/createH...')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/createHospital
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/createHospital
+---
+2018/11/25 17:05:58 [error] [exception.ParseError] ParseError: syntax error, unexpected '=' in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:549
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('createHospital/')
+#1 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('Default/createH...')
+#2 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/html/RadarHospital/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/RadarHospital/index.php/Default/createHospital
+HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/createHospital
+---

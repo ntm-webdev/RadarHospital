@@ -3,7 +3,13 @@
 	if (Yii::app()->user->hasState("nome") && Yii::app()->user->hasState("id")) {
 		$id = Yii::app()->user->getState("id");
 		$usuario = usuario::model()->findByPk($id);
-		$favoritado = favorites::model()->findByAttributes(['id_hospital'=>$model->id, 'id_usuario'=>$id]);
+		$favoritado = favorites::model()->find([
+			'condition' => 'id_hospital=:id_hospital and id_usuario=:id_usuario',
+			'params' => [
+				':id_hospital'=>$model->id, 
+				':id_usuario'=>$id
+			]
+		]);
 		echo CHtml::hiddenField("iduser",$id);
 		echo CHtml::hiddenField("idhosp",$model->id);
 	}
@@ -37,11 +43,11 @@
 						foreach ($model->fkimagens as $imagem) : 
 							if ($imagem->nome == "1.jpg") : ?>
 								<div class="item active">
-						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/1.jpg" class="img img-responsive img-view">
+						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/1.jpg" class="img-view">
 							    </div>
 							<?php else :?>
 						    	<div class="item">
-						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/<?=$imagem->nome?>" class="img img-responsive img-view">
+						      		<img src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$model->nome?>/<?=$imagem->nome?>" class="img-view">
 						    	</div>
 			    <?php 		endif; 
 			    		endforeach;

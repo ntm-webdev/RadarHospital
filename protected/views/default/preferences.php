@@ -38,7 +38,7 @@
 		<div class="form-group">
 			<label class="text-beauty">Bairro</label>
 			<?=CHtml::activeDropDownList($model, 'id_bairro', [
-					CHtml::ListData(bairro::model()->findAllByAttributes(['id_regiao'=>$model->id_regiao]), 'id', 'nome') 
+					CHtml::ListData(bairro::model()->findAll(['condition'=>'id_regiao=:id_regiao', 'params'=>[':id_regiao'=>$model->id_regiao]]), 'id', 'nome') 
 				],['class'=>'form-control'])
 			?>
 			<?=$form->error($model,'id_regiao'); ?>

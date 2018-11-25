@@ -27,7 +27,13 @@
 <div class="row row-avaliacoes">
 	<hr class="hr-beauty">
 	<?php 
-		$checkAvaliacao = feedback::model()->findByAttributes(['id_usuario' => Yii::app()->user->getState("id"), 'id_hospital'=>$model->id]);
+		$checkAvaliacao = feedback::model()->find([
+			'condition' => 'id_usuario=:id_usuario and id_hospital=:id_hospital', 
+			'params' => [ 
+				':id_usuario' => Yii::app()->user->getState("id"), 
+				':id_hospital'=>$model->id
+			]
+		]);
 
 		$texto = (!empty($checkAvaliacao)) ? "Atualizar avaliação" : "Adicionar avaliação";
 	
@@ -63,12 +69,10 @@
 			<?=$feedback[$i]->getStarts($feedback[$i]->infraestrutura)?>
 			<?php $somaInfraestrutura += $feedback[$i]->infraestrutura; ?>
 		</p>
+		
+		<hr class="hr-beauty">
 	</div>
-	
-	<hr class="hr-beauty">
-
-<?php
-	endfor;
+<?php endfor;
 	
 	$numAvaliacoes = count($feedback);
 

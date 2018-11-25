@@ -61,7 +61,8 @@
                             $("#form-index #hospital__plano_saude").prop("selectedIndex", data.indicePlanoSaude);
                             $("#form-index #hospital__regiao").prop("selectedIndex", data.indiceRegiao);
                             $("#form-index #hospital__regiao").trigger("change");
-                            setTimeout(function(){
+                            setTimeout(function() {
+                                console.log(data.bairro);
                                 $("#form-index #hospital__bairro option[value=\'"+data.bairro+"\']").prop("selected", "true")
                             }, 2000);
                         }'           

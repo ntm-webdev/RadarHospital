@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <?=CHtml::activeLabel($model, '_especialidade', ['class'=>'text-beauty'])?><br>
-            <?=CHtml::activeDropDownList($model, 'fkespecialidade', CHtml::ListData(especialidades::model()->findAll(), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---', 'multiple'=>'multiple'])?>
+            <?=CHtml::activeDropDownList($model, 'fkespecialidade', CHtml::ListData(especialidades::model()->findAll(['order'=>'nome ASC']), 'id', 'nome'),['class'=>'form-control', 'empty'=>'Selecione ---', 'multiple'=>'multiple'])?>
         </div>
 
         <div class="form-group">
@@ -361,7 +361,11 @@
 			            $.each(data.fields, function(index, value) {
 			            	$(".user-error").remove();
 			            	window.setTimeout(function() {
-			            		$("#hospital_"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\">"+ index + " não pode ser vazio</label>");
+			            		if (value == "wrong") {
+			            			$("#hospital_"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\"> formato incorreto, apenas .jpg</label>");
+			            		} else {
+			            			$("#hospital_"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\">"+ index + " não pode ser vazio</label>");
+			            		}
 			            	}, 800);
 						});
 			        }
