@@ -647,7 +647,6 @@ class DefaultController extends CController
 			$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'A requisição não pode ser feita'));
 			echo $data;
 			exit;
-			
 		}
 
 		if (!empty($_FILES['json_file']['name'])) {
