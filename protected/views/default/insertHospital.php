@@ -27,50 +27,39 @@
 
 <?php
 
-	Yii::app()->clientScript->registerScript('JsonHosp', '
+	Yii::app()->clientScript->registerScript('insertJson', '
 		$("#submit").click(function(e) {
 		    var formData = new FormData($("form")[0]);
 		    
 		    $.ajax({
+		        url: "'.Yii::app()->createUrl('Default/insertHospital').'",  
 		        type: "POST",
-		        url: "'.Yii::app()->createUrl('Default/insertJson').'",  
 		        data: formData,
+		        dataType: json,
 		        cache: false,
 		        contentType: false,
 		        processData: false,
-		        dataType: "json",
 	            success: function (data) {
 	                if (data.status == "ok") {
+						
 						$.gritter.add({
 			                title: "Sucesso!",
 			                text: data.msg,
 			                class_name: "gritter-success"
 			            });
 
-			            setTimeout(function() { 
-			            	location.reload(); 
-			            }, 3000);
 					} else {
-						var fields = data.fields;
-						console.log(fields);
-
-			   			$.gritter.add({
+			        	var fields = data.fields;
+			        	console.log(fields);
+	
+			        	$.gritter.add({
 			                title: "Erro!",
 			                text: data.msg,
 			                class_name: "gritter-error"
 			            });
-						
-						$.each(data.fields, function(index, value) {
-			            	$(".user-error").remove();
-			            	window.setTimeout(function() {
-			            		$("#"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\">"+ index + " não pode ser vazio</label>");
-			            	}, 800);
-						});
 			        }
 	            }
 		    });
-
-		    return false;
 		});
                 	
 	');

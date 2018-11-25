@@ -573,29 +573,8 @@ class DefaultController extends CController
 
 	public function actionInsertHospital()
 	{
-		if (Yii::app()->user->hasState("masterAccess")) {
-			$this->render('insertHospital');
-		} else {
-			$this->redirect(['Login']);
-		}
-	}
-
-	public function actionInsertJson()
-	{
-		
-		if (empty($_POST['nome_hospital'])) {
-			$error = [];
-			$error['nome_hospital'] = 'blank';
-
-			header("Content-Type: application/json");
-			$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'A requisição não pode ser feita'));
-			echo $data;
-			exit;
-			
-		}
-
-		if (!empty($_FILES['json_file']['name'])) {
-			if (!empty(hospital::model()->findByAttributes(['nome'=>$_POST['nome_hospital']]))) {
+		if (isset($_POST['yt0'])) {
+			if (!empty($_FILES['json_file']['name'])) {
 				$str = file_get_contents($_SERVER['DOCUMENT_ROOT']."/RadarHospital/themes/classic/json/".$_POST['nome_hospital'].'/data.json');
 				$json = json_decode($str);
 				
@@ -603,6 +582,7 @@ class DefaultController extends CController
 				try 
 				{
 					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
+
 					if (empty($codhospital)) {
 						$model = new hospital();
 					} else {
@@ -679,34 +659,17 @@ class DefaultController extends CController
 					}
 					Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_finalsemana, :hora_fim_finalsemana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_finalsemana' => $hora_inicio_finalsemana, ':hora_fim_finalsemana' => $hora_fim_finalsemana, ':id_dia_da_semana' => 7, ':idHospital' => $codhospital));
 
-					header("Content-Type: application/json");
-					$data = json_encode(array('status'=>'ok', 'msg'=>'O Hospital foi inserido com sucesso.'));
-					echo $data;
-					exit; 
-
 				    $transaction->commit();
 				} catch(Exception $e) {
-				   	$transaction->rollBack();
-				   	header("Content-Type: application/json");
-					$data = json_encode(array('status'=>'error', 'msg'=>$e->getMessage()));
-					echo $data;
-					exit;
+				   $transaction->rollBack();
 				}
-			} else {
-				$error=[];
-				header("Content-Type: application/json");
-				$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'Hospital inválido'));
-				echo $data;
-				exit;
 			}
 		} else {
-			$error=[];
-			$error['json_file'] = 'blank';
-
-			header("Content-Type: application/json");
-			$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'A requisição não pode ser feita'));
-			echo $data;
-			exit;
+			if (Yii::app()->user->hasState("masterAccess")) {
+				$this->render('insertHospital');
+			} else {
+				$this->redirect(['Login']);
+			}
 		}
 	}
 
