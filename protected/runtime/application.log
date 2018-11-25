@@ -522,6 +522,7 @@ Stack trace:
 #9 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
 #10 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
 REQUEST_URI=/RadarHospital/index.php/Default/createHospital
+<<<<<<< HEAD
 2018/11/24 14:30:28 [error] [exception.ParseError] ParseError: syntax error, unexpected '$data' (T_VARIABLE) in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:669
 Stack trace:
 #0 /var/www/html/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('insertHospital/')
@@ -884,6 +885,9 @@ Stack trace:
 #12 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
 REQUEST_URI=/RadarHospital/index.php/Default/View/20
 2018/11/25 16:50:41 [error] [php] file_get_contents(/var/www/html/RadarHospital/themes/classic/json/Hospital geral do Grajau/data.json): failed to open stream: No such file or directory (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:656)
+=======
+2018/11/25 09:27:10 [error] [php] chmod(): Operation not permitted (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:517)
+>>>>>>> 3826e1946b0fec2a61f3a22975a811b3b9a4de79
 Stack trace:
 #0 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
 #1 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
@@ -892,8 +896,13 @@ Stack trace:
 #4 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
 #5 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
 #6 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+<<<<<<< HEAD
 REQUEST_URI=/RadarHospital/index.php/Default/insertJson
 2018/11/25 16:50:48 [error] [php] file_get_contents(/var/www/html/RadarHospital/themes/classic/json/Hospital geral do Grajau/data.json): failed to open stream: No such file or directory (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:656)
+=======
+REQUEST_URI=/RadarHospital/index.php/Default/createHospital
+2018/11/25 09:30:24 [error] [php] chmod(): Operation not permitted (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:517)
+>>>>>>> 3826e1946b0fec2a61f3a22975a811b3b9a4de79
 Stack trace:
 #0 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
 #1 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
@@ -902,6 +911,7 @@ Stack trace:
 #4 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
 #5 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
 #6 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+<<<<<<< HEAD
 REQUEST_URI=/RadarHospital/index.php/Default/insertJson
 2018/11/25 17:05:57 [error] [exception.ParseError] ParseError: syntax error, unexpected '=' in /var/www/html/RadarHospital/protected/controllers/DefaultController.php:549
 Stack trace:
@@ -923,3 +933,16 @@ Stack trace:
 REQUEST_URI=/RadarHospital/index.php/Default/createHospital
 HTTP_REFERER=http://localhost/RadarHospital/index.php/Default/createHospital
 ---
+=======
+REQUEST_URI=/RadarHospital/index.php/Default/createHospital
+2018/11/25 09:33:39 [error] [php] chmod(): Operation not permitted (/var/www/html/RadarHospital/protected/controllers/DefaultController.php:517)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/html/yii/framework/web/CController.php(286): DefaultController->runAction()
+#2 /var/www/html/yii/framework/web/CController.php(265): DefaultController->runActionWithFilters()
+#3 /var/www/html/yii/framework/web/CWebApplication.php(282): DefaultController->run()
+#4 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#6 /var/www/html/RadarHospital/index.php(13): CWebApplication->run()
+REQUEST_URI=/RadarHospital/index.php/Default/createHospital
+>>>>>>> 3826e1946b0fec2a61f3a22975a811b3b9a4de79

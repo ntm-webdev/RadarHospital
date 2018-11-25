@@ -752,8 +752,7 @@ class DefaultController extends CController
 						echo $data;
 						exit;
 					}
-				} 
-				else {
+				} else {
 					$error=[];
 					header("Content-Type: application/json");
 					$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'Hospital inválido'));
