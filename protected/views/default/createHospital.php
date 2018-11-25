@@ -326,7 +326,7 @@
 
 		$("#submit").click(function(e){
 		    var formData = new FormData($("form")[0]);
-
+		    
 		    $.ajax({
 		        type: "POST",
 		        url: "'.Yii::app()->createUrl('Default/createHospital').'",  
