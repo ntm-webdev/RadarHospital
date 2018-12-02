@@ -33,6 +33,7 @@
 	<div class="col-xs-12 no-padding-left">
 		<p class="text-beauty">Horário de Funcionamento</p>
 		<?php foreach ($periodo as $key => $value) : ?>
+			<?php $value->horario_final = ($value->horario_inicial== "00:00" && $value->horario_final == "00:00") ? "23:59" : $value->horario_final ?>
 			<?="<p><b>".$dias[$value->id_dia_da_semana].": </b> ".$value->horario_inicial." às ". $value->horario_final . "</p>";?>
 		<?php endforeach; ?>
 		<hr>

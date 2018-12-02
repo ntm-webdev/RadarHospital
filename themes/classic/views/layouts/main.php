@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/css/style.css">
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/css/jquery.gritter.css">
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->theme->baseUrl?>/css/bootstrap-multiselect.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet">
 		<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/jquery-3.3.1.min.js"></script>
 	</head>
 	<body>

@@ -5,6 +5,7 @@
 		</div>
 		<div id="list">
 			<ul>
+				<li><?=CHtml::tag("a", ['href'=>'resultado'], "<i class='fa fa-fw fa-search'></i> Voltar para a pesquisa")?></li>
 				<li><?=CHtml::tag("a", ['href'=>'favorites'], "<i class='fa fa-fw fa-heart'></i> Lista de Hospitais")?></li>
 				<li><?=CHtml::tag("a", ['href'=>'preferences'], "<i class='fa fa-fw fa-cog'></i> Preferências")?></li> 
 				<li><?=CHtml::tag("a", ['href'=>'about'], "<i class='fa fa-fw fa-question-circle'></i> Sobre")?></li>

@@ -92,11 +92,11 @@
                 </div>
 
                 <div class="col-xs-3">
-                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/map', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-map text-beauty"></i> Mapa</button>')?>
+                    <?=CHtml::tag('a', ['href'=>'http://www.radarhospital.epizy.com/index.php/Default/map', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-map text-beauty"></i> Mapa</button>')?>
                 </div>
 
                 <div class="col-xs-3">
-                    <?=CHtml::tag('a', ['href'=>'http://localhost/RadarHospital/index.php/default/userArea', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
+                    <?=CHtml::tag('a', ['href'=>'http://www.radarhospital.epizy.com/index.php/Default/userArea', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
                 </div>
                 <br>
             </div>
@@ -120,8 +120,34 @@
 
 <?php
 
+    Yii::app()->clientScript->registerScript('beforeLoad', '
+        if ($("#form-result #hospital__regiao").val().length > 0) {
+            var descricao = $("#form-result #hospital__regiao").val();
+            $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
+                $("#form-result #hospital__bairro").empty();
+                var bairros = data.bairros;
+                bairros = bairros.substring(0, (bairros.length-1));
+                arrayBairros = bairros.split(",");
+
+                var strOpcoesBairros = "";
+                strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+                $("#form-result #hospital__bairro").empty();
+
+                $("<option>").val("").text("Selecione ---").appendTo("#form-result #hospital__bairro");
+                for (var i=0;i<=arrayBairros.length;i++) {
+                    if(arrayBairros[i] != undefined && arrayBairros != "") {
+                        $("<option>").val(arrayBairros[i]).text(arrayBairros[i]).appendTo("#form-result #hospital__bairro");
+                    }
+                }
+            }, "json");
+
+            window.setTimeout(function(){
+                $("#form-result #hospital__bairro option[value=\"'.$model->_bairro.'\"]").prop("selected", "true");                
+            },1000);
+        }
+    ');
+    
     Yii::app()->clientScript->registerScript('askGeolocation2', '
-        
         if($("#form-result #radioLocation").is(":checked")) {
             $("#form-result #hospital__regiao").prop("disabled", true);
             $("#regiao, #bairro").css("display","");
@@ -185,7 +211,7 @@
         });
 
         $("#form-result #cleanFilter").on("click", function(){
-            $("#form-result").find(":checkbox").prop("checked", false);
+            $("#form-result").find(":checkbox").attr("checked", false);
             $("#form-result #radioLocation").trigger("change");
             $("#form-result option:selected").attr("selected", false);
             $("#form-result")[0].reset();
@@ -202,14 +228,14 @@
 
                 var strOpcoesBairros = "";
                 strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+                $("#form-result #hospital__bairro").empty();
 
+                $("<option>").val("").text("Selecione ---").appendTo("#form-result #hospital__bairro");
                 for (var i=0;i<=arrayBairros.length;i++) {
                     if(arrayBairros[i] != undefined && arrayBairros != "") {
-                        strOpcoesBairros += "<option value="+arrayBairros[i]+">"+arrayBairros[i]+"</option>";
+                        $("<option>").val(arrayBairros[i]).text(arrayBairros[i]).appendTo("#form-result #hospital__bairro");
                     }
                 }
-                $("#form-result #hospital__bairro").append(strOpcoesBairros);
-
             }, "json");
         });
     ');

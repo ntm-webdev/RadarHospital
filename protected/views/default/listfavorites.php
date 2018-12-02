@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="media resultado">
 				 	<div class="media-left">
-				      	<img class="media-object" src="<?=Yii::app()->theme->baseUrl?>/imgs/hospital.jpg" alt="...">
+				      	<img class="media-object" src="<?= Yii::app()->theme->baseUrl?>/imgs/hosp/<?=$hospital->nome?>/1.jpg" alt="<?=$hospital->nome?>" width="129" height="110">
 				  	</div>
 				  	<div class="media-body">
 				    	<h5 class="media-heading text-beauty"><i class="fa fa-fw fa-h-square"></i> <?=$hospital->nome?> </h5>

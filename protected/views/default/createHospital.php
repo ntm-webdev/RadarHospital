@@ -280,6 +280,35 @@
 
 <?php
 
+	Yii::app()->clientScript->registerScript('beforeLoad', '
+        if ($("#hospital_id_regiao").val().length > 0) {
+            var descricao = $("#hospital_id_regiao").val();
+            $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
+                var bairros = data.bairros;
+                bairros = bairros.substring(0, (bairros.length-1));
+                arrayBairros = bairros.split(",");
+
+                var idBairros = data.idBairros;
+                idBairros = idBairros.substring(0, (idBairros.length-1));
+				arrayIdBairros = idBairros.split(",");                
+
+                var strOpcoesBairros = "";
+                strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+                $("#hospital_id_bairro").empty();
+
+                for (var i=0;i<=arrayBairros.length;i++) {
+                    if(arrayBairros[i] != undefined && arrayBairros != "") {
+                    	$("<option>").val(arrayIdBairros[i]).text(arrayBairros[i]).appendTo("#hospital_id_bairro");
+                    }
+                }
+            }, "json");
+
+            window.setTimeout(function(){
+                $("#hospital_id_bairro option[value=\"'.$model->id_bairro.'\"]").prop("selected", "true");                
+            },50);
+        }
+    ');
+
 	Yii::app()->clientScript->registerScript('createHospitalFunctions', '
 
 		/*$(document).on("click","#hospital_fkplanosaude option", function() {
@@ -301,7 +330,7 @@
 			$("label[for=hospital_foto4]").text("Foto 4 Selecionada");
 		});
 
-		$("#hospital__regiao").on("change", function() {
+		$("#hospital_id_regiao").on("change", function() {
             var descricao = $(this).val();
             $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
                 var bairros = data.bairros;
@@ -314,13 +343,13 @@
 
                 var strOpcoesBairros = "";
                 strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+                $("#hospital_id_bairro").empty();
 
                 for (var i=0;i<=arrayBairros.length;i++) {
                     if(arrayBairros[i] != undefined && arrayBairros != "") {
-                        strOpcoesBairros += "<option value="+arrayIdBairros[i]+">"+arrayBairros[i]+"</option>";
+                    	$("<option>").val(arrayIdBairros[i]).text(arrayBairros[i]).appendTo("#hospital_id_bairro");
                     }
                 }
-                $("#hospital__bairro").empty().append(strOpcoesBairros);
             }, "json");
         });
 

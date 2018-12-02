@@ -1,5 +1,5 @@
 <div class="container">
-	<a href="http://localhost/RadarHospital/index.php/default/userArea">
+	<a href="http://www.radarhospital.epizy.com/index.php/Default/userArea">
 		<span class="text-beauty pull-right">
 			<i class="fa fa-fw fa-lg pointer fa-user"></i>
 			<?=(Yii::app()->user->hasState("id") ? "Olá, ".Yii::app()->user->getState("nome") : "Faça seu Login") ?>
@@ -147,13 +147,14 @@
 
                 var strOpcoesBairros = "";
                 strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+                $("#form-index #hospital__bairro").empty();
 
+                $("<option>").val("").text("Selecione ---").appendTo("#form-index #hospital__bairro");
                 for (var i=0;i<=arrayBairros.length;i++) {
-                    if(arrayBairros[i] != undefined && arrayBairros != "") {
-                        strOpcoesBairros += "<option value="+arrayBairros[i]+">"+arrayBairros[i]+"</option>";
+                    if (arrayBairros[i] != undefined && arrayBairros != "") {
+                        $("<option>").val(arrayBairros[i]).text(arrayBairros[i]).appendTo("#form-index #hospital__bairro");
                     }
                 }
-                $("#form-index #hospital__bairro").empty().append(strOpcoesBairros);
             }, "json");
         });
     ');

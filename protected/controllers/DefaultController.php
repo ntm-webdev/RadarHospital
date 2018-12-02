@@ -397,35 +397,44 @@ class DefaultController extends CController
 	public function actionPartner() 
 	{
 		$error = [];
+		$erro = false;
+
 		if (!empty($_POST)) {
 
 			if (empty($_POST['nome'])) {
 				$error[] = "Nome cannot be blank"; 
-			}
+				$erro = true;
+			} 
 
 			if (empty($_POST['email'])) {
 				$error[] = "E-mail cannot be blank"; 
+				$erro = true;
 			} else {
 				if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 					$error[] = "E-mail not valid"; 
+					$erro = true;
 				}
 			}
 
 			if (empty($_POST['telefone'])) {
 				$error[] = "Telefone cannot be blank"; 
+				$erro = true;
 			} else {
 				if (!filter_var($_POST['telefone'], FILTER_VALIDATE_INT)) {
 					$error[] = "Telefone not valid"; 
+					$erro = true;
 				}
 			}
-
+			
 			if (empty($_POST['mensagem'])) {
 				$error[] = "Mensagem cannot be blank"; 
+				$erro = true;
 			}
 			
-			if (empty($_POST['nome']) || empty($_POST['email']) || empty($_POST['telefone']) || empty($_POST['mensagem'])) {
+			if ($erro == true) {
 				$data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
-				exit($data);
+				echo $data;
+				exit;
 			} else {
 				Yii::import('application.extensions.phpmailer.JPhpMailer');
 				$mail = new JPhpMailer;
@@ -446,8 +455,9 @@ class DefaultController extends CController
 				$mail->AddAddress('suporte.radarhospital@gmail.com', $_POST['nome']);
 				
 				if ($mail->Send()) {
-					$data = json_encode(array('msg' => 'O usuário foi cadastrado com sucesso.', 'status'=>'ok'));
-					exit($data);
+					$data = json_encode(array('msg' => 'O formulário foi entregue com sucesso.', 'status'=>'ok'));
+					echo $data;
+					exit;
 				}
 			}
 		} else {

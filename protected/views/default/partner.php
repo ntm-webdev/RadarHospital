@@ -38,8 +38,9 @@
 			                class_name: "gritter-success"
 			            });
 
-			            location.reload();
-
+			            window.setTimeout(function(){
+			            	location.reload();
+			            }, 3000);
 					} else {
 			        	var fields = data.fields;
 			        	var msgs = fields.join(); 
@@ -78,14 +79,14 @@
 			        		$("#telefone-error").remove();
 			        	}
 
-			        	if (msgs.search("Telefone not valid") > 0) {
+			        	if (msgs.includes("Telefone not valid") > 0) {
 			        		$("#telefoneinvalid").remove();
 			        		$("#telefone").after("<label id=\"telefoneinvalid\" class=\"user-error\" style=\"color: red\">Esse não é um telefone válido</label>")
 			        	} else {
 			        		$("#telefoneinvalid").remove();
 			        	}
 
-			        	if (msgs.search("Mensagem cannot be blank") > 0) {
+			        	if (msgs.includes("Mensagem cannot be blank") > 0) {
 			        		$("#mensagem-error").remove();
 			        		$("#mensagem").after("<label class=\"user-error\" id=\"mensagem-error\" style=\"color: red\">Mensagem não pode ser vazio</label>")
 			        	} else {

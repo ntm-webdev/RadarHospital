@@ -171,6 +171,31 @@
 </div>
 
 <?php
+	
+	Yii::app()->clientScript->registerScript('beforeLoad', '
+        if ($("#Usuario_id_regiao").val().length > 0) {
+            var descricao = $("#Usuario_id_regiao").val();
+            $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
+                var bairros = data.bairros;
+                bairros = bairros.substring(0, (bairros.length-1));
+                arrayBairros = bairros.split(",");
+
+                var idBairros = data.idBairros;
+                idBairros = idBairros.substring(0, (idBairros.length-1));
+				arrayIdBairros = idBairros.split(",");                
+
+                var strOpcoesBairros = "";
+                strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+                $("#Usuario_id_bairro").empty();
+
+                for (var i=0;i<=arrayBairros.length;i++) {
+                    if(arrayBairros[i] != undefined && arrayBairros != "") {
+                    	$("<option>").val(arrayIdBairros[i]).text(arrayBairros[i]).appendTo("#Usuario_id_bairro");
+                    }
+                }
+            }, "json");
+        }
+    ');
 
 	Yii::app()->clientScript->registerScript('registeruserJS', '
 		$("#Usuario_partner").on("change", function(){
@@ -181,5 +206,28 @@
 				$("#nome_hospital").css("display", "none");
 			}
 		});
+
+		$("#Usuario_id_regiao").on("change", function() {
+            var descricao = $(this).val();
+            $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
+                var bairros = data.bairros;
+                bairros = bairros.substring(0, (bairros.length-1));
+                arrayBairros = bairros.split(",");
+
+                var idBairros = data.idBairros;
+                idBairros = idBairros.substring(0, (idBairros.length-1));
+				arrayIdBairros = idBairros.split(",");                
+
+                var strOpcoesBairros = "";
+                strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+                $("#Usuario_id_bairro").empty();
+
+                for (var i=0;i<=arrayBairros.length;i++) {
+                    if(arrayBairros[i] != undefined && arrayBairros != "") {
+                    	$("<option>").val(arrayIdBairros[i]).text(arrayBairros[i]).appendTo("#Usuario_id_bairro");
+                    }
+                }
+            }, "json");
+        });
 	');
 ?>

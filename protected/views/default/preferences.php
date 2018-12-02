@@ -79,6 +79,7 @@
 	endif;	
 
 Yii::app()->clientScript->registerScript('relationRegiaoBairro', '
+
 	$("#preferences-form #Usuario_id_regiao").on("change", function() {
         var descricao = $(this).val();
         $.post("'.Yii::app()->createUrl("default/associaBairroRegiao").'", {regiao:descricao}, function(data) {
@@ -93,13 +94,13 @@ Yii::app()->clientScript->registerScript('relationRegiaoBairro', '
 
             var strOpcoesBairros = "";
             strOpcoesBairros += "<option value=\"\">Selecione ---</option>";
+            $("#preferences-form #Usuario_id_bairro").empty();
 
             for (var i=0;i<=arrayBairros.length;i++) {
                 if(arrayBairros[i] != undefined && arrayBairros != "") {
-                    strOpcoesBairros += "<option value="+arrayIdsBairros[i]+">"+arrayBairros[i]+"</option>";
+                    $("<option>").val(arrayIdsBairros[i]).text(arrayBairros[i]).appendTo("#preferences-form #Usuario_id_bairro");
                 }
             }
-            $("#preferences-form #Usuario_id_bairro").empty().append(strOpcoesBairros);
         }, "json");
     });
 ');
