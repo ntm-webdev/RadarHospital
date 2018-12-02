@@ -1,13 +1,14 @@
 <div class="container">
-	<a href="http://www.radarhospital.epizy.com/index.php/Default/userArea">
+    <a href="<?=Yii::app()->createUrl('Default/userArea')?>">
 		<span class="text-beauty pull-right">
 			<i class="fa fa-fw fa-lg pointer fa-user"></i>
 			<?=(Yii::app()->user->hasState("id") ? "Olá, ".Yii::app()->user->getState("nome") : "Faça seu Login") ?>
 		</span>
 	</a>
-	<br>
+	<br><br>
 	<img style="height: 230px" src="<?= Yii::app()->theme->baseUrl?>/imgs/main-logo.png" alt="Radar Hospital" class="img img-responsive center">
-	
+	<br>
+
 	<?php $form=$this->beginWidget("CActiveForm", array(
         'action' => Yii::app()->createUrl("Default/resultado"),
         'method' => 'POST',

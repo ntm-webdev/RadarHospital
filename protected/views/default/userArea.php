@@ -5,7 +5,10 @@
 		</div>
 		<div id="list">
 			<ul>
-				<li><?=CHtml::tag("a", ['href'=>'resultado'], "<i class='fa fa-fw fa-search'></i> Voltar para a pesquisa")?></li>
+				<?php if (Yii::app()->user->hasState("masterAccess")) : ?>
+					<li><?=CHtml::tag("a", ['href'=>'insertHospital'], "<i class='fa fa-fw fa-save'></i> Registrar Hospital")?></li>
+				<?php endif; ?>
+				<li><?=CHtml::tag("a", ['href'=>'resultado'], "<i class='fa fa-fw fa-search'></i> Ir para pesquisa")?></li>
 				<li><?=CHtml::tag("a", ['href'=>'favorites'], "<i class='fa fa-fw fa-heart'></i> Lista de Hospitais")?></li>
 				<li><?=CHtml::tag("a", ['href'=>'preferences'], "<i class='fa fa-fw fa-cog'></i> Preferências")?></li> 
 				<li><?=CHtml::tag("a", ['href'=>'about'], "<i class='fa fa-fw fa-question-circle'></i> Sobre")?></li>

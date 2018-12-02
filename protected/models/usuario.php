@@ -168,18 +168,6 @@ class Usuario extends CActiveRecord
             if (self::model()->count($criteria) > 0) {
                 $this->addError("email", "Ja existe uma conta para o e-mail informado.");
             }
-            /*
-            if ($this->partner == 1) {
-                $criteriaHosp = new CDbCriteria();
-                $criteriaHosp->select='max(id) AS maxColumn';
-                $row = hospital::model()->find($criteriaHosp);
-                echo "<pre>";
-                print_r($row);
-                echo "</pre>";
-                die;
-                $somevariable = $row['maxColumn'] + 1;
-                $this->id_hospital = $somevariable;
-            }*/
         }
 
         return parent::beforeValidate();

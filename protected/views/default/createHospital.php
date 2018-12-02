@@ -1,6 +1,22 @@
 <?php 
 	$model->getRelated("fkplanosaude", true);
 	$model->getRelated("fkespecialidade", true);
+	$periodo = periodo::model()->find([
+		'condition'=>'id_hospital=:id_hospital and id_dia_da_semana=:id',
+		'params'=>[
+			':id_hospital'=>$model->id,
+			':id'=>2,
+		]
+	]);
+
+	$periodoFds = periodo::model()->find([
+		'condition'=>'id_hospital=:id_hospital and id_dia_da_semana=:id',
+		'params'=>[
+			':id_hospital'=>$model->id,
+			':id'=>1,
+		]
+	]);
+
 ?>
 <div class="container">
 	<?php $form=$this->beginWidget('CActiveForm', array(
@@ -51,11 +67,13 @@
 	    				<legend>Dia de Semana</legend>
 	    				<div class="col-xs-12 col-md-6">
 	    					<?=CHtml::label('Início', '', ['class'=>'text-beauty'])?>
-	    					<?=CHtml::dropDownlist('hospital[hora_inicio_semana]', '', $horas , ['class'=>'form-control'])?>
+	    					<?php $hora_inicio_semana = (!empty($periodo->horario_inicial)) ? $periodo->horario_inicial : "" ?>
+	    					<?=CHtml::dropDownlist('hospital[hora_inicio_semana]', $hora_inicio_semana, $horas , ['class'=>'form-control'])?>
 	    				</div>
 	    				<div class="col-xs-12 col-md-6">
 	    					<?=CHtml::label('Fim', '', ['class'=>'text-beauty'])?>
-	    					<?=CHtml::dropDownlist('hospital[hora_fim_semana]', '', $horas , ['class'=>'form-control'])?>
+	    					<?php $hora_fim_semana = (!empty($periodo->horario_final)) ? $periodo->horario_final : "" ?>
+	    					<?=CHtml::dropDownlist('hospital[hora_fim_semana]', $hora_fim_semana, $horas , ['class'=>'form-control'])?>
 	    				</div>
 	    			</fieldset>
 	    		</div>
@@ -65,11 +83,13 @@
 	    				<legend>Final de Semana</legend>
 	    				<div class="col-xs-12 col-md-6">
 	    					<?=CHtml::label('Início', '', ['class'=>'text-beauty'])?>
-	    					<?=CHtml::dropDownlist('hospital[hora_inicio_finalsemana]', '', $horas , ['class'=>'form-control'])?>
+	    					<?php $hora_inicio_finalsemana = (!empty($periodoFds->horario_inicial)) ? $periodoFds->horario_inicial : "" ?>
+	    					<?=CHtml::dropDownlist('hospital[hora_inicio_finalsemana]', $hora_inicio_finalsemana, $horas , ['class'=>'form-control'])?>
 	    				</div>
 	    				<div class="col-xs-12 col-md-6">
 	    					<?=CHtml::label('Fim', '', ['class'=>'text-beauty'])?>
-	    					<?=CHtml::dropDownlist('hospital[hora_fim_finalsemana]', '', $horas , ['class'=>'form-control'])?>
+	    					<?php $hora_fim_finalsemana = (!empty($periodoFds->horario_final)) ? $periodoFds->horario_final : "" ?>
+	    					<?=CHtml::dropDownlist('hospital[hora_fim_finalsemana]', $hora_fim_finalsemana, $horas , ['class'=>'form-control'])?>
 	    				</div>
 	    			</fieldset>
 	    		</div>

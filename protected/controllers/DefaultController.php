@@ -36,17 +36,25 @@ class DefaultController extends CController
     		if (isset($_POST['hospital'])) {
     			$model->attributes = $_POST['hospital'];
     			$dataProvider = $model->search();
+
+    			$filtroUserCadastrado = $this->filterString($_POST['hospital']);
     			
     			return $this->render('resultado', array(
 						'model' => $model, 
 						'dataProvider' => $dataProvider,
-						'usuario'=>$usuario
+						'usuario'=>$usuario,
+						'filtroUserCadastrado'=>$filtroUserCadastrado,
 					)
     			);
-    		} else {   			
+    		} else {
+    			$filtroUserCadastrado = "";
+
 	    		$regiao = regiao::model()->findByPk($usuario->id_regiao)->nome;
+	    		$filtroUserCadastrado = "Região: " . $regiao;
 	    		$bairro = bairro::model()->findByPk($usuario->id_bairro)->nome;
+	    		$filtroUserCadastrado .= ", Bairro: " . $bairro;
 	    		$planoSaude = plano_saude::model()->findByPk($usuario->id_planosaude)->nome;
+	    		$filtroUserCadastrado .= ", Plano de Saúde: " . $planoSaude;
 
 	  			$model->_regiao = $regiao;
 	  			$model->_bairro = $bairro;
@@ -68,13 +76,15 @@ class DefaultController extends CController
 	     		return $this->render('resultado', [
 	     			'model' => $model, 
 	     			'dataProvider' => $dataProvider,
-	     			'usuario'=>$usuario
+	     			'usuario'=>$usuario,
+	     			'filtroUserCadastrado'=>$filtroUserCadastrado,
 	     		]);
 	     	}
     	
     	} else {
 	    	if (isset($_POST['hospital'])) {
 				$model->attributes = $_POST['hospital'];
+				$filtroUserCadastrado = $this->filterString($_POST['hospital']);
 			}
 			$dataProvider = $model->search();
     	}
@@ -82,7 +92,8 @@ class DefaultController extends CController
     	$this->render('resultado', [
     		'model' => $model,
     		'dataProvider' => $dataProvider,
-    		'usuario'=> $usuario
+    		'usuario'=> $usuario,
+    		'filtroUserCadastrado'=>$filtroUserCadastrado
     	]);
 	}
 
@@ -305,7 +316,7 @@ class DefaultController extends CController
 
 	public function actionMap()
 	{
-		$this->renderPartial("map");
+		$this->render("map");
 	}
 
 	public function actionresultMaps()
@@ -796,5 +807,25 @@ class DefaultController extends CController
 
 			exit($data);
 		}
+	}
+
+	public function filterString($filtros)
+	{
+		$str = "";
+		$i = 0;
+
+		foreach ($filtros as $attr => $valor) {
+			if (!empty($valor)) {
+				if ($i == 0) {
+					$str .= str_replace("_"," ", $attr).": ".$valor;
+				} else {
+					$str .= ", ".str_replace("_"," ", $attr).": ".$valor;
+				}
+				
+				$i++;
+			}
+		}
+
+		return $str;
 	}
 }

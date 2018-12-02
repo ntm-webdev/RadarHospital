@@ -14,10 +14,10 @@
 				<br>
 				<?=CHtml::activeLabel($model, 'atendimento', ['class'=>'text-beauty'])?>
 				<?=CHtml::activeDropDownList($model, 'atendimento',[
-					1 => '&#xf005;&#xf006;&#xf006;&#xf006;',
-					2 => '&#xf005;&#xf005;&#xf006;&#xf006;',
-					3 => '&#xf005;&#xf005;&#xf005;&#xf006;',
-					4 => '&#xf005;&#xf005;&#xf005;&#xf005;',
+					1 => '★',
+					2 => '★★',
+					3 => '★★★',
+					4 => '★★★★',
 					],['class'=>'form-control select-evaluate', 'encode'=>false])
 				?>
 			</div>
@@ -25,10 +25,10 @@
 			<div class="form-group">
 				<?=CHtml::activeLabel($model, 'atendimento_medico', ['class'=>'text-beauty'])?>
 				<?=CHtml::activeDropDownList($model, 'atendimento_medico',[
-					1 => '&#xf005;&#xf006;&#xf006;&#xf006;',
-					2 => '&#xf005;&#xf005;&#xf006;&#xf006;',
-					3 => '&#xf005;&#xf005;&#xf005;&#xf006;',
-					4 => '&#xf005;&#xf005;&#xf005;&#xf005;',
+					1 => '★',
+					2 => '★★',
+					3 => '★★★',
+					4 => '★★★★',
 					],['class'=>'form-control select-evaluate', 'encode'=>false])
 				?>
 			</div>
@@ -36,10 +36,10 @@
 			<div class="form-group">
 				<?=CHtml::activeLabel($model, 'higiene', ['class'=>'text-beauty'])?>
 				<?=CHtml::activeDropDownList($model, 'higiene',[
-					1 => '&#xf005;&#xf006;&#xf006;&#xf006;',
-					2 => '&#xf005;&#xf005;&#xf006;&#xf006;',
-					3 => '&#xf005;&#xf005;&#xf005;&#xf006;',
-					4 => '&#xf005;&#xf005;&#xf005;&#xf005;',
+					1 => '★',
+					2 => '★★',
+					3 => '★★★',
+					4 => '★★★★',
 					],['class'=>'form-control select-evaluate', 'encode'=>false])
 				?>
 			</div>
@@ -47,10 +47,10 @@
 			<div class="form-group">
 				<?=CHtml::activeLabel($model, 'infraestrutura', ['class'=>'text-beauty'])?>
 				<?=CHtml::activeDropDownList($model, 'infraestrutura',[
-					1 => '&#xf005;&#xf006;&#xf006;&#xf006;',
-					2 => '&#xf005;&#xf005;&#xf006;&#xf006;',
-					3 => '&#xf005;&#xf005;&#xf005;&#xf006;',
-					4 => '&#xf005;&#xf005;&#xf005;&#xf005;',
+					1 => '★',
+					2 => '★★',
+					3 => '★★★',
+					4 => '★★★★',
 					],['class'=>'form-control select-evaluate', 'encode'=>false])
 				?>
 			</div>

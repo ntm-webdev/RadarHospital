@@ -11,13 +11,14 @@
 				  	</div>
 				  	<div class="media-body">
 				    	<h5 class="media-heading text-beauty"><i class="fa fa-fw fa-h-square"></i> <?=$hospital->nome?> </h5>
+				    	<br>
 					    <p>
 							<i class="fa fa-fw fa-map-marker"></i> <b class="text-beauty">Endereço:</b> <?=$hospital->endereco?>
-							<br>
+							<br><br>
 							<i class="fa fa-fw fa-location-arrow"></i> <b class="text-beauty">Bairro:</b> <?=$hospital->fkbairro->nome?>	
 						</p>
 
-						<h5 class="media-heading text-beauty"><i class="fa fa-fw fa-heartbeat"></i> Planos:</h5>
+						<span class="media-heading text-beauty"><i class="fa fa-fw fa-heartbeat"></i> Planos:</span>
 						<?php
 							$hospital->getRelated("fkplanosaude", true);
 							$planos = [];
@@ -27,9 +28,9 @@
 							endforeach;
 
 
-							$str = implode(",", $planos);
-							echo "<div class='content-planos'>".$str."</div>";
+							$str = implode(", ", $planos);
 						?>
+						<?=$str;?>
 				  	</div>
 				  	<hr>
 				  	<?=CHtml::link("Detalhes", ['default/view', 'id'=>$hospital->id], ['class'=>'btn btn-success pull-right'])?>

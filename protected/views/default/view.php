@@ -15,12 +15,9 @@
 	}
 	
 ?>
-
 <div class="container-fluid">
-
 	<div class="row">
 		<div id="gallery" class="carousel slide" data-ride="carousel">
-			
 			<ol class="carousel-indicators">
 				<?php 
 					$i=0; 
@@ -71,6 +68,15 @@
 	<div class="row">
   		<!-- Navegacao -->
 		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation">
+				<a href="<?=Yii::app()->createUrl('Default/resultado')?>">
+					<span class="btn btn-purple">
+						<i class="fa fa-fw fa-lg pointer fa-search"></i>
+						Buscador
+					</span>
+				</a>
+			</li>
+
 			<li role="presentation" class="active">
 				<a href="#detalhes" class="text-beauty" aria-controls="detalhes" role="tab" data-toggle="tab" aria-expanded="true">Detalhes</a>
 			</li>
@@ -142,12 +148,5 @@
 				}
 			});
 		');	
-	}
-
-	if (isset($_GET['error']) && $_GET['error'] == "duplicidade") {
-		Yii::app()->clientScript->registerScript('actionFavorite', '
-			$("a[href=\"#avaliacoes\"]").trigger("click");
-			alert("Não é possível avaliar um hospital mais de uma vez");
-		', CClientScript::POS_LOAD);
 	}
 ?>

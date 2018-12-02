@@ -24,8 +24,10 @@
 		</div>
 	</div>
 </div>
+
+<hr class="hr-beauty">
+
 <div class="row row-avaliacoes">
-	<hr class="hr-beauty">
 	<?php 
 		$checkAvaliacao = feedback::model()->find([
 			'condition' => 'id_usuario=:id_usuario and id_hospital=:id_hospital', 
@@ -40,6 +42,8 @@
 	 	echo CHtml::link($texto, ['Default/evaluate', 'idHospital'=>$model->id], ['class'=>'btn btn-purple','style'=>'font-size: 15px']);
 	?>
 </div>
+
+<hr class="hr-beauty">
 
 <?php for($i=0;$i < count($feedback); $i++) : ?>
 	<br>

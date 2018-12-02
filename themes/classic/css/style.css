@@ -313,6 +313,10 @@ fieldset {
     #img-userarea{
         height: 200px; 
     }
+
+    #img-about {
+        left: 1%;
+    }
 }
 
 @media screen and (max-height: 450px) {
@@ -335,6 +339,10 @@ fieldset {
 
     .buttons-index {
         line-height: 50px;
+    }
+
+    #img-about {
+        left: 5%;
     }
 
     #img-userarea{
@@ -361,6 +369,10 @@ fieldset {
     #img-userarea{
         height: 250px; 
     }
+
+    #img-about {
+        left: 30%;
+    }
 }
 
 @media only screen and (min-width: 1224px) {
@@ -383,5 +395,9 @@ fieldset {
     .carousel-inner > .item > img, .carousel-inner > .item > a > img {
         width: 100%;
         height: 600px;
+    }
+
+    #img-about {
+        left: 30%;
     }
 }

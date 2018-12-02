@@ -92,17 +92,19 @@
                 </div>
 
                 <div class="col-xs-3">
-                    <?=CHtml::tag('a', ['href'=>'http://www.radarhospital.epizy.com/index.php/Default/map', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-map text-beauty"></i> Mapa</button>')?>
+                    <button id="btnMapa" class="btn btn-default btn-sm"> <i class="fa fa-map text-beauty"></i> Mapa</button>
                 </div>
 
                 <div class="col-xs-3">
-                    <?=CHtml::tag('a', ['href'=>'http://www.radarhospital.epizy.com/index.php/Default/userArea', 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
+                    <?=CHtml::tag('a', ['href'=>Yii::app()->createUrl('Default/userArea'), 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
                 </div>
                 <br>
             </div>
             
             <br>
-    
+
+            <strong class="text-beauty" style="font-weight: bold;"><?=$filtroUserCadastrado?></strong>
+
             <?php
 
                 $this->widget('zii.widgets.CListView', array(
@@ -238,5 +240,16 @@
                 }
             }, "json");
         });
+
+        $("#btnMapa").on("click", function() {
+            var latitude = $("#form-result #hospital_latitude").val();
+            var longitude = $("#form-result #hospital_longitude").val();
+
+            if (latitude.length <= 0 && longitude.length <= 0) {
+                alert("Não será possível realizar a operação atual, favor habilitar a localização");
+            } else {
+                window.location = "http://localhost/RadarHospital/index.php/default/map?lat="+latitude+"&long="+longitude; 
+            }
+        })
     ');
 ?>  

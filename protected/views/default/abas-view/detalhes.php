@@ -22,10 +22,10 @@
 	<div class="col-xs-12 no-padding-left">
 		<p class="text-beauty">Informações gerais</p>
 		<p><b>Nome:</b> <?=$model->nome?></p>
-		<p><b>Região:</b> <?=$model->fkregiao->nome?></p>
-		<p><b>Bairro:</b> <?=$model->fkbairro->nome?></p>
+		<p><b>Região:</b> <?=(!empty($model->fkregiao)) ? $model->fkregiao->nome : "" ?></p>
+		<p><b>Bairro:</b> <?=(!empty($model->fkbairro)) ? $model->fkbairro->nome : "" ?></p>
 		<p><b>Endereço:</b> <?=$model->endereco?></p>
-		<p><b>Site:</b> <?=CHtml::tag('a',['href'=>$model->site, 'target'=>'_blank'], 'Website')?></p>
+		<p><b>Site:</b> <?=CHtml::tag('a',['href'=>$model->site, 'target'=>'_blank', 'class'=>'text-beauty'], 'Website')?></p>
 		<p><b>Telefone:</b> <?=$model->telefone?></p>
 		<hr>
 	</div>

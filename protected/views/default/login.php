@@ -31,7 +31,7 @@ else : ?>
 			</div>
 
 			<div class="form-group">
-				<?=CHtml::tag("a", ['class'=>'text-beauty', 'href'=>'http://localhost/RadarHospital/index.php/default/registerUser'], "Ainda não se cadastrou? Clique aqui e faça seu cadastro");?>
+				<?=CHtml::tag("a", ['class'=>'text-beauty', 'href'=>Yii::app()->createUrl('Default/registerUser')], "Ainda não se cadastrou? Clique aqui e faça seu cadastro");?>
 			</div>
 		<?php $this->endWidget(); ?>
 	</div>
