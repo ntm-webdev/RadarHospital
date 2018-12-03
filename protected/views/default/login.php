@@ -31,7 +31,8 @@ else : ?>
 			</div>
 
 			<div class="form-group">
-				<?=CHtml::tag("a", ['class'=>'text-beauty', 'href'=>Yii::app()->createUrl('Default/registerUser')], "Ainda não se cadastrou? Clique aqui e faça seu cadastro");?>
+				<?=CHtml::tag("a", ['class'=>'text-beauty', 'href'=>Yii::app()->createUrl('Default/registerUser')], "Ainda não se cadastrou? Clique aqui e faça seu cadastro");?><br><br>
+				<?=CHtml::tag("a", ['class'=>'text-beauty', 'href'=>Yii::app()->createUrl('Default/resultado')], "Ir para página de resultados");?>
 			</div>
 		<?php $this->endWidget(); ?>
 	</div>

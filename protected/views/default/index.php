@@ -72,8 +72,14 @@
             ?>
 		</div>
 
+        <?php if (Yii::app()->user->hasState("specialAccess")) : ?>
+            <div class="form-group">
+                <?=CHtml::link('Edite ou Registre o seu hospital', ['Default/createHospital'], ['class'=>'text-beauty'])?>
+            </div>
+        <?php endif; ?>
+
         <div class="form-group">
-            <?=CHtml::link('Deseja cadastrar seu hospital? Clique aqui', ['Default/Partner'], ['class'=>'text-beauty'])?>
+            <?=CHtml::link('Tem interesse em se tornar nosso parceiro? Clique aqui', ['Default/Partner'], ['class'=>'text-beauty'])?>
         </div>
     <?php $this->endWidget() ?>
 

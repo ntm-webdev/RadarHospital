@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="form-group">
-			<?=CHtml::submitButton('Enviar', array('class'=>'btn btn-success', 'id'=>'submit')); ?>
+			<?=CHtml::submitButton('Salvar', array('class'=>'btn btn-success', 'id'=>'submit')); ?>
 	    </div>
 
 	<?php $this->endWidget(); ?>

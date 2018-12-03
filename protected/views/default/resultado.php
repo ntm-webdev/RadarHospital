@@ -1,6 +1,8 @@
 <body style="background-color: #f2f2f2">
     <div id="main">
         <div class="container">
+            <?=CHtml::tag("a", ['href'=>'index', 'class'=>'btn btn-purple'], "<i class='fa fa-fw fa-home'></i> Home")?>
+            <br><br>
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <div id="sidenav-content">
@@ -98,6 +100,12 @@
                 <div class="col-xs-3">
                     <?=CHtml::tag('a', ['href'=>Yii::app()->createUrl('Default/userArea'), 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-user text-beauty"></i> Minha Conta</button>')?>
                 </div>
+
+                <?php if(Yii::app()->user->hasState("nome")) : ?>
+                    <div class="col-xs-3">
+                        <?=CHtml::tag('a', ['href'=>Yii::app()->createUrl('Default/favorites'), 'class'=> 'no-link'], '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-heart text-beauty"></i> Favoritos</button>')?>
+                    </div>
+                <?php endif; ?>
                 <br>
             </div>
             

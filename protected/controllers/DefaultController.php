@@ -82,6 +82,8 @@ class DefaultController extends CController
 	     	}
     	
     	} else {
+    		$filtroUserCadastrado = "";
+    		
 	    	if (isset($_POST['hospital'])) {
 				$model->attributes = $_POST['hospital'];
 				$filtroUserCadastrado = $this->filterString($_POST['hospital']);

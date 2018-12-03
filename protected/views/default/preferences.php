@@ -8,6 +8,11 @@
 			]
 		]);
 	?>
+		<div class="form-group">
+			<a href="<?=Yii::app()->createUrl('Default/userArea')?>" class="text-beauty btn btn-default">
+		      Voltar para minhas preferências
+		    </a>
+		</div>
 		<?=CHtml::hiddenField('Usuario[email]', $model->email)?>
 		<?=CHtml::hiddenField('Usuario[confEmail]', $model->email)?>
 		<?=CHtml::hiddenField('Usuario[pwd]', $model->pwd)?>
