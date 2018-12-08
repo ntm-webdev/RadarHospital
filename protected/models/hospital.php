@@ -22,6 +22,7 @@ class hospital extends CActiveRecord
     public function tableName()
     {
         return 'hospital';
+        rfrefve;vsds;dswes
     }
 
     protected $_regiao;
