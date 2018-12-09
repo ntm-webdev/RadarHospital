@@ -42,56 +42,19 @@
 			            	location.reload();
 			            }, 3000);
 					} else {
-			        	var fields = data.fields;
-			        	var msgs = fields.join(); 
 
 			        	$.gritter.add({
 			                title: "Erro!",
 			                text: data.msg,
 			                class_name: "gritter-error"
 			            });
-
-			            if (msgs.includes("Nome cannot be blank") > 0) {
-			        		$("#nome-error").remove();
-			        		$("#nome").after("<label class=\"user-error\" id=\"nome-error\" style=\"color: red\">Nome não pode ser vazio</label>")
-			        	} else {
-			        		$("#nome-error").remove();
-			        	}
-
-			        	if (msgs.includes("E-mail cannot be blank") > 0) {
-			        		$("#email-error").remove();
-			        		$("#email").after("<label class=\"user-error\" id=\"email-error\" style=\"color: red\">E-mail não pode ser vazio</label>")
-			        	} else {
-			        		$("#email-error").remove();
-			        	}
-
-			        	if (msgs.includes("E-mail not valid") > 0) {
-			        		$("#email-valid-error").remove();
-			        		$("#email").after("<label class=\"user-error\" id=\"email-valid-error\" style=\"color: red\">Esse não é um e-mail válido</label>")
-			        	} else {
-			        		$("#email-valid-error").remove();
-			        	}
-
-			        	if (msgs.includes("Telefone cannot be blank") > 0) {
-			        		$("#telefone-error").remove();
-			        		$("#telefone").after("<label class=\"user-error\" id=\"telefone-error\" style=\"color: red\">Telefone não pode ser vazio</label>")
-			        	} else {
-			        		$("#telefone-error").remove();
-			        	}
-
-			        	if (msgs.includes("Telefone not valid") > 0) {
-			        		$("#telefoneinvalid").remove();
-			        		$("#telefone").after("<label id=\"telefoneinvalid\" class=\"user-error\" style=\"color: red\">Esse não é um telefone válido</label>")
-			        	} else {
-			        		$("#telefoneinvalid").remove();
-			        	}
-
-			        	if (msgs.includes("Mensagem cannot be blank") > 0) {
-			        		$("#mensagem-error").remove();
-			        		$("#mensagem").after("<label class=\"user-error\" id=\"mensagem-error\" style=\"color: red\">Mensagem não pode ser vazio</label>")
-			        	} else {
-			        		$("#mensagem-error").remove();
-			        	}
+			            
+			            $.each(data.fields, function(index, value) {
+			            	$(".user-error").remove();
+			            	window.setTimeout(function() {
+		            			$("#"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\">" + value + "</label>");
+			            	}, 800);
+						});
 			        }
 		        }',     
             ),array('class'=>'btn btn-success')); ?>

@@ -118,24 +118,11 @@ class DefaultController extends CController
 	public function actionEvaluate()
 	{	
 		if (!empty($_REQUEST['idHospital'])) {
-			$newRecord = feedback::model()->find([
-				'condition' => 'id_hospital=:idHospital and id_usuario=:idUsuario',
-				'params' => [
-					':idHospital'=> $_REQUEST['idHospital'],
-					':idUsuario'=>Yii::app()->user->getState("id")
-				]
-			]);
+			$feedback = new feedback();
+			$model = $feedback->verifyEvaluate($_REQUEST['idHospital'], Yii::app()->user->getState("id"));
 
-			if (!empty($newRecord)) {
-				$model = $newRecord;
-			} else {
-				$model = new feedback();
-			}
-
-			if (!empty($_REQUEST['Feedback'])) {
+			if (isset($_REQUEST['Feedback'])) {
 				$model->attributes = $_REQUEST['Feedback'];
-				$model->id_hospital = $_REQUEST['idHospital'];
-				$model->id_usuario = Yii::app()->user->getState("id");
 
 				$valid = $model->validate(); 
 				$error = CActiveForm::validate($model);
@@ -251,12 +238,6 @@ class DefaultController extends CController
 
 		if (isset($_POST['Usuario'])) {
 			$model->attributes = $_POST['Usuario'];
-			
-			$criteria=new CDbCriteria;
-			$criteria->select='max(id) AS maxColumn';
-			$row = $model->model()->find($criteria);
-			$somevariable = $row['maxColumn'] + 1;
-			$model->id = $somevariable;
 
 			if (!empty($_POST['nome_hospital'])) {
 				$model->partner = 1;
@@ -409,65 +390,18 @@ class DefaultController extends CController
 
 	public function actionPartner() 
 	{
-		$error = [];
-		$erro = false;
-
 		if (!empty($_POST)) {
 
-			if (empty($_POST['nome'])) {
-				$error[] = "Nome cannot be blank"; 
-				$erro = true;
-			} 
+			$error = GlobalFunctions::validateFields($_POST);
 
-			if (empty($_POST['email'])) {
-				$error[] = "E-mail cannot be blank"; 
-				$erro = true;
-			} else {
-				if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-					$error[] = "E-mail not valid"; 
-					$erro = true;
-				}
-			}
-
-			if (empty($_POST['telefone'])) {
-				$error[] = "Telefone cannot be blank"; 
-				$erro = true;
-			} else {
-				if (!filter_var($_POST['telefone'], FILTER_VALIDATE_INT)) {
-					$error[] = "Telefone not valid"; 
-					$erro = true;
-				}
-			}
-			
-			if (empty($_POST['mensagem'])) {
-				$error[] = "Mensagem cannot be blank"; 
-				$erro = true;
-			}
-			
-			if ($erro == true) {
+			if (!empty($error)) {
 				$data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
 				echo $data;
 				exit;
 			} else {
-				Yii::import('application.extensions.phpmailer.JPhpMailer');
-				$mail = new JPhpMailer;
-				$mail->IsSMTP();
-				$mail->SMTPAuth = true;
-				$mail->SMTPSecure = 'tls';
-				$mail->Host = 'smtp.gmail.com';
-				$mail->Port = '587';
-				$mail->Username = 'root.radarhospital@gmail.com';
-				$mail->Password = 'admin1234LX';
-				$mail->SetFrom('root.radarhospital@gmail.com', 'Radar Hospital');
-				$mail->Subject = 'Nova parceria';
-				$mail->Body .= "Nome: ".$_POST['nome']."<br>"; 
-				$mail->Body .= "E-mail: ".$_POST['email']."<br>"; 
-				$mail->Body .= "Telefone: ".$_POST['telefone']."<br>"; 
-				$mail->Body .= "Mensagem: ".$_POST['mensagem'];
-				$mail->IsHTML(true); 
-				$mail->AddAddress('suporte.radarhospital@gmail.com', $_POST['nome']);
-				
-				if ($mail->Send()) {
+				$partner = new Partner();
+
+				if ($partner->sendEmail($_POST)) {
 					$data = json_encode(array('msg' => 'O formulário foi entregue com sucesso.', 'status'=>'ok'));
 					echo $data;
 					exit;
@@ -481,30 +415,12 @@ class DefaultController extends CController
 	public function actionCreateHospital()
 	{
 		if (isset($_POST['hospital'])) {	
-			$error = [];
-			$erro = false;
 
-			foreach ($_POST['hospital'] as $key => $value) {
-				if (empty($_POST['hospital'][$key])) {
-					$error[$key] = $key." cannot be blank";
-					$erro = true; 
-				}
-			}
+			$erro = GlobalFunctions::validateFields($_POST['hospital'], true);
 
-			if (empty($_POST['hospital']['fkespecialidade'])) {
-				$error['fkespecialidade'] = "especialidade cannot be blank";
-				$erro = true; 
-			}
-
-			if (empty($_POST['hospital']['fkplanosaude'])) {
-				$error['fkplanosaude'] = "plano de saude cannot be blank";
-				$erro = true; 
-			}
-
-
-			if ($erro == true) {
+			if (!empty($erro)) {
 				header('Content-Type: application/json');
-				$data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
+				$data = json_encode(array('fields' => $erro, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
 				echo($data);
 				exit;
 			} else {
@@ -520,57 +436,22 @@ class DefaultController extends CController
 		        	$wrongPicturesFormat = false;
 		        	$errorPhotos= [];
 
-	        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>1,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto1'])) {
-	        			$ext = pathinfo($_FILES['hospital']['name']['foto1'], PATHINFO_EXTENSION);
-	        			if (!empty($_FILES['hospital']['tmp_name']['foto1']) && $ext != "jpg") {
-	    					$errorPhotos['foto1'] = 'wrong';
-							$wrongPicturesFormat = true;
-	        			} else {
-	    					$wrongPicturesFormat = false;
-	        				$foto1_tmp = $_FILES['hospital']['tmp_name']['foto1'];
-	    					move_uploaded_file($foto1_tmp, $destino."/1.jpg");
-	    					$fotos['foto'][] = 1;
-	        			}
-	        		}
+		        	for ($i=1; $i<=4; $i++) {
+		        		$indice = (string)$i;
 
-	        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>2,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto2'])) {
-	        			$ext = pathinfo($_FILES['hospital']['name']['foto2'], PATHINFO_EXTENSION);
-	        			if (!empty($_FILES['hospital']['tmp_name']['foto2']) && $ext != "jpg") {
-		        			$errorPhotos['foto2'] = 'wrong';
-							$wrongPicturesFormat = true;
-	        			} else {
-	        				$wrongPicturesFormat = false;
-							$foto2_tmp = $_FILES['hospital']['tmp_name']['foto2'];
-	    					move_uploaded_file($foto2_tmp, $destino."/2.jpg");
-	    					$fotos['foto'][] = 2;
-	        			}
-	        		}
+		        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>$i,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto'.$indice])) {
+		        			$ext = pathinfo($_FILES['hospital']['name']['foto'.$indice], PATHINFO_EXTENSION);
 
-	        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>3,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto3'])) {
-	        			$ext = pathinfo($_FILES['hospital']['name']['foto3'], PATHINFO_EXTENSION);
-	        			if (!empty($_FILES['hospital']['tmp_name']['foto3']) && $ext != "jpg") {
-	    					$errorPhotos['foto3'] = 'wrong';
-							$wrongPicturesFormat = true;
-	        			} else {
-	        				$wrongPicturesFormat = false;
-	        				$foto3_tmp = $_FILES['hospital']['tmp_name']['foto3'];
-	    					move_uploaded_file($foto3_tmp, $destino."/3.jpg");
-	    					$fotos['foto'][] = 3;
-	        			}
-	        		}
-
-	        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>4,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto4'])) {
-	        			$ext = pathinfo($_FILES['hospital']['name']['foto4'], PATHINFO_EXTENSION);
-	        			if (!empty($_FILES['hospital']['tmp_name']['foto4']) && $ext != "jpg") {
-		        			$errorPhotos['foto4'] = 'wrong';
-		        			$wrongPicturesFormat = true;
-	        			} else {
-	        				$wrongPicturesFormat = false;
-							$foto4_tmp = $_FILES['hospital']['tmp_name']['foto4'];
-	    					move_uploaded_file($foto4_tmp, $destino."/4.jpg");
-	    					$fotos['foto'][] = 4;
-	        			}
-	        		}
+		        			if (!empty($_FILES['hospital']['tmp_name']['foto'.$indice]) && $ext != "jpg") {
+		    					$errorPhotos['foto'.$indice] = 'wrong';
+								$wrongPicturesFormat = true;
+		        			} else {
+		    					$wrongPicturesFormat = false;
+		    					move_uploaded_file($_FILES['hospital']['tmp_name']['foto'.$indice], $destino."/".$indice.".jpg");
+		    					$fotos['foto'][] = $i;
+		        			}
+		        		}
+		        	}
 
 	        		if ($wrongPicturesFormat == true) {
 	        			header("Content-Type: application/json");
@@ -603,40 +484,16 @@ class DefaultController extends CController
 			}
 		} else {
 			if (Yii::app()->user->hasState("specialAccess") || Yii::app()->user->hasState("masterAccess")) {
-				$horas = [
-					'00:00' => '00:00',
-					'01:00' => '01:00',
-					'02:00' => '02:00',
-					'03:00' => '03:00',
-					'04:00' => '04:00',
-					'05:00' => '05:00',
-					'06:00' => '06:00',
-					'07:00' => '07:00',
-					'08:00' => '08:00',
-					'09:00' => '09:00',
-					'10:00' => '10:00',
-					'11:00' => '11:00',
-					'12:00' => '12:00',
-					'13:00' => '13:00',
-					'14:00' => '14:00',
-					'15:00' => '15:00',
-					'15:00' => '15:00',
-					'16:00' => '16:00',
-					'17:00' => '17:00',
-					'18:00' => '18:00',
-					'19:00' => '19:00',
-					'20:00' => '20:00',
-					'21:00' => '21:00',
-					'22:00' => '22:00',
-					'23:00' => '23:00',
-				];
+				$horas = ['00:00' => '00:00','01:00' => '01:00','02:00' => '02:00','03:00' => '03:00','04:00' => '04:00','05:00' => '05:00','06:00' => '06:00','07:00' => '07:00','08:00' => '08:00','09:00' => '09:00','10:00' => '10:00','11:00' => '11:00','12:00' => '12:00','13:00' => '13:00','14:00' => '14:00','15:00' => '15:00','15:00' => '15:00','16:00' => '16:00','17:00' => '17:00','18:00' => '18:00','19:00' => '19:00','20:00' => '20:00','21:00' => '21:00','22:00' => '22:00','23:00' => '23:00'];
 				$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
 				$model = hospital::model()->findByPk($usuario->id_hospital);
 				$imagens = imagem_hospital::model()->findAllByAttributes(['codhospital'=>$model->id]);
+				
 				$img = [];
 				for ($i=0; $i<count($imagens); $i++) { 
 					$img[] = $imagens[$i]->codimagem;
 				}
+
 				$this->render("createHospital",[
 					'model'=>$model,
 					'usuario'=>$usuario,
@@ -661,12 +518,9 @@ class DefaultController extends CController
 
 	public function actionInsertJson()
 	{
+		$error = GlobalFunctions::validateFields($_POST);
 		
-		if (empty($_POST['nome_hospital'])) {
-			$error = [];
-			$error['nome_hospital'] = 'blank';
-
-			header("Content-Type: application/json");
+		if (!empty($error)) {	
 			$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'A requisição não pode ser feita'));
 			echo $data;
 			exit;
@@ -684,24 +538,27 @@ class DefaultController extends CController
 					try 
 					{
 						$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
+
 						if (empty($codhospital)) {
 							$model = new hospital();
 						} else {
 							$model = hospital::model()->findByPk($codhospital);
-							Yii::app()->db->createCommand('DELETE from especialidade_hospital where codhospital=:codhospital')->execute([':codhospital'=>$codhospital]);
-							Yii::app()->db->createCommand('DELETE from plano_hospital where codhospital=:codhospital')->execute([':codhospital'=>$codhospital]);
-
-							if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>1,'codhospital'=>$codhospital])) || !empty($json->foto[0])) {
-								Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$codhospital, ':codimagem'=>$json->foto[0]]);
-							} if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>2,'codhospital'=>$codhospital])) || !empty($json->foto[1])) {
-								Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$codhospital, ':codimagem'=>$json->foto[1]]);
-							} if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>3,'codhospital'=>$codhospital])) || !empty($json->foto[2])) {
-								Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$codhospital, ':codimagem'=>$json->foto[2]]);
-							} if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>4,'codhospital'=>$codhospital])) || !empty($json->foto[3])) {
-								Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$codhospital, ':codimagem'=>$json->foto[3]]);
-							}
 							
-							Yii::app()->db->createCommand('DELETE from periodo where id_hospital=:codhospital')->execute([':codhospital'=>$codhospital]);
+							//deletando associacao de especialidades
+							$especialidade = new especialidade_hospital();
+							$especialidade->deleteEspecialidade($codhospital);
+
+							//deletando associação de planos
+							$planos = new plano_hospital();
+							$planos->deletePlanoSaude($codhospital);
+
+							//deletando associação de imagens
+							$imagens = new imagem_hospital();
+							$imagens->deleteImagem($codhospital, $json->foto);
+							
+							//deletando associação de horario atendimento
+							$periodo = new periodo();
+							$periodo->deletePeriodo($codhospital);
 						}
 						
 						#hospital
@@ -788,20 +645,15 @@ class DefaultController extends CController
 				echo $data;
 				exit;
 			}
-		} else {
-			$error=[];
-			$error['json_file'] = 'blank';
-			header("Content-Type: application/json");
-			$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'A requisição não pode ser feita'));
-			echo $data;
-			exit;
 		}
 	}
 
 	public function actionDeletePhoto()
 	{
 		if (isset($_REQUEST['codimagem']) && isset($_REQUEST['codhospital'])) {
-			if (imagem_hospital::model()->deleteAllByAttributes(['codhospital'=>$_REQUEST['codhospital'], 'codimagem'=>$_REQUEST['codimagem']])) {
+			$imagens = new imagens();
+
+			if ($imagens->deletePhoto($_REQUEST['codimagem'], $_REQUEST['codhospital'])) {
 				$data = json_encode(array('msg' => 'A imagem foi deletada com sucesso', 'status'=>'ok'));
 			} else {
 				$data = json_encode(array('msg' => 'A imagem não pode ser deletada', 'status'=>'error'));

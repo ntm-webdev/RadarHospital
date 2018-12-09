@@ -51,7 +51,6 @@
 			            	location.reload(); 
 			            }, 3000);
 					} else {
-			        	var fields = data.fields;
 
 			        	$.gritter.add({
 			                title: "Erro!",

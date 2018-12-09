@@ -37,15 +37,15 @@ class Usuario extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id, nome, pwd, email, id_bairro, id_planosaude, id_regiao, confEmail, confPwd', 'required'),
+            array('nome, pwd, email, id_bairro, id_planosaude, id_regiao, confEmail, confPwd', 'required'),
             array('email, confEmail', 'email'),
-            array('id, id_bairro, id_planosaude, id_regiao, partner, master', 'numerical', 'integerOnly'=>true),
+            array('id_bairro, id_planosaude, id_regiao, partner, master', 'numerical', 'integerOnly'=>true),
             array('nome, email, pwd', 'length', 'max'=>150),
-            array('confEmail, email', 'confirmacaoEmail'),
+            array('email', 'confirmacaoEmail'),
             array('pwd, confPwd', 'confirmacaoPwd'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, nome, id_bairro, id_planosaude, id_regiao, email, pwd', 'safe', 'on'=>'search'),
+            array('nome, id_bairro, id_planosaude, id_regiao, email, pwd', 'safe', 'on'=>'search'),
         );
     }
 

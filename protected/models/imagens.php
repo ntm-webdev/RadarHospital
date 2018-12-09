@@ -96,4 +96,14 @@ class imagens extends CActiveRecord
     {
         return parent::model($className);
     }
+
+    public function deletePhoto($idImagem, $idHospital)
+    {
+        if (imagem_hospital::model()->deleteAllByAttributes(['codimagem'=>$idImagem, 'codhospital'=>$idHospital])) {
+            return true;
+        } else {
+            GlobalFunctions::die_dump($this->error);
+            return false;
+        }
+    }
 }

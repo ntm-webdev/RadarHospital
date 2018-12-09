@@ -7,7 +7,7 @@
  * @property integer $codplano
  * @property integer $codhospital
  */
-class planoHospital extends CActiveRecord
+class plano_hospital extends CActiveRecord
 {
     /**
      * @return string the associated database table name
@@ -90,5 +90,10 @@ class planoHospital extends CActiveRecord
     public static function model($className=__CLASS__)
     {
         return parent::model($className);
+    }
+
+    public function deletePlanoSaude($idHospital)
+    {
+        $this::model()->deleteAllByAttributes(['codhospital'=>$idHospital]);
     }
 }

@@ -103,4 +103,9 @@ class periodo extends CActiveRecord
     {
         return parent::model($className);
     }
+
+    public function deletePeriodo($idHospital)
+    {
+        $this::model()->deleteAllByAttributes(['id_hospital'=>$idHospital]);
+    }
 }

@@ -92,4 +92,9 @@ class especialidade_hospital extends CActiveRecord
     {
         return parent::model($className);
     }
+
+    public function deleteEspecialidade($idHospital)
+    {
+        $this::model()->deleteAllByAttributes(['codhospital'=>$idHospital]);
+    }
 }

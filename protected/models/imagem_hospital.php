@@ -98,4 +98,15 @@ class imagem_hospital extends CActiveRecord
     {
         return parent::model($className);
     }
+
+    public function deleteImagem($idHospital, $fotos)
+    {
+        for ($i=0; $i<4; $i++) {
+            $j = $i+1;
+
+            if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>$j,'codhospital'=>$idHospital])) || !empty($fotos[$i])) {
+                Yii::app()->db->createCommand('DELETE from imagem_hospital where codhospital=:codhospital and codimagem=:codimagem')->execute([':codhospital'=>$idHospital, ':codimagem'=>$fotos[$i]]);
+            } 
+        }
+    }
 }

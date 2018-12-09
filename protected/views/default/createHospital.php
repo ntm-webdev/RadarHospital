@@ -398,8 +398,6 @@
 			            	location.reload();
 			            }, 4000);
 					} else {
-			        	var fields = data.fields;
-			        	console.log(fields);
 	
 			        	$.gritter.add({
 			                title: "Erro!",
@@ -411,10 +409,10 @@
 			            	$(".user-error").remove();
 			            	window.setTimeout(function() {
 			            		if (value == "wrong") {
-			            			$("#hospital_"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\"> formato incorreto, apenas .jpg</label>");
+			            			$("#hospital_"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\"> favor utilizar .jpg</label>");
 			            		} else {
-			            			$("#hospital_"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\">"+ index + " não pode ser vazio</label>");
-			            		}
+		            				$("#hospital_"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\">" + value+"</label>");
+		            			}
 			            	}, 800);
 						});
 			        }

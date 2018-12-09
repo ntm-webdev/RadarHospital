@@ -9,6 +9,9 @@
 				'method' => 'GET'
 			]);
 		?>
+			<?=CHtml::hiddenField('Feedback[id_hospital]', $_GET['idHospital']) ?>
+			<?=CHtml::hiddenField('Feedback[id_usuario]', Yii::app()->user->getState("id")) ?>
+
 			<div class="form-group">
 				<h2 class="text-beauty">Deixe sua opinião</h2>
 				<br>
@@ -83,8 +86,6 @@
 				                text: data.msg,
 				                class_name: "gritter-error"
 				            });
-
-				            var fields = data.fields;
 				        }
 			            
 			        }'           

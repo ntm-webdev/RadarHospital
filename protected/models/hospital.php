@@ -22,7 +22,6 @@ class hospital extends CActiveRecord
     public function tableName()
     {
         return 'hospital';
-        rfrefve;vsds;dswes
     }
 
     protected $_regiao;
@@ -170,6 +169,11 @@ class hospital extends CActiveRecord
     public static function model($className=__CLASS__)
     {
         return parent::model($className);
+    }
+
+    public function createHospital()
+    {
+        
     }
 
     public function getHospitais()

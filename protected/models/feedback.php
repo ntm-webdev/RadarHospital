@@ -161,4 +161,23 @@ class Feedback extends CActiveRecord
     {
         return date('d/m/Y', strtotime($date));
     }
+
+    public function verifyEvaluate($idHospital, $idUsuario)
+    {
+        $newRecord = feedback::model()->find([
+            'condition' => 'id_hospital=:idHospital and id_usuario=:idUsuario',
+            'params' => [
+                ':idHospital' => $idHospital,
+                ':idUsuario'  => $idUsuario
+            ]
+        ]);
+
+        if (!empty($newRecord)) {
+            $model = $newRecord;
+        } else {
+            $model = new feedback();
+        }
+
+        return $model;
+    }
 }

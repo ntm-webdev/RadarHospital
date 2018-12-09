@@ -89,8 +89,6 @@
 			            		window.location = "'.Yii::app()->createUrl("Default/login").'"; 
 			            	}, 4000);
 				        } else {
-				        	var fields = data.fields;
-				        	console.log(fields);
 				        	
 				        	$.gritter.add({
 				                title: "Erro!",
@@ -98,70 +96,19 @@
 				                class_name: "gritter-error"
 				            });
 
-				        	if (fields.search("Nome cannot be blank.") > 0) {
-				        		$("#nome-error").remove();
-				        		$("#Usuario_nome").after("<label class=\"user-error\" id=\"nome-error\" style=\"color: red\">Nome não pode ser vazio</label>")
-				        	} else {
-				        		$("#nome-error").remove();
-				        	}
+				            var fields = JSON.parse(data.fields);
 
-				        	if (fields.search("Senha cannot be blank.") > 0) {
-				        		$("#pwd-error").remove();
-				        		$("#Usuario_pwd").after("<label class=\"user-error\" id=\"pwd-error\" style=\"color: red\">Senha não pode ser vazia</label>")
-				        	} else {
-				        		$("#pwd-error").remove();
-				        	}
+				           	$.each(fields, function(index, value) {
+				            	$(".user-error").remove();
+				            	
+				            	window.setTimeout(function() {
+				            		msg = value.join(",");
+				            		msg = msg.replace("cannot be blank", "não pode ser vazio");
+				            		msg = msg.replace("is not a valid email address", "não é valido"); 
 
-				        	if (fields.search("E-mail cannot be blank.") > 0) {
-				        		$("#email-blankerror").remove();
-				        		$("#Usuario_email").after("<label class=\"user-error\" id=\"email-blankerror\" style=\"color: red\">E-mail não pode ser vazio</label>")
-				        	} else {
-				        		$("#email-blankerror").remove();
-				        	}
-
-				        	if (fields.search("Ja existe uma conta para o e-mail informado.") > 0) {
-				        		$("#email-error").remove();
-				        		$("#Usuario_email").after("<label class=\"user-error\" id=\"email-error\" style=\"color: red\">Já existe uma conta para o e-mail informado</label>")
-				        	} else {
-				        		$("#email-error").remove();
-				        	}
-
-				        	if (fields.search("Confirme seu e-mail cannot be blank.") > 0) {
-				        		$("#confemail-error").remove();
-				        		$("#Usuario_confEmail").after("<label class=\"user-error\" id=\"confemail-error\" style=\"color: red\">Confirme seu e-mail não pode ser vazio</label>")
-				        	} else {
-				        		$("#confemail-error").remove();
-				        	}
-
-				        	if (fields.search("Confirme sua senha cannot be blank.") > 0) {
-				        		$("#confpwd-error").remove();
-				        		$("#Usuario_confPwd").after("<label id=\"confpwd-error\" class=\"user-error\" style=\"color: red\">Confirme sua senha não pode ser vazia</label>")
-				        	} else {
-				        		$("#confpwd-error").remove();
-				        	}
-
-				        	if (fields.search("E-mail is not a valid email address.") > 0) {
-				        		$("#emailinvalid").remove();
-				        		$("#Usuario_email").after("<label id=\"emailinvalid\" class=\"user-error\" style=\"color: red\">Esse não é um e-mail válido</label>")
-				        	} else {
-				        		$("#emailinvalid").remove();
-				        	}
-
-				        	if (fields.search("Os emails nao correspondem.") > 0) {
-				        		$("#confemailcorrespondent-error, #emailcorrespondent-error").remove();
-				        		$("#Usuario_email").after("<label id=\"confemailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label><br>");
-				        		$("#Usuario_confEmail").after("<label id=\"emailcorrespondent-error\" class=\"user-error\" style=\"color: red\">Os e-mails não correspondem</label><br>")
-				        	} else {
-				        		$("#confemailcorrespondent-error, #emailcorrespondent-error").remove();
-				        	}
-
-				        	if (fields.search("As senhas nao correspondem.") > 0) {
-				        		$("#confpwdcorrespondent-error, #pwdcorrespondent-error").remove();
-				        		$("#Usuario_pwd").after("<label id=\"confpwdcorrespondent-error\" class=\"user-error\" style=\"color: red\">As senhas não correspondem</label>");
-				        		$("#Usuario_confPwd").after("<label id=\"pwdcorrespondent-error\" class=\"user-error\" style=\"color: red\">As senhas não correspondem</label>")
-				        	} else {
-				        		$("#confpwdcorrespondent-error, #pwdcorrespondent-error").remove();
-				        	}
+			            			$("#"+index).after("<label class=\"user-error\" id=\""+index+"-error\" style=\"color: red\">" + msg + "</label>");
+				            	}, 800);
+							});
 				        }
 			        }'	       
                 ),array('class'=>'btn btn-success'));
