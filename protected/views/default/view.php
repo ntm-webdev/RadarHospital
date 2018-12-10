@@ -124,26 +124,42 @@
 				var idhosp = $("#idhosp").val();
 				
 				if($("#favorite").prop("class") == "text-beauty") {
-					$.post("'.Yii::app()->createUrl("default/Unfavorite").'", {id_usuario:iduser, id_hospital:idhosp}, function(){
-						
-						$.gritter.add({
-			                title: "Sucesso!",
-			                text: "O hospital foi retirado dos seus favoritos.",
-			                class_name: "gritter-success"
-			            });
+					$.post("'.Yii::app()->createUrl("default/Unfavorite").'", {id_usuario:iduser, id_hospital:idhosp}, function(data) {
+						console.log(data.msg);
+						if (data.status == "ok") {
+							$.gritter.add({
+				                title: "Sucesso!",
+				                text: data.msg,
+				                class_name: "gritter-success"
+				            });
 
-			            setTimeout(function(){ window.location.reload(); }, 4000);
+				            setTimeout(function(){ window.location.reload(); }, 4000);
+				        } else {
+				        	$.gritter.add({
+				                title: "Erro!",
+				                text: data.msg,
+				                class_name: "gritter-error"
+				            });
+				        }
 					});
 				} else {
-					$.post("'.Yii::app()->createUrl("default/favorite").'",{id_usuario:iduser, id_hospital:idhosp}, function(data){
-						
-			            $.gritter.add({
-			                title: "Sucesso!",
-			                text: "Hospital favoritado com sucesso.",
-			                class_name: "gritter-success"
-			            });
+					$.post("'.Yii::app()->createUrl("default/favorite").'",{id_usuario:iduser, id_hospital:idhosp}, function(data) {
+						console.log(data.msg);
+						if (data.status == "ok") {
+				            $.gritter.add({
+				                title: "Sucesso!",
+				                text: data.msg,
+				                class_name: "gritter-success"
+				            });
 
-			            setTimeout(function(){ window.location.reload(); }, 4000);
+				            setTimeout(function(){ window.location.reload(); }, 4000);
+				        } else {
+				        	$.gritter.add({
+				                title: "Erro!",
+				                text: data.msg,
+				                class_name: "gritter-error"
+				            });
+				        }
 					});
 				}
 			});

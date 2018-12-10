@@ -97,4 +97,26 @@ class favorites extends CActiveRecord
     {
         return parent::model($className);
     }
+
+    public function favorite($idHospital, $idUsuario)
+    {
+        $model = new favorites();
+        $model->id_hospital = $idHospital;
+        $model->id_usuario = $idUsuario;
+        
+        if ($model->save()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function unfavorite($idHospital, $idUsuario)
+    {
+        if (favorites::model()->deleteAll(['condition' => 'id_hospital=:idHospital and id_usuario=:idUsuario', 'params' => [':idHospital' => $idHospital, ':idUsuario' => $idUsuario]])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

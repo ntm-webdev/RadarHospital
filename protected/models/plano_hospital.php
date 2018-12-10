@@ -96,4 +96,14 @@ class plano_hospital extends CActiveRecord
     {
         $this::model()->deleteAllByAttributes(['codhospital'=>$idHospital]);
     }
+
+    public function insertPlanosSaude($idHospital, $planos)
+    {
+        foreach ($planos as $value) {
+            $model = new plano_hospital();
+            $model->codplano = (int) $value;
+            $model->codhospital = (int) $idHospital;
+            $model->save();
+        }
+    }
 }

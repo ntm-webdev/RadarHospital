@@ -40,10 +40,10 @@ class DefaultController extends CController
     			$filtroUserCadastrado = $this->filterString($_POST['hospital']);
     			
     			return $this->render('resultado', array(
-						'model' => $model, 
-						'dataProvider' => $dataProvider,
-						'usuario'=>$usuario,
-						'filtroUserCadastrado'=>$filtroUserCadastrado,
+					'model' => $model, 
+					'dataProvider' => $dataProvider,
+					'usuario'=>$usuario,
+					'filtroUserCadastrado'=>$filtroUserCadastrado,
 					)
     			);
     		} else {
@@ -128,12 +128,10 @@ class DefaultController extends CController
 				$error = CActiveForm::validate($model);
 				
 				if($valid == false) {
-	                $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'O Feedback não pode ser salvo'));
-					exit($data);
+					JsonHandler::sendResponse('error', 'O Feedback não pode ser salvo.', $error);
 				} else {
 					if($model->save()) {
-						$data = json_encode(array('msg' => 'Feedback salvo com sucesso.', 'status'=>'ok'));
-						exit($data);
+						JsonHandler::sendResponse('ok', 'Feedback salvo com sucesso.');
 					}
 				}
 			} else {
@@ -161,13 +159,11 @@ class DefaultController extends CController
 			$valid = $model->validate(); 
 			$error = CActiveForm::validate($model);
 			
-			if($valid == false) {
-                $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'Falha ao atualizar o cadastro'));
-				exit($data);
+			if ($valid == false) {
+				JsonHandler::sendResponse('error', 'Falha ao atualizar o cadastro', $error);
 			} else {
 				if($model->save()) {
-					$data = json_encode(array('msg' => 'O cadastro foi atualizado com sucesso.', 'status'=>'ok'));
-					exit($data);
+					JsonHandler::sendResponse('ok', 'O cadastro foi atualizado com sucesso.');
 				}
 			}
 		} else {
@@ -274,9 +270,13 @@ class DefaultController extends CController
 	{
 		if (isset($_POST['id_hospital']) && isset($_POST['id_usuario'])) {
 			$model = new favorites();
-			$model->id_hospital = $_POST['id_hospital'];
-			$model->id_usuario = $_POST['id_usuario'];
-			$model->save();
+			
+			if ($model->favorite($_POST['id_hospital'], $_POST['id_usuario'])) {
+				JsonHandler::sendResponse('ok', 'O hospital foi favoritado com sucesso.');
+			} else {
+				JsonHandler::sendResponse('error', 'Falha na operação, tente novamente.');
+			}
+
 		} else {
 			$this->redirect(['Login']);
 		}
@@ -285,13 +285,13 @@ class DefaultController extends CController
 	public function actionUnfavorite()
 	{
 		if (isset($_POST['id_hospital']) && isset($_POST['id_usuario'])) {
-			favorites::model()->deleteAll([
-				'condition' => 'id_hospital=:idHospital and id_usuario=:idUsuario', 
-				'params' => [
-					':idHospital' => $_POST['id_hospital'],
-					':idUsuario' => $_POST['id_usuario'],
-				]
-			]);
+			$model = new favorites();
+			
+			if ($model->unfavorite($_POST['id_hospital'], $_POST['id_usuario'])) {
+				JsonHandler::sendResponse('ok', 'O hospital foi removido dos seus favoritos.');
+			} else {
+				JsonHandler::sendResponse('error', 'Falha na operação, tente novamente.');
+			}
 		} else {
 			$this->redirect(['Login']);
 		}
@@ -531,106 +531,21 @@ class DefaultController extends CController
 
 			if ($ext == "json") {
 				if (!empty(hospital::model()->findByAttributes(['nome'=>$_POST['nome_hospital']]))) {
-					$str = file_get_contents($_SERVER['DOCUMENT_ROOT']."/RadarHospital/themes/classic/json/".$_POST['nome_hospital'].'/data.json');
-					$json = json_decode($str);
+					$json = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT']."/RadarHospital/themes/classic/json/".$_POST['nome_hospital'].'/data.json'));
+					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
 					
-					$transaction = Yii::app()->db->beginTransaction();
-					try 
-					{
-						$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
-
-						if (empty($codhospital)) {
-							$model = new hospital();
-						} else {
-							$model = hospital::model()->findByPk($codhospital);
-							
-							//deletando associacao de especialidades
-							$especialidade = new especialidade_hospital();
-							$especialidade->deleteEspecialidade($codhospital);
-
-							//deletando associação de planos
-							$planos = new plano_hospital();
-							$planos->deletePlanoSaude($codhospital);
-
-							//deletando associação de imagens
-							$imagens = new imagem_hospital();
-							$imagens->deleteImagem($codhospital, $json->foto);
-							
-							//deletando associação de horario atendimento
-							$periodo = new periodo();
-							$periodo->deletePeriodo($codhospital);
-						}
-						
-						#hospital
-						$model->nome = $json->nome;
-						$model->endereco = $json->endereco;
-						$model->latitude = $json->latitude;
-						$model->longitude = $json->longitude;
-						$model->id_regiao = $json->id_regiao;
-						$model->id_bairro = $json->id_bairro;
-						$model->telefone = $json->telefone;
-						$model->site = $json->site;
-						$model->url_mapa = $json->url_mapa;
-						$model->save();
-
-						#especialidade
-						foreach ($json->fkespecialidade as $key => $value) {
-							$parameters = array(
-								":codespecialidade"=>$value,
-								":codhospital"=>$codhospital,
-							);
-							
-							Yii::app()->db->createCommand('INSERT INTO especialidade_hospital VALUES (:codespecialidade, :codhospital)')->execute($parameters);
-						}
-						
-						#plano saude
-						foreach ($json->fkplanosaude as $key => $value) {
-							$parameters = array(
-								":codplano"=>$value,
-								":codhospital"=>$codhospital,
-							);
-							Yii::app()->db->createCommand('INSERT INTO plano_hospital VALUES (:codplano, :codhospital)')->execute($parameters);
-						}
-
-						#imagens
-						if (!empty($json->foto)) {
-							foreach ($json->foto as $key => $value) {
-								if (!empty($json->foto[$key])) {
-									$parameters = array(
-										":codimagem"=>$value,
-										":codhospital"=>$codhospital,
-									);
-									Yii::app()->db->createCommand('INSERT INTO imagem_hospital VALUES (:codhospital, :codimagem)')->execute($parameters);
-								}
-							}
-						}
-
-						#horario de funcionamento
-						$hora_inicio_semana = $json->hora_inicio_semana;
-						$hora_fim_semana = $json->hora_fim_semana;
-						$hora_inicio_finalsemana = $json->hora_inicio_finalsemana;
-						$hora_fim_finalsemana = $json->hora_fim_finalsemana;
-
-						Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_finalsemana, :hora_fim_finalsemana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_finalsemana' => $hora_inicio_finalsemana, ':hora_fim_finalsemana' => $hora_fim_finalsemana, ':id_dia_da_semana' => 1, ':idHospital' => $codhospital));
-						for ($i=2; $i <=6 ; $i++) { 
-							Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_semana, :hora_fim_semana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_semana' => $hora_inicio_semana, ':hora_fim_semana' => $hora_fim_semana, ':id_dia_da_semana' => $i, ':idHospital' => $codhospital));
-						}
-						Yii::app()->db->createCommand('INSERT INTO periodo(horario_inicial, horario_final, id_dia_da_semana, id_hospital) VALUES (:hora_inicio_finalsemana, :hora_fim_finalsemana, :id_dia_da_semana, :idHospital)')->execute(array(':hora_inicio_finalsemana' => $hora_inicio_finalsemana, ':hora_fim_finalsemana' => $hora_fim_finalsemana, ':id_dia_da_semana' => 7, ':idHospital' => $codhospital));
-
-
-					    $transaction->commit();
-					    
+					if (hospital::insertHospital($codhospital, $json)) {
 						header("Content-Type: application/json");
-						$data = json_encode(array('status'=>'ok', 'msg'=>'O Hospital foi inserido com sucesso.'));
-						echo $data;
-						exit; 
-					} catch(Exception $e) {
-					   	$transaction->rollBack();
-					   	header("Content-Type: application/json");
-						$data = json_encode(array('status'=>'error', 'msg'=>$e->getMessage()));
-						echo $data;
-						exit;
+			            $data = json_encode(array('status'=>'ok', 'msg'=>'O Hospital foi inserido com sucesso.'));
+			            echo $data;
+			            exit; 
+					} else {
+						header("Content-Type: application/json");
+			            $data = json_encode(array('status'=>'error', 'msg'=>$e->getMessage()));
+			            echo $data;
+			            exit;
 					}
+
 				} else {
 					$error=[];
 					header("Content-Type: application/json");
@@ -654,12 +569,10 @@ class DefaultController extends CController
 			$imagens = new imagens();
 
 			if ($imagens->deletePhoto($_REQUEST['codimagem'], $_REQUEST['codhospital'])) {
-				$data = json_encode(array('msg' => 'A imagem foi deletada com sucesso', 'status'=>'ok'));
+				JsonHandler::sendResponse('ok', 'A imagem foi deletada com sucesso.');
 			} else {
-				$data = json_encode(array('msg' => 'A imagem não pode ser deletada', 'status'=>'error'));
+				JsonHandler::sendResponse('error', 'A imagem não pode ser deletada.');
 			}
-
-			exit($data);
 		}
 	}
 

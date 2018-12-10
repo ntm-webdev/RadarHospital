@@ -108,4 +108,30 @@ class periodo extends CActiveRecord
     {
         $this::model()->deleteAllByAttributes(['id_hospital'=>$idHospital]);
     }
+
+    public function insertHorarioFuncionamento($idHospital, $hora_inicio_semana, $hora_fim_semana, $hora_inicio_finalsemana, $hora_fim_finalsemana)
+    {
+        $modelDomingo = new periodo();
+        $modelDomingo->horario_inicial = $hora_inicio_finalsemana;
+        $modelDomingo->horario_final = $hora_fim_finalsemana;
+        $modelDomingo->id_dia_da_semana = 1;
+        $modelDomingo->id_hospital = $idHospital;
+        $modelDomingo->save();
+
+        for ($i=2; $i <=6 ; $i++) {
+            $modelSemana = new periodo();
+            $modelSemana->horario_inicial = $hora_inicio_semana;
+            $modelSemana->horario_final = $hora_fim_semana;
+            $modelSemana->id_dia_da_semana = $i;
+            $modelSemana->id_hospital = $idHospital;
+            $modelSemana->save(); 
+        }
+
+        $modelSabado = new periodo();
+        $modelSabado->horario_inicial = $hora_inicio_finalsemana;
+        $modelSabado->horario_final = $hora_fim_finalsemana;
+        $modelSabado->id_dia_da_semana = 7;
+        $modelSabado->id_hospital = $idHospital;
+        $modelSabado->save();
+    }
 }

@@ -171,9 +171,70 @@ class hospital extends CActiveRecord
         return parent::model($className);
     }
 
-    public function createHospital()
+    public static function insertHospital($codhospital, $json)
     {
-        
+        $transaction = Yii::app()->db->beginTransaction();
+        try 
+        {
+            if (empty($codhospital)) {
+                $model = new hospital();
+            } else {
+                $model = hospital::model()->findByPk($codhospital);
+
+                //deletando associacao de especialidades
+                $especialidade = new especialidade_hospital();
+                $especialidade->deleteEspecialidade($codhospital);
+
+                //deletando associação de planos
+                $planos = new plano_hospital();
+                $planos->deletePlanoSaude($codhospital);
+
+                //deletando associação de imagens
+                $imagens = new imagem_hospital();
+                $imagens->deleteImagem($codhospital, $json->foto);
+                
+                //deletando associação de horario atendimento
+                $periodo = new periodo();
+                $periodo->deletePeriodo($codhospital);
+            }
+            
+            #hospital
+            $model->nome = $json->nome;
+            $model->endereco = $json->endereco;
+            $model->latitude = $json->latitude;
+            $model->longitude = $json->longitude;
+            $model->id_regiao = $json->id_regiao;
+            $model->id_bairro = $json->id_bairro;
+            $model->telefone = $json->telefone;
+            $model->site = $json->site;
+            $model->url_mapa = $json->url_mapa;
+            $model->save();
+
+            #especialidade
+            $especialidade = new especialidade_hospital();
+            $especialidade->insertEspecialidades($codhospital, $json->fkespecialidade);
+            
+            #plano saude
+            $planoSaude = new plano_hospital();
+            $planoSaude->insertPlanosSaude($codhospital, $json->fkplanosaude);
+
+            #imagens
+            $imagens = new imagem_hospital();
+            $imagens->insertImagens($codhospital, $json->foto);
+
+            #horario de funcionamento
+            $periodo = new periodo();
+            $periodo->insertHorarioFuncionamento($codhospital, $json->hora_inicio_semana, $json->hora_fim_semana, $json->hora_inicio_finalsemana, $json->hora_fim_finalsemana);
+
+            $transaction->commit();
+            
+            return true;
+            
+        } catch(Exception $e) {
+            $transaction->rollBack();
+
+            return false;
+        }
     }
 
     public function getHospitais()

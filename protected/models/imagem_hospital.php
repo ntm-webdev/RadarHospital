@@ -109,4 +109,18 @@ class imagem_hospital extends CActiveRecord
             } 
         }
     }
+
+    public function insertImagens($idHospital, $fotos)
+    {
+        if (!empty($fotos)) {
+            foreach ($fotos as $key => $value) {
+                if (!empty($fotos[$key])) {
+                    $model = new imagem_hospital();
+                    $model->codimagem = (int) $value;
+                    $model->codhospital = (int) $idHospital;
+                    $model->save();
+                }
+            }
+        }
+    }
 }

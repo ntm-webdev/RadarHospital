@@ -96,5 +96,15 @@ class especialidade_hospital extends CActiveRecord
     public function deleteEspecialidade($idHospital)
     {
         $this::model()->deleteAllByAttributes(['codhospital'=>$idHospital]);
+    } 
+
+    public function insertEspecialidades($idHospital, $especialidades)
+    {
+        foreach ($especialidades as $value) {
+            $model = new especialidade_hospital();
+            $model->codespecialidade = (int) $value;
+            $model->codhospital = (int) $idHospital;
+            $model->save();
+        }
     }
 }
