@@ -2,7 +2,8 @@
 
 class DefaultController extends CController
 {
-	
+	public $horas = ['00:00' => '00:00','01:00' => '01:00','02:00' => '02:00','03:00' => '03:00','04:00' => '04:00','05:00' => '05:00','06:00' => '06:00','07:00' => '07:00','08:00' => '08:00','09:00' => '09:00','10:00' => '10:00','11:00' => '11:00','12:00' => '12:00','13:00' => '13:00','14:00' => '14:00','15:00' => '15:00','15:00' => '15:00','16:00' => '16:00','17:00' => '17:00','18:00' => '18:00','19:00' => '19:00','20:00' => '20:00','21:00' => '21:00','22:00' => '22:00','23:00' => '23:00'];
+
 	public function actionIndex()
 	{	
 		$model = new hospital;
@@ -250,12 +251,10 @@ class DefaultController extends CController
 			$error = CActiveForm::validate($model);
 			
 			if ($valid == false) {
-                $data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'O usuário não pode ser cadastrado'));
-				exit($data);
+				JsonHandler::sendResponse('error', 'O usuário não pode ser cadastrado.', $error);
 			} else {
 				if ($model->save()) {
-					$data = json_encode(array('msg' => 'O usuário foi cadastrado com sucesso.', 'status'=>'ok'));
-					exit($data);
+					JsonHandler::sendResponse('ok', 'O usuário foi cadastrado com sucesso.');
 				}
 			}
 			
@@ -395,16 +394,12 @@ class DefaultController extends CController
 			$error = GlobalFunctions::validateFields($_POST);
 
 			if (!empty($error)) {
-				$data = json_encode(array('fields' => $error, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
-				echo $data;
-				exit;
+				JsonHandler::sendResponse('error', 'A Requisição não pode ser feita,', $error);
 			} else {
 				$partner = new Partner();
 
 				if ($partner->sendEmail($_POST)) {
-					$data = json_encode(array('msg' => 'O formulário foi entregue com sucesso.', 'status'=>'ok'));
-					echo $data;
-					exit;
+					JsonHandler::sendResponse('ok', 'O formulário foi entregue com sucesso.', $error);
 				}
 			}
 		} else {
@@ -419,72 +414,18 @@ class DefaultController extends CController
 			$erro = GlobalFunctions::validateFields($_POST['hospital'], true);
 
 			if (!empty($erro)) {
-				header('Content-Type: application/json');
-				$data = json_encode(array('fields' => $erro, 'status'=>'error', 'msg'=>'A Requisição não pode ser feita'));
-				echo($data);
-				exit;
+				JsonHandler::sendResponse('error', 'A Requisição não pode ser feita.', $erro);
 			} else {
-	        	if (!empty($_FILES)) {
-	        		$fotos = [];
-
-	        		$destino = $_SERVER['DOCUMENT_ROOT']."/RadarHospital/themes/classic/imgs/hosp/".$_POST['hospital']['nome'];
-	        		if (!is_dir($destino)) { 
-		        		mkdir($destino,0777,true);
-		        	}
-
-		        	$codhospital = hospital::model()->findByAttributes(['nome'=>$_POST['hospital']['nome']])->id;
-		        	$wrongPicturesFormat = false;
-		        	$errorPhotos= [];
-
-		        	for ($i=1; $i<=4; $i++) {
-		        		$indice = (string)$i;
-
-		        		if (!empty(imagem_hospital::model()->findByAttributes(['codimagem'=>$i,'codhospital'=>$codhospital])) || !empty($_FILES['hospital']['tmp_name']['foto'.$indice])) {
-		        			$ext = pathinfo($_FILES['hospital']['name']['foto'.$indice], PATHINFO_EXTENSION);
-
-		        			if (!empty($_FILES['hospital']['tmp_name']['foto'.$indice]) && $ext != "jpg") {
-		    					$errorPhotos['foto'.$indice] = 'wrong';
-								$wrongPicturesFormat = true;
-		        			} else {
-		    					$wrongPicturesFormat = false;
-		    					move_uploaded_file($_FILES['hospital']['tmp_name']['foto'.$indice], $destino."/".$indice.".jpg");
-		    					$fotos['foto'][] = $i;
-		        			}
-		        		}
-		        	}
-
-	        		if ($wrongPicturesFormat == true) {
-	        			header("Content-Type: application/json");
-						$data = json_encode(array('fields'=>$errorPhotos,'status'=>'error', 'msg'=>'Extensão não suportada, favor utilizar .jpg'));
-						echo $data;
-						exit;
-	        		} else {
-	        			$arr = array_merge($_POST['hospital'], $fotos);
-	        		}
-	        		
-	        	} else {
-	        		$arr = array_merge($_POST['hospital']);
-	        	}
-
-	        	$folder = $_SERVER['DOCUMENT_ROOT']."/RadarHospital/themes/classic/json/".$_POST['hospital']['nome'];
-	        	if (!is_dir($folder)) { 
-	        		mkdir($folder,0777,true);
-	        	}
-
-				$data = json_encode($arr);
-				$fp = fopen($folder.'/data.json', 'w+');
-				fwrite($fp, $data);
-				chmod($folder.'/data.json', 0777);
-				fclose($fp);
-				
-				header('Content-Type: application/json');
-				$data = json_encode(array('msg' => 'Sua solicitação foi realizada com sucesso.', 'status'=>'ok'));
-				echo($data);
-				exit;
+        		$codhospital = hospital::model()->findByAttributes(['nome'=>$_POST['hospital']['nome']])->id;
+        		
+        		if (JsonHandler::generateJsonFile($codhospital, $_POST['hospital'], $_FILES['hospital'])) {
+        			JsonHandler::sendResponse('ok', 'Sua solicitação foi realizada com sucesso.');
+        		} else {
+        			JsonHandler::sendResponse('error', 'Extensão não suportada, favor utilizar .jpg');
+        		}
 			}
 		} else {
 			if (Yii::app()->user->hasState("specialAccess") || Yii::app()->user->hasState("masterAccess")) {
-				$horas = ['00:00' => '00:00','01:00' => '01:00','02:00' => '02:00','03:00' => '03:00','04:00' => '04:00','05:00' => '05:00','06:00' => '06:00','07:00' => '07:00','08:00' => '08:00','09:00' => '09:00','10:00' => '10:00','11:00' => '11:00','12:00' => '12:00','13:00' => '13:00','14:00' => '14:00','15:00' => '15:00','15:00' => '15:00','16:00' => '16:00','17:00' => '17:00','18:00' => '18:00','19:00' => '19:00','20:00' => '20:00','21:00' => '21:00','22:00' => '22:00','23:00' => '23:00'];
 				$usuario = usuario::model()->findByPk(Yii::app()->user->getState("id"));
 				$model = hospital::model()->findByPk($usuario->id_hospital);
 				$imagens = imagem_hospital::model()->findAllByAttributes(['codhospital'=>$model->id]);
@@ -497,7 +438,7 @@ class DefaultController extends CController
 				$this->render("createHospital",[
 					'model'=>$model,
 					'usuario'=>$usuario,
-					'horas'=>$horas,
+					'horas'=>$this->horas,
 					'imagens'=>$imagens,
 					'img'=>$img,
 				]);
@@ -520,10 +461,8 @@ class DefaultController extends CController
 	{
 		$error = GlobalFunctions::validateFields($_POST);
 		
-		if (!empty($error)) {	
-			$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'A requisição não pode ser feita'));
-			echo $data;
-			exit;
+		if (!empty($error)) {
+			JsonHandler::sendResponse('error', 'A requisição não pode ser feita.', $error);	
 		}
 
 		if (!empty($_FILES['json_file']['name'])) {
@@ -535,30 +474,16 @@ class DefaultController extends CController
 					$codhospital = hospital::model()->findByAttributes(['nome'=>$json->nome])->id;
 					
 					if (hospital::insertHospital($codhospital, $json)) {
-						header("Content-Type: application/json");
-			            $data = json_encode(array('status'=>'ok', 'msg'=>'O Hospital foi inserido com sucesso.'));
-			            echo $data;
-			            exit; 
+						JsonHandler::sendResponse('ok', 'O Hospital foi inserido com sucesso.');
 					} else {
-						header("Content-Type: application/json");
-			            $data = json_encode(array('status'=>'error', 'msg'=>$e->getMessage()));
-			            echo $data;
-			            exit;
+						JsonHandler::sendResponse('error', $e->getMessage());
 					}
 
 				} else {
-					$error=[];
-					header("Content-Type: application/json");
-					$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'Hospital inválido'));
-					echo $data;
-					exit;
+					JsonHandler::sendResponse('error', 'Hospital inválido.');
 				}
 			} else {
-				$error=[];
-				header("Content-Type: application/json");
-				$data = json_encode(array('fields'=>$error,'status'=>'error', 'msg'=>'Formato inválido, apenas arquivos .json são aceitos'));
-				echo $data;
-				exit;
+				JsonHandler::sendResponse('error', 'Formato inválido, apenas arquivos .json são aceitos.');
 			}
 		}
 	}
